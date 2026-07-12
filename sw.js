@@ -1,4 +1,4 @@
-const CACHE = 'padhai-v1';
+const CACHE = 'padhai-v2';
 self.addEventListener('install', e => {
   self.skipWaiting();
   e.waitUntil(
@@ -6,10 +6,20 @@ self.addEventListener('install', e => {
   );
 });
 self.addEventListener('activate', e => {
-  e.waitUntil(self.clients.claim());
+  e.waitUntil(
+    caches.keys().then(names =>
+      Promise.all(names.filter(n => n !== CACHE).map(n => caches.delete(n)))
+    ).then(() => self.clients.claim())
+  );
 });
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
+    fetch(e.request)
+      .then(res => {
+        const resClone = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, resClone));
+        return res;
+      })
+      .catch(() => caches.match(e.request))
   );
 });
