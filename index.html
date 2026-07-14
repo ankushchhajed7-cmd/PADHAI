@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>PadhAI - Class 4 Maths</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#6C5CE7">
+<meta name="theme-color" content="#7A0C0C">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
@@ -15,31 +15,31 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap">
 <style>
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  :root{--bg:#FBF8FF;--ink:#2D2350;--soft:#6B5E94;--purple:#7C5CFC;--purpleDark:#5B3FD6;--yellow:#FFC83D;--coral:#FF7A6B;--mint:#21C997;--sky:#4DB8FF;}
+  :root{--bg:#7A0C0C;--ink:#FFECB3;--soft:#FFCC80;--purple:#E53935;--purpleDark:#FFD400;--yellow:#FFC107;--coral:#FF5252;--mint:#FFD600;--sky:#FFAB00;}
   html,body{margin:0;padding:0;}
   body{background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:18px 14px 30px;-webkit-font-smoothing:antialiased;}
   .wrap{width:100%;max-width:440px;}
   .fred{font-family:Fredoka,system-ui,sans-serif;}
-  .card{background:#fff;border-radius:24px;padding:20px;box-shadow:0 12px 38px rgba(124,92,252,.16);}
-  .btn{border:none;border-radius:18px;padding:14px 22px;font-size:18px;font-weight:800;font-family:Fredoka,system-ui;color:#fff;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.12);width:100%;}
-  .btn:active{transform:translateY(2px);box-shadow:0 3px 0 rgba(0,0,0,.12);}
+  .card{background:#C62828;border-radius:24px;padding:20px;box-shadow:0 12px 38px rgba(0,0,0,.35);}
+  .btn{border:none;border-radius:18px;padding:14px 22px;font-size:18px;font-weight:800;font-family:Fredoka,system-ui;color:#FFD400;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.25);width:100%;}
+  .btn:active{transform:translateY(2px);box-shadow:0 3px 0 rgba(0,0,0,.25);}
   .row{display:flex;gap:10px;}
   @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
   @keyframes pop{0%{transform:scale(.6) rotate(-6deg);opacity:0;}60%{transform:scale(1.1) rotate(2deg);}100%{transform:scale(1) rotate(0);opacity:1;}}
   @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
   @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-7px) rotate(3deg);}}
-  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(124,92,252,.35);}100%{box-shadow:0 0 0 18px rgba(124,92,252,0);}}
+  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(229,57,53,.4);}100%{box-shadow:0 0 0 18px rgba(229,57,53,0);}}
   .pop{animation:pop .6s ease;} .fade{animation:fade .5s ease;} .float{animation:floaty 3s ease-in-out infinite;}
   .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
   .link{background:none;border:none;color:var(--soft);font-weight:800;font-size:16px;cursor:pointer;font-family:Nunito;}
-  .bar{width:100%;height:9px;background:#EADFFF;border-radius:9px;overflow:hidden;}
+  .bar{width:100%;height:9px;background:#5C0000;border-radius:9px;overflow:hidden;}
   .bar>i{display:block;height:100%;background:var(--purple);border-radius:9px;width:0%;transition:width .3s;}
-  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#F6F2FF;border:3px solid #E6DCFF;border-radius:18px;padding:14px;margin-bottom:11px;cursor:pointer;font-family:Nunito;font-weight:800;font-size:17px;color:var(--ink);}
+  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#5C0000;border:3px solid #8E0000;border-radius:18px;padding:14px;margin-bottom:11px;cursor:pointer;font-family:Nunito;font-weight:800;font-size:17px;color:var(--ink);}
   .caption{font-weight:800;font-size:18px;line-height:1.55;text-align:center;min-height:88px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
   .stage{min-height:185px;display:flex;align-items:center;justify-content:center;}
-  .seg{display:flex;background:#EFEAFF;border-radius:13px;padding:3px;gap:3px;}
+  .seg{display:flex;background:#5C0000;border-radius:13px;padding:3px;gap:3px;}
   .seg button{flex:1;border:none;background:none;padding:9px 2px;border-radius:10px;font-weight:800;font-family:Nunito;font-size:13px;color:var(--soft);cursor:pointer;}
-  .seg button.on{background:#fff;color:var(--purpleDark);box-shadow:0 2px 6px rgba(124,92,252,.2);}
+  .seg button.on{background:#FFD400;color:var(--purple);box-shadow:0 2px 6px rgba(0,0,0,.3);}
   .mascot{position:relative;width:50px;height:50px;border-radius:50%;background:#FFF3D6;display:flex;align-items:center;justify-content:center;font-size:28px;margin:8px auto 0;}
   .mascot.talk{animation:bob .6s ease-in-out infinite,ring 1.4s ease-out infinite;}
 </style>
@@ -47,7 +47,7 @@
 <body>
 <div class="wrap" id="app"></div>
 <script>
-const C={purple:"#7C5CFC",purpleDark:"#5B3FD6",yellow:"#FFC83D",coral:"#FF7A6B",mint:"#21C997",sky:"#4DB8FF",soft:"#6B5E94",ink:"#2D2350"};
+const C={purple:"#E53935",purpleDark:"#FFD400",yellow:"#FFC107",coral:"#FF5252",mint:"#FFD600",sky:"#FFAB00",soft:"#FFCC80",ink:"#FFECB3"};
 const app=document.getElementById("app");
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 function load(k,d){try{const x=localStorage.getItem(k);return x?JSON.parse(x):d;}catch(e){return d;}}
@@ -57,7 +57,7 @@ function emoji(e){return `<div style="font-size:90px">${e}</div>`;}
 function circleSVG(parts,shaded,vertical,size){size=size||150;const r=size/2-6,cx=size/2,cy=size/2;let p="";if(parts===1){p=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="#FFE9D6" stroke="#fff" stroke-width="3"/>`;}else{for(let i=0;i<parts;i++){const off=vertical?Math.PI/2:0;const a0=(i/parts)*2*Math.PI-Math.PI/2+off,a1=((i+1)/parts)*2*Math.PI-Math.PI/2+off;const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);const lg=(a1-a0)>Math.PI?1:0;p+=`<path d="M ${cx} ${cy} L ${x0} ${y0} A ${r} ${r} 0 ${lg} 1 ${x1} ${y1} Z" fill="${i<shaded?C.coral:'#FFE9D6'}" stroke="#fff" stroke-width="3"/>`;}}return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${p}<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${C.purpleDark}" stroke-width="3"/></svg>`;}
 function barSVG(parts,shaded,equal,w){w=w||230;const h=58;let widths=[];if(equal){for(let i=0;i<parts;i++)widths.push(w/parts);}else{widths=[w*0.62,w*0.38];}let x=0,p="";widths.forEach((bw,i)=>{p+=`<rect x="${x}" y="4" width="${bw}" height="${h-8}" rx="8" fill="${i<shaded?C.mint:'#E7F8F1'}" stroke="#fff" stroke-width="3"/>`;x+=bw;});return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${p}<rect x="1" y="4" width="${w-2}" height="${h-8}" rx="8" fill="none" stroke="${C.purpleDark}" stroke-width="3"/></svg>`;}
 function bigExpr(html){return `<div class="fred" style="font-size:42px;font-weight:700;color:${C.purpleDark};text-align:center">${html}</div>`;}
-function column(a,b,op,res,carry){return `<div style="display:inline-block;text-align:right;font-family:Fredoka;font-weight:700;font-size:40px;color:${C.ink};line-height:1.12">${carry?`<div style="font-size:20px;color:${C.coral};text-align:right;height:24px">${carry}</div>`:`<div style="height:24px"></div>`}<div>${a}</div><div><span style="color:${C.purple}">${op}</span>&nbsp;${b}</div><div style="border-top:5px solid ${C.purpleDark};margin-top:4px;padding-top:4px;min-width:130px">${(res===''||res===undefined)?'?':res}</div></div>`;}
+function column(a,b,op,res,carry){return `<div style="display:inline-block;text-align:right;font-family:Fredoka;font-weight:700;font-size:40px;color:${C.ink};line-height:1.12">${carry?`<div style="font-size:20px;color:${C.mint};text-align:right;height:24px">${carry}</div>`:`<div style="height:24px"></div>`}<div>${a}</div><div><span style="color:${C.purpleDark}">${op}</span>&nbsp;${b}</div><div style="border-top:5px solid ${C.purpleDark};margin-top:4px;padding-top:4px;min-width:130px">${(res===''||res===undefined)?'?':res}</div></div>`;}
 function pv(tens,ones){let t='';for(let i=0;i<tens;i++)t+=`<div style="width:12px;height:44px;background:${C.sky};border-radius:3px;border:1px solid #fff"></div>`;let o='';for(let i=0;i<ones;i++)o+=`<div style="width:14px;height:14px;background:${C.yellow};border-radius:50%;border:1px solid #fff"></div>`;return `<div style="display:flex;gap:24px;align-items:flex-end;justify-content:center">${tens>0?`<div style="text-align:center"><div style="display:flex;gap:3px">${t}</div><div style="font-weight:800;color:${C.soft};margin-top:6px;font-size:12px">TENS</div></div>`:''}<div style="text-align:center"><div style="display:flex;gap:4px;flex-wrap:wrap;max-width:100px;justify-content:center">${o}</div><div style="font-weight:800;color:${C.soft};margin-top:6px;font-size:12px">ONES</div></div></div>`;}
 function groupsView(e,g,per){let boxes='';for(let i=0;i<g;i++){let inner='';for(let j=0;j<per;j++)inner+=`<span style="font-size:22px">${e}</span>`;boxes+=`<div style="border:3px dashed ${C.purple};border-radius:12px;padding:6px;display:flex;flex-wrap:wrap;gap:2px;max-width:110px;justify-content:center">${inner}</div>`;}return `<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:330px;margin:0 auto">${boxes}</div>`;}
 
@@ -587,7 +587,7 @@ const CH=[
    {art:emoji("🐘"),cap:"Chapter 5 — Sharing and Measuring! Aaj fractions (hisson) ki duniya.",hi:"नमस्ते दोस्तों! आज पाँचवाँ चॅप्टर — शेयरिंग एंड मेज़रिंग। इसमें हम सीखेंगे कि किसी चीज़ को बराबर हिस्सों में कैसे बाँटते हैं। इन्हीं हिस्सों को fractions यानी भिन्न कहते हैं।",en:"Namaste friends! Today is chapter five, Sharing and Measuring. We will learn how to share a thing into equal parts. These parts are called fractions.",mr:"नमस्कार मित्रांनो! आज पाचवा धडा — शेअरिंग अँड मेजरिंग. यात आपण शिकू की एखादी गोष्ट समान भागांत कशी वाटायची. याच भागांना fractions म्हणजे अपूर्णांक म्हणतात.",dur:11000},
    {art:circleSVG(1,0,false,150),cap:"WHOLE: ek poori cheez = 1. Jaise ek poori dhokla.",hi:"सबसे पहले — पूरी चीज़ को होल यानी एक कहते हैं। जैसे एक पूरा ढोकला या एक पूरी रोटी। अभी इसे किसी ने बाँटा नहीं है।",en:"First — a full thing is called a whole, which is one. Like one full dhokla or one full roti. Nobody has shared it yet.",mr:"सर्वात आधी — पूर्ण वस्तूला होल म्हणजे एक म्हणतात. जसे एक पूर्ण ढोकळा किंवा एक पूर्ण पोळी. अजून कोणी ती वाटलेली नाही.",dur:10000},
    {art:circleSVG(2,1,true,150),cap:"HALF (½): cheez ko 2 BARABAR hisson mein baanto. Ek hissa = ½.",hi:"अब इसे दो बराबर हिस्सों में बाँटो। हर एक हिस्से को आधा यानी half कहते हैं, और लिखते हैं एक बटा दो। दो बराबर होना बहुत ज़रूरी है।",en:"Now share it into two equal parts. Each part is called a half, written as one over two. Being two equal parts is very important.",mr:"आता त्याला दोन समान भागांत वाटा. प्रत्येक भागाला अर्धा म्हणजे half म्हणतात, आणि लिहितो एक भागिले दोन. दोन समान असणं खूप महत्त्वाचं.",dur:11000},
-   {art:`<div style="display:flex;flex-direction:column;gap:8px;align-items:center">${barSVG(2,1,true,220)}<div style="font-weight:800;color:${C.mint}">✓ Barabar — yeh HALF hai</div>${barSVG(2,1,false,220)}<div style="font-weight:800;color:${C.coral}">✗ Barabar nahi — yeh half NAHI</div></div>`,cap:"Magic word: EQUAL! Agar tukde barabar nahi, to wo half nahi.",hi:"सबसे ज़रूरी शब्द — बराबर! अगर किसी चीज़ को दो हिस्सों में बाँटा पर वे बराबर नहीं हैं, तो वह आधा नहीं कहलाता। हिस्से एक जैसे साइज़ के होने चाहिए।",en:"The most important word — equal! If a thing is split into two parts but they are not equal, it is not a half. The parts must be the same size.",mr:"सर्वात महत्त्वाचा शब्द — समान! एखादी गोष्ट दोन भागांत वाटली पण ते समान नसतील, तर तो अर्धा नाही. भाग सारख्या आकाराचे असले पाहिजेत.",dur:11000},
+   {art:`<div style="display:flex;flex-direction:column;gap:8px;align-items:center">${barSVG(2,1,true,220)}<div style="font-weight:800;color:${C.mint}">✓ Barabar — yeh HALF hai</div>${barSVG(2,1,false,220)}<div style="font-weight:800;color:#fff">✗ Barabar nahi — yeh half NAHI</div></div>`,cap:"Magic word: EQUAL! Agar tukde barabar nahi, to wo half nahi.",hi:"सबसे ज़रूरी शब्द — बराबर! अगर किसी चीज़ को दो हिस्सों में बाँटा पर वे बराबर नहीं हैं, तो वह आधा नहीं कहलाता। हिस्से एक जैसे साइज़ के होने चाहिए।",en:"The most important word — equal! If a thing is split into two parts but they are not equal, it is not a half. The parts must be the same size.",mr:"सर्वात महत्त्वाचा शब्द — समान! एखादी गोष्ट दोन भागांत वाटली पण ते समान नसतील, तर तो अर्धा नाही. भाग सारख्या आकाराचे असले पाहिजेत.",dur:11000},
    {art:`<div style="display:flex;gap:10px">${barSVG(2,1,true,90)}${circleSVG(2,1,false,80)}${circleSVG(2,1,true,80)}</div>`,cap:"Half banane ke kai tareeke: seedha, aadi, tircha — sab theek agar barabar.",hi:"आधा बनाने के कई तरीके हैं। किसी कागज़ को बीच से सीधा मोड़ो, या आड़ा मोड़ो, या कोने से कोने तक तिरछा मोड़ो — हर तरीके से आधा बनता है, बशर्ते दोनों हिस्से बराबर हों।",en:"There are many ways to make a half. Fold a paper straight down the middle, or across, or diagonally corner to corner — each way makes a half, as long as both parts are equal.",mr:"अर्धा बनवण्याचे अनेक मार्ग आहेत. कागद मधोमध सरळ दुमडा, किंवा आडवा, किंवा कोपऱ्यापासून कोपऱ्यापर्यंत तिरका — प्रत्येक मार्गाने अर्धा होतो, जर दोन्ही भाग समान असतील.",dur:11500},
    {art:circleSVG(4,1,false,150),cap:"QUARTER (¼): cheez ko 4 BARABAR hisson mein baanto. Ek = ¼.",hi:"अब चीज़ को चार बराबर हिस्सों में बाँटो। हर एक हिस्से को क्वार्टर यानी quarter कहते हैं, और लिखते हैं एक बटा चार।",en:"Now share the thing into four equal parts. Each part is called a quarter, written as one over four.",mr:"आता गोष्ट चार समान भागांत वाटा. प्रत्येक भागाला क्वार्टर म्हणतात, आणि लिहितो एक भागिले चार.",dur:10500},
    {art:`<div style="display:flex;gap:14px;align-items:center">${circleSVG(2,1,true,90)}<div style="font-size:22px;color:#6B5E94">=</div>${circleSVG(4,2,false,90)}</div>`,cap:"Ikra-Samina: 2 QUARTERS milke 1 HALF! To dono barabar.",hi:"किताब की कहानी — समीना को लगा कि दो क्वार्टर, एक हाफ से बड़े हैं। पर असल में दो क्वार्टर मिलकर एक हाफ ही बनते हैं! यानी दोनों बराबर हैं। समीना धोखे में आ गई।",en:"The book's story — Samina thought two quarters were bigger than one half. But really, two quarters together make exactly one half! So both are equal. Samina was tricked.",mr:"पुस्तकातली गोष्ट — समीनाला वाटलं दोन क्वार्टर, एका हाफपेक्षा मोठे आहेत. पण खरंतर दोन क्वार्टर मिळून एक हाफच होतो! म्हणजे दोन्ही समान आहेत. समीना फसली.",dur:12000},
@@ -8364,6 +8364,538 @@ const CH=[
      {q:"Write a letter to your friend on an inland letter, telling them how you spent your summer vacation.",a:"Sample: Dear friend, Hi, how are you? I am fine, hope you are too. I write this letter to tell you how I spent my summer vacation happily. In the first week of May, I went with my sister and mummy to my Nana's house for 15 days. At Nana's, we did many fun things, made reels, played funny games with cousins, sisters, etc. I learned some new things and had a lot of fun. Now school has reopened and I am very excited to meet you. Yours loving, [Your name]."},
    ]},
  ]},
+ {id:'e_nature',title:'Nature Trail',emoji:'🌿',color:C.sky,scenes:[
+   {art:emoji("🌳"),cap:"Chapter 3 — Nature Trail! Chalo Pachmarhi (Madhya Pradesh) ki jungle safari par chalte hain.",hi:"नमस्ते बच्चों! आज हम EVS का तीसरा पाठ पढ़ेंगे — Nature Trail। इस पाठ में हम बच्चों के साथ पचमढ़ी, मध्य प्रदेश की एक जंगल सफारी पर चलेंगे और वहाँ के जानवरों, पक्षियों, कीड़ों और पौधों के बारे में जानेंगे।",en:"Hello children! Today we will study our third EVS chapter — Nature Trail. In this chapter, we will join students on a jungle safari at Pachmarhi, Madhya Pradesh, and learn about the animals, birds, insects and plants found there.",mr:"नमस्कार मुलांनो! आज आपण EVS चा तिसरा धडा शिकणार आहोत — Nature Trail. या धड्यात आपण विद्यार्थ्यांसोबत पचमढी, मध्य प्रदेशच्या जंगल सफारीला जाऊ आणि तिथले प्राणी, पक्षी, कीटक व वनस्पतींबद्दल जाणून घेऊ.",dur:16000},
+   {art:bigExpr("Banyan tree • Bird diving<br>Spider web • Butterflies<br>= Nature is amazing!"),cap:"Kya tumne kabhi hanging roots wala banyan tree dekha hai? Ya paani mein dive karta hua colourful bird? Ya web banati spider? Nature amazing animals aur plants se bhara hai!",hi:"क्या तुमने कभी लटकती जड़ों वाला बरगद का पेड़ देखा है, जिसकी जड़ें ज़मीन को छूती हैं? या पानी में गोता लगाता एक रंगीन पक्षी? या जाला बुनती हुई एक मकड़ी? या किसी फूल के चारों ओर उड़ती तितलियाँ? प्रकृति अद्भुत जानवरों और पौधों से भरी हुई है। चलो, उनके बारे में और जानते हैं!",en:"Have you ever seen a banyan tree with its hanging roots touching the ground? Or a coloured bird diving into the water? Or a spider weaving its web? Or butterflies flying around a flower? Nature is full of amazing animals and plants. Let us explore more about them!",mr:"तुम्ही कधी लोंबकळणाऱ्या मुळांचे वडाचे झाड पाहिले आहे, ज्याची मुळे जमिनीला स्पर्श करतात? किंवा पाण्यात सूर मारणारा रंगीत पक्षी? किंवा जाळे विणणारा कोळी? किंवा फुलाभोवती उडणारी फुलपाखरे? निसर्ग अद्भुत प्राणी व वनस्पतींनी भरलेला आहे. चला, त्यांच्याबद्दल अधिक जाणून घेऊया!",dur:19000},
+   {art:bigExpr("The Adventure Begins!<br>Nature Trail at<br>Pachmarhi, Madhya Pradesh"),cap:"Students apne teacher ke saath ek nature trail ke liye ready hue — Pachmarhi, Madhya Pradesh mein. Wo ek jeep mein baithkar jungle ki taraf gaye.",hi:"छात्र अपने अध्यापिका के साथ एक नेचर ट्रेल यानी प्रकृति भ्रमण के लिए तैयार हो गए — यह पचमढ़ी, मध्य प्रदेश में होने वाला था। वे सब एक जीप में बैठकर जंगल की ओर निकल पड़े।",en:"The students, along with their teacher, got ready for a nature trail at Pachmarhi, Madhya Pradesh. They all sat in a jeep and set off towards the forest.",mr:"विद्यार्थी त्यांच्या शिक्षिकेसोबत निसर्ग सहलीसाठी सज्ज झाले — ही पचमढी, मध्य प्रदेशात होणार होती. सर्वजण एका जीपमध्ये बसून जंगलाकडे निघाले.",dur:15500},
+   {art:bigExpr("Abha Didi:<br>Nature Scientist! 🔬<br>Studies plants & animals"),cap:"Forest entrance par pahunchkar, students ne tall trees aur chirping birds dekhe. Abha Didi ne unhe welcome kiya — wo ek nature scientist hain, jo plants aur animals ka adhyayan karti hain.",hi:"जंगल के प्रवेश द्वार पर पहुँचकर, छात्रों को ऊँचे पेड़ और चहचहाते पक्षी देखकर बहुत उत्साह हुआ। आभा दीदी ने उनका स्वागत किया — 'पचमढ़ी में आपका स्वागत है!' अध्यापिका ने बताया — ये आभा दीदी हैं, एक नेचर साइंटिस्ट यानी प्रकृति वैज्ञानिक, जो पेड़-पौधों और जानवरों का अध्ययन करती हैं। वे जंगल की सैर में हमारा मार्गदर्शन करेंगी।",en:"As they reached the forest entrance, the students got excited to see a lot of tall trees and chirping birds. Abha Didi welcomed them — 'Welcome to Pachmarhi!' The teacher explained — this is Abha Didi, a nature scientist who studies plants and animals. She will guide them in exploring the forest.",mr:"जंगलाच्या प्रवेशद्वारापाशी पोहोचल्यावर, विद्यार्थ्यांना उंच झाडे व किलबिलणारे पक्षी पाहून खूप उत्साह वाटला. आभा दीदींनी त्यांचे स्वागत केले — 'पचमढीत आपले स्वागत आहे!' शिक्षिकेने सांगितले — या आभा दीदी आहेत, एक नेचर सायंटिस्ट, ज्या वनस्पती व प्राण्यांचा अभ्यास करतात. त्या जंगल शोधण्यात आपल्याला मार्गदर्शन करतील.",dur:19000},
+   {art:bigExpr("Safety Rules —<br>DOs and DON'Ts<br>in a Zoo/Forest"),cap:"Students ne poocha — kya hum monkeys, deer, snakes, eagles, tigers dekhenge? Abha ne kaha — yahi toh dhundna hai! Par hume plants-animals ko harm nahi karna. Isliye safety rules follow karna zaroori hai.",hi:"छात्रों ने पूछा — 'आभा दीदी, क्या हम रास्ते में बंदर, हिरण, साँप, चील और बाघ देखेंगे?' आभा ने कहा — 'यही तो हमें पता लगाना है! हमें यह भी सुनिश्चित करना होगा कि हम जंगल के पेड़-पौधों और जानवरों को नुकसान न पहुँचाएँ।' इसीलिए जंगल या चिड़ियाघर जाते समय सुरक्षा नियमों यानी Safety Rules का पालन करना बहुत ज़रूरी है।",en:"The students asked, 'Abha Didi, will we see monkeys, deer, snakes, eagles and tigers on the way?' Abha said, 'That is what we have to find out! We must also make sure that we do not harm the plants and animals in the forest.' That is why it is very important to follow Safety Rules when visiting a zoo or forest.",mr:"विद्यार्थ्यांनी विचारले, 'आभा दीदी, आपल्याला रस्त्यात माकडे, हरणे, साप, गरुड आणि वाघ दिसतील का?' आभा म्हणाल्या, 'हेच तर आपल्याला शोधायचे आहे! आपण जंगलातील झाडे व प्राण्यांना इजा पोहोचवणार नाही याची खात्री करायला हवी.' म्हणूनच प्राणिसंग्रहालय किंवा जंगलात जाताना सुरक्षा नियमांचे पालन करणे खूप महत्त्वाचे आहे.",dur:18000},
+   {art:bigExpr("DOs and DON'Ts:<br>❌ Don't tease/feed animals<br>❌ Don't bring polythene<br>✅ Be careful, respect nature"),cap:"Safety rules: careful raho new place mein, animals ko tease ya feed mat karo, trees-flowers ko damage mat karo, pets/firearms/weapons mat lao, polythene bags mat lao, public utilities damage mat karo, garbage forest mein mat feko.",hi:"सुरक्षा नियम याद रखो — नई जगह पर सावधान रहो, जानवरों को छेड़ो या खाना मत खिलाओ, पेड़-पौधों और फूलों को नुकसान मत पहुँचाओ, पालतू जानवर, हथियार या बंदूक मत लाओ, पॉलिथीन बैग मत लाओ, सार्वजनिक चीज़ों को नुकसान मत पहुँचाओ, और जंगल में कचरा मत फेंको। ये नियम इसलिए ज़रूरी हैं ताकि जानवर सुरक्षित रहें और हम सब जंगल का आनंद शांति से ले सकें।",en:"Remember the safety rules — be careful in a new place, do not tease or feed animals, do not damage trees and flowers, do not bring pets, firearms or weapons, do not bring polythene bags, do not damage public utilities, and do not throw garbage in the forest. These rules keep the animals safe and help everyone enjoy the forest peacefully.",mr:"सुरक्षा नियम लक्षात ठेवा — नवीन ठिकाणी सावध रहा, प्राण्यांना छेडू नका किंवा खाऊ घालू नका, झाडे-फुलांना इजा करू नका, पाळीव प्राणी, शस्त्रे आणू नका, प्लास्टिक पिशव्या आणू नका, सार्वजनिक वस्तूंचे नुकसान करू नका, आणि जंगलात कचरा टाकू नका. हे नियम प्राण्यांना सुरक्षित ठेवतात आणि सर्वांना जंगलाचा आनंद शांतपणे घेता येतो.",dur:19000},
+   {art:bigExpr("Jeep mein forest ke andar!<br>Deer • Birds • Gaur dikhe"),cap:"Students jeeps mein baithkar forest ke andar gaye. Waha unhone variety of plants aur animals dekhe — deer, flying birds, aur gaur (jo buffaloes jaisa dikhta hai par stronger hai aur shorter horns rakhta hai).",hi:"छात्र जीपों में बैठकर जंगल के अंदर गए। वहाँ उन्होंने तरह-तरह के पेड़-पौधे और जानवर देखे — हिरण, उड़ते हुए पक्षी और गौर। गौर देखने में भैंसों जैसा लगता है, लेकिन वह उनसे ज़्यादा मज़बूत होता है और उसके सींग छोटे होते हैं।",en:"The students hopped onto the jeeps. As they entered the forest, they saw a variety of plants and animals — deer, flying birds and gaur. The gaur look like buffaloes, but they are stronger, with shorter horns.",mr:"विद्यार्थी जीपमध्ये बसून जंगलाच्या आत गेले. तिथे त्यांनी विविध वनस्पती व प्राणी पाहिले — हरणे, उडणारे पक्षी आणि गवा. गवा दिसायला रेड्यासारखा दिसतो, पण तो त्यापेक्षा मजबूत असतो आणि त्याची शिंगे लहान असतात.",dur:17000},
+   {art:bigExpr("Footprints in the mud! 🐾<br>Arya: 'Deer? Tiger? Rabbit?'"),cap:"Arya ne poocha — kaunse animals pond par paani peene aate hain? Footprints dekho! Sarthak: shayad deer ya tiger? Ya rabbit? — ek rabbit toh grass munch kar raha hai!",hi:"आर्या ने कहा — 'मुझे लगता है, यहाँ पानी पीने के लिए और भी जानवर आते होंगे। ज़मीन पर ये पैरों के निशान देखो, ये किसने बनाए होंगे?' सार्थक ने कहा — 'हम्म... शायद कोई हिरण या बाघ? या एक खरगोश? देखो, वहाँ एक खरगोश घास चर रहा है!'",en:"Arya said, 'I wonder which other animals come here to drink water. Look at these footprints in the mud. Which animal might have left these marks?' Sarthak said, 'Hmm... maybe a deer or a tiger? Or a rabbit? I see one rabbit munching on grass over there!'",mr:"आर्या म्हणाली, 'मला वाटते इथे पाणी प्यायला आणखी कोणते प्राणी येत असतील. या चिखलातील पावलांचे ठसे बघा, हे कोणी सोडले असतील?' सार्थक म्हणाला, 'हम्म... कदाचित हरीण किंवा वाघ? किंवा ससा? बघा, तिथे एक ससा गवत खात आहे!'",dur:17500},
+   {art:bigExpr("Guess the animal!<br>Footprints → Lion, Duck, Sparrow"),cap:"Activity — footprints dekhkar guess karo kaunsa animal pond par paani peene aaya hoga. Apni khud ki drawing bhi banao kisi animal ke footprint ki. Sarthak ek bird ke baare mein jaanna chahta tha — long tail aur large curved beak wala, tree par baitha hua.",hi:"एक गतिविधि में, पैरों के निशान देखकर अंदाज़ा लगाना था कि कौन सा जानवर तालाब पर पानी पीने आया होगा। फिर अपनी ओर से किसी जानवर के पैरों के निशान की एक ड्राइंग भी बनानी थी। सार्थक एक ऐसे पक्षी के बारे में जानना चाहता था, जिसकी लंबी पूँछ और बड़ी घुमावदार चोंच थी, और जो पास के एक पेड़ पर बैठा था।",en:"In an activity, students had to guess which animal came to the pond to drink water, just by looking at the footprints. They also had to draw the footprint of an animal on their own. Sarthak wanted to know about a bird — it had a long tail and a large curved beak, sitting on a tree nearby.",mr:"एका उपक्रमात, तळ्यावर पाणी प्यायला कोणता प्राणी आला असेल हे फक्त पावलांचे ठसे बघून अंदाज लावायचा होता. तसेच स्वतः एखाद्या प्राण्याच्या पावलांचे ठसे काढायचे होते. सार्थकला एका पक्ष्याबद्दल जाणून घ्यायचे होते — त्याची लांब शेपटी व मोठी वाकडी चोच होती, जो जवळच्या झाडावर बसला होता.",dur:18000},
+   {art:bigExpr("Hornbill! 🦤<br>Headgear like a horn"),cap:"Abha ne bataya — wo bird hornbill hai. Uska forehead se ek headgear nikalta hai jo horn jaisa dikhta hai, isliye naam hornbill. Peacock colourful hote hain, owls ki eyesight sharp hoti hai night mein dekhne ke liye.",hi:"आभा ने बताया — 'वह एक हॉर्नबिल है। इसके माथे से एक सींग जैसा हेडगियर निकलता है, इसलिए इसे हॉर्नबिल कहते हैं।' कुछ पक्षी, जैसे मोर, रंग-बिरंगे होते हैं; जबकि उल्लू जैसे पक्षियों की नज़र तेज़ होती है, जिससे वे रात में देख पाते हैं।",en:"Abha explained, 'That is a hornbill. It has a headgear growing out of its forehead like a horn, hence it is called hornbill.' Some birds, like peacocks, are colourful; while others, like owls, have sharp eyesight that helps them see at night.",mr:"आभांनी सांगितले, 'तो हॉर्नबिल आहे. त्याच्या कपाळावरून शिंगासारखे एक हेडगिअर वाढते, म्हणून त्याला हॉर्नबिल म्हणतात.' मोरासारखे काही पक्षी रंगीबेरंगी असतात; तर घुबडासारख्या पक्ष्यांची दृष्टी तीक्ष्ण असते, ज्यामुळे ते रात्री बघू शकतात.",dur:17000},
+   {art:bigExpr("Beaks & Claws!<br>Eagle: sharp curved beak, sharp claws<br>Sunbird: long beak for nectar"),cap:"Birds ke beaks aur claws unhe khaane aur doosre kaamon mein madad karte hain. Eagle ka sharp curved beak aur sharp claws prey pakadne ke liye hote hain. Sunbird ka long beak flowers se nectar peene ke liye hota hai.",hi:"पक्षियों की चोंच और पंजे उन्हें खाने और दूसरे कामों में मदद करते हैं। बाज़ यानी eagle की चोंच तेज़ और घुमावदार होती है, और उसके पंजे तेज़ होते हैं, जिससे वह अपना शिकार पकड़ पाता है। जबकि सनबर्ड की चोंच लंबी होती है, जिससे वह फूलों से अमृत यानी nectar पी पाती है। चोंच और पंजों को देखकर हम पक्षी की खाने की आदतों का अंदाज़ा लगा सकते हैं।",en:"Birds have beaks and claws which help them in eating and other activities. An eagle has a sharp, curved beak and sharp claws to catch its prey, while a sunbird has a long beak to drink nectar from flowers. We can guess the eating habits of a bird by observing its beak and claws.",mr:"पक्ष्यांच्या चोची व नखे त्यांना खाण्यात व इतर कामांत मदत करतात. गरुडाची चोच तीक्ष्ण व वाकडी असते, आणि त्याची नखे तीक्ष्ण असतात, ज्यामुळे तो शिकार पकडू शकतो. तर सनबर्डची चोच लांब असते, ज्यामुळे ती फुलांतून मध पिऊ शकते. चोच व नखे पाहून आपण पक्ष्याच्या खाण्याच्या सवयींचा अंदाज लावू शकतो.",dur:18500},
+   {art:bigExpr("Bird Diary! 📔<br>Go near tree → Listen →<br>Observe → Write!"),cap:"Activity: Bird Diary banao. Ek tree ke paas jao, aankhein band karke birds ki awazein suno. Phir aankhein kholkar ek bird par focus karo — dekho kaise move karta hai, kya khata hai, kaha baithta hai. Observations likho!",hi:"गतिविधि — बर्ड डायरी बनाओ! सबसे पहले किसी पेड़ के पास जाओ। अपनी आँखें बंद करो और अलग-अलग पक्षियों की आवाज़ों को सुनो। फिर आँखें खोलो और एक समय में एक पक्षी पर ध्यान दो। देखो वह कैसे चलता है, क्या खाता है, और कहाँ बैठता है। अपने अवलोकन यानी observations एक बर्ड डायरी में लिख लो!",en:"Activity: Make a Bird Diary! First, go near a tree. Close your eyes and listen to the sounds of different birds. Now open your eyes and focus on one bird at a time. Observe how it moves, what it eats, and where it sits. Write your observations in a Bird Diary!",mr:"उपक्रम: बर्ड डायरी बनवा! सर्वप्रथम एका झाडाजवळ जा. डोळे बंद करा आणि वेगवेगळ्या पक्ष्यांचे आवाज ऐका. आता डोळे उघडा आणि एका वेळी एका पक्ष्यावर लक्ष केंद्रित करा. तो कसा हालचाल करतो, काय खातो, आणि कुठे बसतो हे बघा. तुमची निरीक्षणे बर्ड डायरीत लिहा!",dur:18000},
+   {art:bigExpr("Grasshopper! 🦗<br>Insect: 3 pairs legs<br>1 pair antennae, sometimes 2 pairs wings"),cap:"Ek grasshopper achanak grass se hop kiya, sab amused hue. Arya bataya — ye ek insect hai. Insects ke 3 pairs legs, 1 pair antennae (surroundings sense karne ke liye) hote hain, kuch ke 2 pairs wings bhi hote hain jaise flies aur grasshoppers.",hi:"एक टिड्डा यानी grasshopper अचानक घास से उछलकर बाहर आ गया, और सब खुश हो गए। आर्या ने बताया — 'यह एक कीट यानी insect है। इसके तीन जोड़ी पैर, और एक जोड़ी antennae यानी सूंघने वाले अंग होते हैं, जो अपने आस-पास का माहौल पहचानने में मदद करते हैं। कुछ कीटों के, जैसे मक्खी और टिड्डे के, दो जोड़ी पंख भी होते हैं।'",en:"A grasshopper suddenly hopped out from the grass. Everyone was amused. Arya said, 'This is an insect. It has three pairs of legs, one pair of antennae to sense its surroundings. Insects also sometimes have two pairs of wings, as in the case of flies and grasshoppers.'",mr:"एक टोळ अचानक गवतातून उडी मारून बाहेर आला, आणि सर्वजण गंमत वाटली. आर्या म्हणाली, 'हा एक कीटक आहे. याला तीन जोड्या पाय, आणि एक जोडी antennae असतात, जे आजूबाजूचा परिसर जाणण्यास मदत करतात. काही कीटकांना, जसे माशी व टोळाला, दोन जोड्या पंखही असतात.'",dur:17000},
+   {art:bigExpr("Forest insects:<br>Ants, Beetles, Bees<br>Flies, Mantises, Butterflies"),cap:"Abha ne bataya — grasshopper jaise bahut se insects forest mein milte hain, jaise ants, beetles, bees, flies, praying mantises, butterflies, etc.",hi:"आभा ने बताया — 'टिड्डे की तरह, तुम्हें जंगल में और भी कई कीट मिलेंगे, जैसे चींटियाँ, भृंग, मधुमक्खियाँ, मक्खियाँ, प्रेइंग मैंटिस और तितलियाँ, आदि।'",en:"Abha said, 'Like the grasshopper, you will find many insects in the forest such as ants, beetles, bees, flies, praying mantises, butterflies, etc.'",mr:"आभा म्हणाल्या, 'टोळासारखे, तुम्हाला जंगलात अनेक कीटक सापडतील, जसे मुंग्या, भुंगे, मधमाश्या, माश्या, प्रेइंग मॅंटिस आणि फुलपाखरे, इत्यादी.'",dur:13500},
+   {art:bigExpr("Water animals:<br>Fish-fins • Gharial-long snout<br>Turtle-strong shell • Frog-both land+water"),cap:"Paani mein rehne wale animals ke special features hote hain survive karne ke liye. Fish ke fins swimming ke liye hote hain. Gharial (crocodile type) ka long-narrow-pointed snout fish pakadne ke liye hai. Turtles ke strong shells safety ke liye aur webbed feet swimming ke liye. Frogs land aur water dono jagah reh sakte hain.",hi:"पानी में रहने वाले जानवरों में जीवित रहने के लिए खास विशेषताएँ होती हैं। मछलियों के पंख यानी fins तैरने में मदद करते हैं। घड़ियाल, जो मगरमच्छ की एक प्रजाति है, की लंबी, संकरी और नुकीली थूथन होती है, जिससे वह मछली पकड़ पाता है। कछुओं के मज़बूत खोल उन्हें सुरक्षित रखते हैं, और जालदार पैर उन्हें आसानी से तैरने में मदद करते हैं। मेंढक ज़मीन और पानी दोनों जगह रह सकते हैं।",en:"Animals which live in water have special features to help them survive. Fish have fins to swim. The gharial, a type of crocodile, has a long, narrow and pointed snout to catch fish. Turtles have strong shells to keep them safe and webbed feet to help them swim easily. Frogs can live both on land and in water.",mr:"पाण्यात राहणाऱ्या प्राण्यांमध्ये टिकून राहण्यासाठी खास वैशिष्ट्ये असतात. माशांना पंख (fins) पोहण्यासाठी असतात. घरियाल, जो मगरीचा एक प्रकार आहे, त्याला लांब, अरुंद व टोकदार तोंड असते, ज्याने तो मासे पकडतो. कासवांना सुरक्षित राहण्यासाठी मजबूत कवच असते, आणि जाळीदार पाय सहज पोहण्यास मदत करतात. बेडूक जमिनीवर व पाण्यात दोन्ही ठिकाणी राहू शकतात.",dur:19500},
+   {art:bigExpr("Leaves collected! 🍃<br>Colour • Shape • Texture • Veins"),cap:"Nature trail ke visit ke dauran, students ne alag-alag plants se leaves collect ki. Leaves ka colour, shape, texture note kiya. Leaves par lines bhi hoti hain jinhe veins kehte hain — do alag types ki vein arrangements hoti hain.",hi:"नेचर ट्रेल के दौरान, छात्रों ने अलग-अलग पौधों से पत्तियाँ इकट्ठा कीं। उन्होंने हर पत्ती का रंग, आकार और बनावट यानी texture नोट किया। पत्तियों पर कुछ रेखाएँ भी होती हैं, जिन्हें शिराएँ यानी veins कहते हैं। इन शिराओं की दो अलग-अलग तरह की व्यवस्थाएँ होती हैं।",en:"During the visit to the nature trail, students collected leaves from different plants. They noted the colour, shape, and texture of each leaf. Leaves also have different types of lines on them, called veins. There are two different types of arrangement of veins.",mr:"निसर्ग सहलीदरम्यान, विद्यार्थ्यांनी वेगवेगळ्या वनस्पतींची पाने गोळा केली. त्यांनी प्रत्येक पानाचा रंग, आकार व पोत नोंदवला. पानांवर काही रेषाही असतात, ज्यांना शिरा (veins) म्हणतात. या शिरांची दोन वेगवेगळी रचना असते.",dur:16500},
+   {art:bigExpr("Leaf Autograph! 🖍️<br>Rough side up → cover → rub crayon<br>= magic pattern appears!"),cap:"Activity: leaf ko notebook par rough vein-side facing up rakho. Plain paper se cover karo. Crayon rubkar dekho — leaf ka shape jaise magic se dikhta hai! Alag leaves ka apna unique pattern hota hai.",hi:"गतिविधि — लीफ ऑटोग्राफ! एक पत्ती को नोटबुक पर उसकी खुरदरी, शिरा वाली साइड ऊपर की ओर रखो। उसके ऊपर एक सादा कागज़ रखकर ढक दो। कागज़ पर क्रेयॉन रगड़ो, और देखो पत्ती का आकार जादू की तरह उभर आता है! अलग-अलग पत्तियों को आज़माओ और देखो हर एक का अपना अनोखा पैटर्न होता है।",en:"Activity — Leaf Autograph! Place a leaf on a notebook with the rough, vein-side facing up. Cover it with a plain sheet of paper. Rub a crayon over the paper, and watch the leaf's shape appear like magic! Try this with different leaves and see how each one has its own unique pattern.",mr:"उपक्रम — लीफ ऑटोग्राफ! एक पान वहीवर खरखरीत, शिरायुक्त बाजू वर ठेवून ठेवा. त्यावर साधा कागद ठेवून झाकून टाका. कागदावर क्रेयॉन घासा आणि पानाचा आकार जादूसारखा दिसताना बघा! वेगवेगळी पाने वापरून बघा आणि प्रत्येकाचा वेगळा नमुना कसा असतो ते बघा.",dur:16500},
+   {art:bigExpr("Web of Life game! 🕸️<br>Yarn ball passed between<br>connected players!"),cap:"Game: Web of Life. Har player ko plant/animal/natural element ka card milta hai. Ek player yarn ball pakadkar apni connection wale player ko yarn pass karta hai, jaise tree bird ko food deta hai. Web badhta jaata hai — agar ek part hata do, dekho web kaise kamzor ho jaata hai!",hi:"खेल — Web of Life! हर खिलाड़ी को एक पौधे, जानवर या प्राकृतिक तत्व के नाम वाला कार्ड मिलता है। एक खिलाड़ी धागे की एक गेंद पकड़कर अपने कार्ड से मिलती-जुलती कड़ी वाले दूसरे खिलाड़ी को धागा पास करता है — जैसे एक पेड़ पक्षी को भोजन देता है, या एक नदी मछली को सहारा देती है। जैसे-जैसे और जुड़ाव बनते हैं, जाला यानी web बढ़ता जाता है। अब अगर एक हिस्सा हटा दिया जाए — जैसे बाघ के लिए हिरण गायब हो जाए — तो देखो कैसे यह जाला कमज़ोर हो जाता है या टूट जाता है! यह दिखाता है कि प्रकृति में सब कुछ आपस में जुड़ा हुआ है।",en:"Game — Web of Life! Each player gets a card with the name of a plant, animal, or natural element. One player starts by holding a ball of yarn and thinking about their connection to another player with a similar card — for example, a tree provides food for a bird, or a river supports a fish. The yarn is passed to that player while the first player still holds onto its thread. The web keeps growing as more connections are made. Now, what if one part of the web disappears? Try removing a player, like a missing deer for a tiger — watch how the web weakens or collapses! It shows how everything in nature is connected.",mr:"खेळ — Web of Life! प्रत्येक खेळाडूला एका वनस्पती, प्राणी किंवा नैसर्गिक घटकाचे नाव असलेले कार्ड मिळते. एक खेळाडू धाग्याचा गोळा धरून आपल्या कार्डाशी संबंधित असलेल्या दुसऱ्या खेळाडूला धागा देतो — उदा. झाड पक्ष्याला अन्न देते, किंवा नदी माशाला आधार देते. जसजसे अधिक कनेक्शन तयार होतात, जाळे वाढत जाते. आता जर जाळ्याचा एक भाग गायब झाला तर? एखादा खेळाडू काढून बघा, जसे वाघासाठी हरीण गायब — जाळे कसे कमकुवत होते किंवा कोसळते ते बघा! यातून कळते की निसर्गात सर्वकाही जोडलेले आहे.",dur:23000},
+   {art:bigExpr("Nature's Chain of Life!<br>Grass → Deer → Lion →<br>Vulture → Decomposers"),cap:"Food chain: Grass ko Deer khata hai, Deer ko Lion khata hai. Lion ke bad Vulture use khata hai. Dead plants-animals ko decomposers (fungi/bacteria) break down karte hain, jisse mitti ko nutrients milte hain aur cycle phir se grass se shuru hoti hai.",hi:"खाद्य श्रृंखला यानी food chain — घास को हिरण खाता है, हिरण को शेर खाता है। शेर के बाद गिद्ध यानी vulture उसे खाता है। मरे हुए पौधों और जानवरों को डीकंपोज़र्स यानी विघटक (कवक और बैक्टीरिया) तोड़ते हैं, जिससे मिट्टी को ज़रूरी पोषक तत्व मिलते हैं, और यह चक्र फिर से घास से शुरू हो जाता है। अगर घास खत्म हो जाए, तो हिरण भूखे मर जाएँगे, और पूरी श्रृंखला बिगड़ जाएगी।",en:"Food chain — grass is eaten by the deer, the deer is eaten by the lion. After the lion, the vulture eats what remains. Dead plants and animals are broken down by decomposers (fungi and bacteria), giving the soil important nutrients, and the cycle starts again with grass. If the grass disappears, the deer would starve, and the whole chain would be disturbed.",mr:"अन्नसाखळी — गवत हरीण खाते, हरणाला सिंह खातो. सिंहानंतर गिधाड (vulture) उरलेले खाते. मृत वनस्पती व प्राणी विघटक (बुरशी व जीवाणू) तोडतात, ज्यामुळे मातीला महत्त्वाची पोषकतत्त्वे मिळतात, आणि हे चक्र पुन्हा गवतापासून सुरू होते. जर गवत नाहीसे झाले, तर हरणे उपाशी राहतील, आणि संपूर्ण साखळी बिघडेल.",dur:19000},
+   {art:bigExpr("Vulture is helpful!<br>Cleans up dead animals,<br>prevents disease"),cap:"Vulture nature mein bahut helpful hai — wo dead animals ko khakar area ko clean rakhta hai, jisse diseases nahi failte. Har living thing important hai — sab ek doosre par dependent hain, aur ek chain jaisi banate hain.",hi:"गिद्ध यानी वल्चर प्रकृति में बहुत मददगार होता है — वह मरे हुए जानवरों को खाकर इलाके को साफ रखता है, जिससे बीमारियाँ नहीं फैलतीं। हर एक जीवित चीज़ ज़रूरी है — सब एक-दूसरे पर निर्भर हैं, और मिलकर एक श्रृंखला बनाते हैं। इसी वजह से हमें हर पौधे और जानवर की रक्षा करनी चाहिए।",en:"The vulture is very helpful in nature — it cleans up the area by eating dead animals, which prevents the spread of diseases. Every living thing is important — they all depend on each other, forming a chain together. This is why we must protect every plant and animal.",mr:"गिधाड निसर्गात खूप उपयुक्त असते — ते मृत प्राणी खाऊन परिसर स्वच्छ ठेवते, ज्यामुळे रोग पसरत नाहीत. प्रत्येक सजीव महत्त्वाचा आहे — सर्वजण एकमेकांवर अवलंबून असतात, आणि एक साखळी तयार करतात. म्हणूनच आपण प्रत्येक वनस्पती व प्राण्याचे रक्षण केले पाहिजे.",dur:16500},
+   {art:bigExpr("Let us Reflect!<br>Which animal would you love to be?<br>Role of a nature scientist?"),cap:"Reflect karo — kaunsa animal tum bannna chahoge? Usme kya special abilities hongi? Plants-animals kaise ek doosre par dependent hain? Nature scientist ka kya role hota hai?",hi:"अब सोचो — तुम कौन-सा जानवर बनना पसंद करोगे? उसमें कौन-सी खास क्षमताएँ होंगी? अलग-अलग पौधे और जानवर एक-दूसरे पर कैसे निर्भर हैं? और एक नेचर साइंटिस्ट यानी प्रकृति वैज्ञानिक की क्या भूमिका होती है — वे पेड़-पौधों और जानवरों का अध्ययन करते हैं, ताकि हम प्रकृति को बेहतर समझ सकें और उसकी रक्षा कर सकें।",en:"Now think — which animal would you love to be? What special abilities would it give you? How are different plants and animals dependent on each other? And what is the role of a nature scientist — they study plants and animals so that we can better understand and protect nature.",mr:"आता विचार करा — तुम्हाला कोणता प्राणी व्हायला आवडेल? त्यामुळे तुम्हाला कोणती खास क्षमता मिळेल? वेगवेगळ्या वनस्पती व प्राणी एकमेकांवर कसे अवलंबून असतात? आणि नेचर सायंटिस्टची भूमिका काय असते — ते वनस्पती व प्राण्यांचा अभ्यास करतात जेणेकरून आपण निसर्ग अधिक चांगला समजू व त्याचे रक्षण करू शकू.",dur:17500},
+   {art:bigExpr("Role-play & Paper Turtle! 🐢<br>Protect Plants & Animals"),cap:"Activity: Classroom mein forest ka role-play karo — plants, animals, visitors ke roles nibhao, focus karo protect karne par. Phir purane newspaper se ek paper turtle banao — origami steps follow karke!",hi:"गतिविधि — कक्षा में जंगल का एक दृश्य बनाओ और रोल-प्ले करो — पौधों, जानवरों और आगंतुकों की भूमिका निभाओ, और ध्यान रखो कि हमारी भूमिका उन्हें बचाने की है। फिर पुराने अख़बार से एक पेपर टर्टल यानी कागज़ का कछुआ बनाओ — बताए गए origami स्टेप्स को फॉलो करके!",en:"Activity — create a scene of a forest in your classroom and role-play, performing the roles of plants, animals, and visitors, focusing on our role to protect animals and plants. Then let us make a paper turtle using an old newspaper, following the given origami steps!",mr:"उपक्रम — वर्गात जंगलाचे दृश्य तयार करा आणि भूमिका साकारा — वनस्पती, प्राणी व पाहुण्यांच्या भूमिका करा, आणि प्राणी-वनस्पतींचे रक्षण करणे हीच आपली भूमिका आहे यावर लक्ष केंद्रित करा. मग जुन्या वर्तमानपत्रापासून एक कागदी कासव बनवा — दिलेल्या ओरिगामी स्टेप्स फॉलो करून!",dur:17000},
+   {art:bigExpr("Find your STATE:<br>Animal 🐾 • Bird 🐦 • Plant 🌱"),cap:"Find out karo — tumhare state ka animal, bird aur plant kya hai? Ye humein apne region ki special species ke baare mein sikhata hai.",hi:"पता लगाओ — तुम्हारे राज्य का पशु, पक्षी और पौधा क्या है? यह हमें अपने इलाके की खास प्रजातियों के बारे में सिखाता है।",en:"Find out — what is the animal, bird and plant of your state? This teaches us about the special species of our own region.",mr:"शोधा — तुमच्या राज्याचा प्राणी, पक्षी व वनस्पती कोणती आहे? यातून आपल्याला आपल्या प्रदेशातील खास जातींबद्दल कळते.",dur:12500},
+   {art:emoji("🌈🐯"),cap:"Shabaash! Nature Trail se hume seekha — sab plants aur animals ek doosre se connected hain, aur humari zimmedari hai unhe protect karna!",hi:"शाबाश दोस्तों! नेचर ट्रेल के इस पाठ से हमने सीखा कि सारे पौधे और जानवर एक-दूसरे से जुड़े हुए हैं — एक फूड चेन की तरह। हमें जंगल में सुरक्षा नियमों का पालन करना चाहिए, जानवरों को तंग नहीं करना चाहिए, और हर एक जीव को महत्व देना चाहिए, क्योंकि यही प्रकृति का संतुलन बनाए रखता है। यह हमारी ज़िम्मेदारी है कि हम इन सबकी रक्षा करें!",en:"Well done, friends! From this Nature Trail chapter, we learned that all plants and animals are connected to each other — like a food chain. We should follow safety rules in the forest, not trouble the animals, and value every living thing, because this is what keeps nature's balance. It is our responsibility to protect them all!",mr:"शाबास मित्रांनो! या Nature Trail धड्यातून आपण शिकलो की सर्व वनस्पती व प्राणी एकमेकांशी जोडलेले आहेत — अन्नसाखळीसारखे. आपण जंगलात सुरक्षा नियमांचे पालन केले पाहिजे, प्राण्यांना त्रास देऊ नये, आणि प्रत्येक सजीवाला महत्त्व द्यावे, कारण यामुळेच निसर्गाचा समतोल राखला जातो. या सर्वांचे रक्षण करणे ही आपली जबाबदारी आहे!",dur:19500},
+  ],quiz:[
+   {tag:"Chuno",q:"Nature trail kaha hui thi?",qe:"Where was the nature trail held?",opts:["Pachmarhi, Madhya Pradesh","Mumbai, Maharashtra","Delhi"],oe:["Pachmarhi, Madhya Pradesh","Mumbai, Maharashtra","Delhi"],ans:0},
+   {tag:"Chuno",q:"Students kis mein baithkar forest gaye?",qe:"What did the students sit in to go to the forest?",opts:["Jeep","Bus","Train"],oe:["Jeep","Bus","Train"],ans:0},
+   {tag:"Chuno",q:"Abha Didi kya hain?",qe:"What is Abha Didi?",opts:["Nature scientist","Doctor","Teacher only"],oe:["A nature scientist","A doctor","Only a teacher"],ans:0},
+   {tag:"Chuno",q:"Abha Didi kya study karti hain?",qe:"What does Abha Didi study?",opts:["Plants aur animals","Sirf paani","Sirf mitti"],oe:["Plants and animals","Only water","Only soil"],ans:0},
+   {tag:"Chuno",q:"Forest entrance par students ne kya dekha?",qe:"What did students see at the forest entrance?",opts:["Tall trees aur chirping birds","Ek bada building","Ek railway station"],oe:["Tall trees and chirping birds","A big building","A railway station"],ans:0},
+   {tag:"Chuno",q:"Safety rule: hume animals ko kya nahi karna chahiye?",qe:"Safety rule: what should we not do to animals?",opts:["Tease ya feed karna","Dekhna","Photo lena"],oe:["Tease or feed them","Look at them","Take photos"],ans:0},
+   {tag:"Chuno",q:"Safety rule: hume kya nahi laana chahiye jungle mein?",qe:"Safety rule: what should we not bring to the jungle?",opts:["Polythene bags","Paani ki bottle","Camera"],oe:["Polythene bags","Water bottle","Camera"],ans:0},
+   {tag:"Chuno",q:"Safety rule: hume kya damage nahi karna chahiye?",qe:"Safety rule: what should we not damage?",opts:["Trees aur flowers","Kuch nahi","Sirf stones"],oe:["Trees and flowers","Nothing","Only stones"],ans:0},
+   {tag:"Chuno",q:"Rules follow karna kyun zaroori hai?",qe:"Why is it important to follow the rules?",opts:["Animals safe rahein, visitors bhi enjoy karein","Koi wajah nahi","Sirf mazaak ke liye"],oe:["To keep animals safe and let visitors enjoy peacefully","No reason","Just for fun"],ans:0},
+   {tag:"Chuno",q:"Gaur kaisa dikhta hai?",qe:"What does a gaur look like?",opts:["Buffaloes jaisa, par stronger, shorter horns","Bilkul tiger jaisa","Bilkul elephant jaisa"],oe:["Like buffaloes, but stronger, with shorter horns","Exactly like a tiger","Exactly like an elephant"],ans:0},
+   {tag:"Chuno",q:"Footprints dekhkar kya guess kar sakte hain?",qe:"What can we guess by looking at footprints?",opts:["Kaunsa animal aaya hoga","Mausam kaisa hoga","Kya khaana banega"],oe:["Which animal might have come","What the weather will be","What food will be cooked"],ans:0},
+   {tag:"Chuno",q:"Hornbill ka naam kyun pada?",qe:"Why is the hornbill named so?",opts:["Uske forehead se horn jaisa headgear nikalta hai","Uski awaaz horn jaisi hai","Uska rang horn jaisa hai"],oe:["A headgear like a horn grows from its forehead","Its sound is like a horn","Its colour is like a horn"],ans:0},
+   {tag:"Chuno",q:"Kaunsa bird colourful hone ke liye jaana jaata hai?",qe:"Which bird is known for being colourful?",opts:["Peacock","Crow","Sparrow"],oe:["Peacock","Crow","Sparrow"],ans:0},
+   {tag:"Chuno",q:"Owl ki khaas baat kya hai?",qe:"What is special about an owl?",opts:["Sharp eyesight, raat mein dekh sakta hai","Bahut fast udta hai","Bahut bada hai"],oe:["Sharp eyesight, can see at night","Flies very fast","Is very big"],ans:0},
+   {tag:"Chuno",q:"Eagle ka beak-claws kaise hote hain?",qe:"What are an eagle's beak and claws like?",opts:["Sharp curved beak, sharp claws","Chhota beak, weak claws","Koi beak nahi"],oe:["Sharp, curved beak and sharp claws","Small beak, weak claws","No beak"],ans:0},
+   {tag:"Chuno",q:"Eagle apna prey pakadne ke liye kya use karta hai?",qe:"What does an eagle use to catch its prey?",opts:["Sharp curved beak aur claws","Sirf wings","Sirf tail"],oe:["Sharp curved beak and claws","Only wings","Only tail"],ans:0},
+   {tag:"Chuno",q:"Sunbird ka long beak kis kaam aata hai?",qe:"What is a sunbird's long beak used for?",opts:["Flowers se nectar peene ke liye","Fish pakadne ke liye","Ped kaatne ke liye"],oe:["To drink nectar from flowers","To catch fish","To cut trees"],ans:0},
+   {tag:"Chuno",q:"Bird ki eating habits kaise pata chalti hain?",qe:"How can we guess a bird's eating habits?",opts:["Beak aur claws observe karke","Rang dekhkar","Awaaz sunkar"],oe:["By observing its beak and claws","By looking at its colour","By listening to its sound"],ans:0},
+   {tag:"Chuno",q:"Bird Diary banane ke liye pehla step kya hai?",qe:"What is the first step to make a Bird Diary?",opts:["Ek tree ke paas jaana","Ghar jaana","Sona"],oe:["Going near a tree","Going home","Sleeping"],ans:0},
+   {tag:"Chuno",q:"Grasshopper kis type ka jeev hai?",qe:"What type of creature is a grasshopper?",opts:["Insect","Mammal","Bird"],oe:["Insect","Mammal","Bird"],ans:0},
+   {tag:"Chuno",q:"Insect ke kitne pairs legs hote hain?",qe:"How many pairs of legs does an insect have?",opts:["Three pairs","One pair","Five pairs"],oe:["Three pairs","One pair","Five pairs"],ans:0},
+   {tag:"Chuno",q:"Insect ke antennae kis kaam aate hain?",qe:"What are an insect's antennae used for?",opts:["Surroundings sense karne ke liye","Udhne ke liye","Khaana banane ke liye"],oe:["To sense surroundings","To fly","To cook food"],ans:0},
+   {tag:"Chuno",q:"Kaunse insects ke do pairs wings hote hain?",qe:"Which insects have two pairs of wings?",opts:["Flies, grasshoppers","Ants only","Snails"],oe:["Flies, grasshoppers","Ants only","Snails"],ans:0},
+   {tag:"Chuno",q:"Forest mein kaunse insects milte hain?",qe:"Which insects are found in the forest?",opts:["Ants, beetles, bees, butterflies","Sirf ants","Koi nahi"],oe:["Ants, beetles, bees, butterflies","Only ants","None"],ans:0},
+   {tag:"Chuno",q:"Fish ke fins kis kaam aate hain?",qe:"What are a fish's fins used for?",opts:["Swimming ke liye","Udne ke liye","Khaane ke liye"],oe:["For swimming","For flying","For eating"],ans:0},
+   {tag:"Chuno",q:"Gharial ka long-narrow snout kis kaam aata hai?",qe:"What is the gharial's long, narrow snout used for?",opts:["Fish pakadne ke liye","Tairne ke liye","Sona ke liye"],oe:["To catch fish","To swim","To sleep"],ans:0},
+   {tag:"Chuno",q:"Turtles ke strong shells kis kaam aate hain?",qe:"What are a turtle's strong shells used for?",opts:["Unhe safe rakhne ke liye","Tairne ke liye","Khaane ke liye"],oe:["To keep them safe","To swim","To eat"],ans:0},
+   {tag:"Chuno",q:"Turtles ke webbed feet kis kaam aate hain?",qe:"What are a turtle's webbed feet used for?",opts:["Aasani se tairne ke liye","Chalne ke liye","Udne ke liye"],oe:["To help them swim easily","To walk","To fly"],ans:0},
+   {tag:"Chuno",q:"Frogs kaha reh sakte hain?",qe:"Where can frogs live?",opts:["Land aur water dono jagah","Sirf land par","Sirf water mein"],oe:["Both on land and in water","Only on land","Only in water"],ans:0},
+   {tag:"Chuno",q:"Leaves par lines ko kya kehte hain?",qe:"What are the lines on leaves called?",opts:["Veins","Roots","Stems"],oe:["Veins","Roots","Stems"],ans:0},
+   {tag:"Chuno",q:"Vein arrangement kitne types ki hoti hai?",qe:"How many types of vein arrangement are shown?",opts:["Two types","Five types","One type"],oe:["Two types","Five types","One type"],ans:0},
+   {tag:"Chuno",q:"Leaf Autograph activity mein kya use hota hai?",qe:"What is used in the Leaf Autograph activity?",opts:["Crayon aur plain paper","Paint aur brush","Scissors"],oe:["A crayon and plain paper","Paint and a brush","Scissors"],ans:0},
+   {tag:"Chuno",q:"Leaf autograph mein leaf ka kaunsa side upar rakhte hain?",qe:"Which side of the leaf is placed facing up in leaf autograph?",opts:["Rough, vein-side","Smooth side","Koi bhi side"],oe:["The rough, vein-side","The smooth side","Any side"],ans:0},
+   {tag:"Chuno",q:"Web of Life game mein har player ko kya milta hai?",qe:"What does each player get in the Web of Life game?",opts:["Ek card (plant/animal/element ka naam)","Ek toy","Ek chocolate"],oe:["A card with a plant/animal/element name","A toy","A chocolate"],ans:0},
+   {tag:"Chuno",q:"Web of Life game mein kya pass kiya jaata hai?",qe:"What is passed around in the Web of Life game?",opts:["Ball of yarn","Ek ball","Ek pencil"],oe:["A ball of yarn","A ball","A pencil"],ans:0},
+   {tag:"Chuno",q:"Agar web ka ek part hata diya jaaye toh kya hota hai?",qe:"What happens if one part of the web is removed?",opts:["Web weak ho jaata hai ya collapse hota hai","Kuch nahi hota","Web aur strong hota hai"],oe:["The web weakens or collapses","Nothing happens","The web becomes stronger"],ans:0},
+   {tag:"Chuno",q:"Web of Life game kya sikhata hai?",qe:"What does the Web of Life game teach?",opts:["Nature mein sab kuch connected hai","Sabko akela rehna chahiye","Kuch nahi"],oe:["Everything in nature is connected","Everyone should live alone","Nothing"],ans:0},
+   {tag:"Chuno",q:"Food chain mein grass ko kaun khata hai?",qe:"In the food chain, who eats the grass?",opts:["Deer","Lion","Vulture"],oe:["Deer","Lion","Vulture"],ans:0},
+   {tag:"Chuno",q:"Food chain mein deer ko kaun khata hai?",qe:"In the food chain, who eats the deer?",opts:["Lion","Grass","Mushroom"],oe:["Lion","Grass","Mushroom"],ans:0},
+   {tag:"Chuno",q:"Vulture kya khata hai?",qe:"What does the vulture eat?",opts:["Dead animals","Grass","Insects only"],oe:["Dead animals","Grass","Only insects"],ans:0},
+   {tag:"Chuno",q:"Agar sab grass gayab ho jaaye toh kya hoga?",qe:"What will happen if all the grass disappears?",opts:["Deer bhookhe mar jaayenge, chain bigad jaayegi","Kuch nahi hoga","Sab khush honge"],oe:["Deer will starve and the chain will be disturbed","Nothing will happen","Everyone will be happy"],ans:0},
+   {tag:"Chuno",q:"Agar koi deer na bache, lion par kya asar hoga?",qe:"If no deer are left, how will it affect the lion?",opts:["Lion bhookha rahega","Lion aur strong hoga","Kuch nahi hoga"],oe:["The lion will go hungry","The lion will become stronger","Nothing will happen"],ans:0},
+   {tag:"Chuno",q:"Grass, lion ki kaise madad karti hai (indirectly)?",qe:"How does grass help the lion, indirectly?",opts:["Deer ko khilati hai, jo lion ka khaana hai","Lion ko seedhe khilati hai","Koi madad nahi karti"],oe:["It feeds the deer, which is the lion's food","It feeds the lion directly","It gives no help"],ans:0},
+   {tag:"Chuno",q:"Vulture nature mein kaise helpful hai?",qe:"How is the vulture helpful in nature?",opts:["Dead animals khakar area clean rakhta hai","Ped lagata hai","Paani saaf karta hai"],oe:["Cleans the area by eating dead animals","Plants trees","Cleans water"],ans:0},
+   {tag:"Chuno",q:"Dead plants-animals ko kaun break down karta hai?",qe:"Who breaks down dead plants and animals?",opts:["Decomposers (fungi, bacteria)","Sirf paani","Sirf hawa"],oe:["Decomposers (fungi, bacteria)","Only water","Only air"],ans:0},
+   {tag:"Chuno",q:"Har living thing important kyun hai?",qe:"Why is each living thing important?",opts:["Sab ek doosre par dependent hain, chain banate hain","Koi wajah nahi","Sirf dekhne ke liye"],oe:["They all depend on each other, forming a chain","No reason","Only for looking at"],ans:0},
+   {tag:"Chuno",q:"Indian Giant Squirrel kaisa hota hai?",qe:"What is the Indian Giant Squirrel like?",opts:["Bada aur red-coloured","Chhota aur white","Kaala aur chhota"],oe:["Big and red-coloured","Small and white","Black and small"],ans:0},
+   {tag:"Chuno",q:"Indian Giant Squirrel kaha paya jaata hai?",qe:"Where is the Indian Giant Squirrel found?",opts:["Pachmarhi aur kuch aur jagah","Sirf Delhi mein","Sirf samundar mein"],oe:["Pachmarhi and some other places","Only in Delhi","Only in the sea"],ans:0},
+   {tag:"Chuno",q:"Spectacled Monkey kis state ka animal hai?",qe:"The Spectacled Monkey is the state animal of which state?",opts:["Tripura","Kerala","Punjab"],oe:["Tripura","Kerala","Punjab"],ans:0},
+   {tag:"Chuno",q:"Spectacled Monkey ko ye naam kyun mila?",qe:"Why is the Spectacled Monkey named so?",opts:["White patches around eyes spectacles jaisi lagti hain","Wo chashma pehanta hai","Uski aankhein bahut badi hain"],oe:["White patches around its eyes look like spectacles","It wears glasses","Its eyes are very big"],ans:0},
+   {tag:"Chuno",q:"Crocodile aur Alligator mein kya farak hai?",qe:"What is the difference between a crocodile and an alligator?",opts:["Crocodile ka mouth narrow, alligator ka wide","Dono same hain","Alligator zyada bada hai"],oe:["Crocodile has a narrow mouth, alligator has a wide one","They are the same","Alligator is much bigger"],ans:0},
+   {tag:"Chuno",q:"Pigeon aur Dove mein kya farak hai?",qe:"What is the difference between a pigeon and a dove?",opts:["Pigeon city mein zyada, dove village mein zyada","Dono same rang ke hain","Dove bahut bada hai"],oe:["Pigeon is seen more in city, dove more in village","Both are the same colour","Dove is much bigger"],ans:0},
+   {tag:"Chuno",q:"Turtle aur Tortoise mein kya farak hai?",qe:"What is the difference between a turtle and a tortoise?",opts:["Turtle water mein rehta hai, tortoise land par","Dono same hain","Tortoise paani mein tairta hai"],oe:["Turtle lives in water, tortoise lives on land","Both are the same","Tortoise swims in water"],ans:0},
+   {tag:"Chuno",q:"Giraffe ki special feature kya hai?",qe:"What is a special feature of the giraffe?",opts:["Long neck to eat leaves","Strong legs to run fast","Big eyes to see at night"],oe:["Long neck to eat leaves","Strong legs to run fast","Big eyes to see at night"],ans:0},
+   {tag:"Chuno",q:"Kangaroo ki special feature kya hai?",qe:"What is a special feature of the kangaroo?",opts:["Carries baby in pouch","Has a hump","Mimics speech"],oe:["Carries baby in pouch","Has a hump","Mimics speech"],ans:0},
+   {tag:"Chuno",q:"Camel ki special feature kya hai?",qe:"What is a special feature of the camel?",opts:["Can live without water, has a hump","Sharp beak","Mimics speech"],oe:["Can live without water, has a hump","Sharp beak","Mimics speech"],ans:0},
+   {tag:"Chuno",q:"Owl ki special feature kya hai?",qe:"What is a special feature of the owl?",opts:["Big eyes to see clearly at night","Long neck","Mimics speech"],oe:["Big eyes to see clearly at night","Long neck","Mimics speech"],ans:0},
+   {tag:"Chuno",q:"Parrot ki special feature kya hai?",qe:"What is a special feature of the parrot?",opts:["Can mimic human speech","Carries baby in pouch","Has a hump"],oe:["Can mimic human speech","Carries baby in pouch","Has a hump"],ans:0},
+   {tag:"Chuno",q:"Bear ki special feature kya hai?",qe:"What is a special feature of the bear?",opts:["Thick fur to stay warm in cold places","Long neck","Mimics speech"],oe:["Thick fur to stay warm in cold places","Long neck","Mimics speech"],ans:0},
+   {tag:"Chuno",q:"Woodpecker ki special feature kya hai?",qe:"What is a special feature of the woodpecker?",opts:["Strong beak to peck tree bark","Carries baby in pouch","Long neck"],oe:["Strong beak to peck tree bark","Carries baby in pouch","Long neck"],ans:0},
+   {tag:"Chuno",q:"Elephant ki special feature kya hai?",qe:"What is a special feature of the elephant?",opts:["Long trunk to take food and water","Sharp beak","Webbed feet"],oe:["Long trunk to take food and water","Sharp beak","Webbed feet"],ans:0},
+   {tag:"Chuno",q:"Sparrow ki special feature kya hai?",qe:"What is a special feature of the sparrow?",opts:["Short strong beak to crack seeds","Long neck","Carries baby in pouch"],oe:["Short strong beak to crack seeds","Long neck","Carries baby in pouch"],ans:0},
+   {tag:"Sahi ya Galat?",q:"Hume zoo mein animals ko feed karna chahiye.",qe:"We should feed animals in a zoo.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:1},
+   {tag:"Sahi ya Galat?",q:"Vulture nature mein helpful hai.",qe:"The vulture is helpful in nature.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:0},
+   {tag:"Sahi ya Galat?",q:"Insect ke 3 pairs legs hote hain.",qe:"An insect has 3 pairs of legs.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:0},
+   {tag:"Sahi ya Galat?",q:"Frog sirf paani mein reh sakta hai.",qe:"A frog can live only in water.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:1},
+   {tag:"Sahi ya Galat?",q:"Spectacled Monkey Tripura ka state animal hai.",qe:"The Spectacled Monkey is the state animal of Tripura.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:0},
+   {tag:"Sahi ya Galat?",q:"Turtle land par rehta hai aur tortoise paani mein.",qe:"A turtle lives on land and a tortoise lives in water.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:1},
+   {tag:"Khaali Jagah",q:"The nature trail took place at ___, Madhya Pradesh.",qe:"The nature trail took place at ___, Madhya Pradesh.",opts:["Pachmarhi","Mumbai","Delhi"],oe:["Pachmarhi","Mumbai","Delhi"],ans:0},
+   {tag:"Khaali Jagah",q:"An insect has three pairs of ___.",qe:"An insect has three pairs of ___.",opts:["legs","wings","eyes"],oe:["legs","wings","eyes"],ans:0},
+   {tag:"Khaali Jagah",q:"The lines on a leaf are called ___.",qe:"The lines on a leaf are called ___.",opts:["veins","roots","petals"],oe:["veins","roots","petals"],ans:0},
+   {tag:"Khaali Jagah",q:"In the food chain, grass is eaten by the ___.",qe:"In the food chain, grass is eaten by the ___.",opts:["deer","lion","vulture"],oe:["deer","lion","vulture"],ans:0},
+   {tag:"Khaali Jagah",q:"Dead plants and animals are broken down by ___.",qe:"Dead plants and animals are broken down by ___.",opts:["decomposers","birds","fish"],oe:["decomposers","birds","fish"],ans:0},
+   {tag:"Khaali Jagah",q:"The hornbill has a headgear like a ___.",qe:"The hornbill has a headgear like a ___.",opts:["horn","crown","hat"],oe:["horn","crown","hat"],ans:0},
+  ],
+ qa:[
+   {q:"Nature trail par students ne kya-kya seekha?",a:"Students ne plants aur animals ki special features, unke habitats, food chain, aur ye seekha ki safety rules follow karke hum nature ko protect kar sakte hain."},
+   {q:"Web of Life game hume kya sikhata hai?",a:"Ye game sikhata hai ki nature mein har plant aur animal ek doosre se connected hai — agar ek link toot jaaye (jaise koi species gayab ho jaaye), toh poori chain weak ho sakti hai."},
+   {q:"Food chain mein har jeev ka role kya hota hai?",a:"Har jeev food chain mein apna role nibhata hai — grass energy deti hai deer ko, deer lion ko energy deta hai, aur vulture-decomposers dead matter ko clean karke soil ko phir se healthy banate hain."},
+   {q:"Zoo ya forest mein safety rules follow karna kyun zaroori hai?",a:"Safety rules follow karne se animals safe rehte hain, unhe koi harm nahi hota, aur sabhi visitors bhi shanti se jungle ka anand le paate hain."},
+   {q:"Birds ke beaks aur claws unhe kaise madad karte hain?",a:"Beaks aur claws birds ko unke khaane ke hisaab se madad karte hain — jaise eagle ka sharp beak-claws prey pakadne ke liye, aur sunbird ka long beak nectar peene ke liye."},
+   {q:"Turtle aur tortoise mein kya antar hai?",a:"Turtle zyada paani mein rehta hai aur tortoise zyada land par rehta hai — dono dikhne mein similar hote hain par habitat alag hota hai."},
+  ],
+ match:[
+   {l:"Hornbill",r:"Headgear like a horn"},
+   {l:"Eagle",r:"Sharp curved beak, sharp claws"},
+   {l:"Sunbird",r:"Long beak to drink nectar"},
+   {l:"Owl",r:"Big eyes to see at night"},
+   {l:"Giraffe",r:"Long neck to eat leaves"},
+   {l:"Kangaroo",r:"Carries baby in pouch"},
+   {l:"Camel",r:"Can live without water, has a hump"},
+   {l:"Woodpecker",r:"Strong beak to peck tree bark"},
+   {l:"Parrot",r:"Can mimic human speech"},
+   {l:"Gharial",r:"Long, narrow, pointed snout"},
+   {l:"Turtle",r:"Strong shell, webbed feet"},
+   {l:"Frog",r:"Lives on land and in water"},
+   {l:"Insect",r:"Three pairs of legs"},
+   {l:"Veins",r:"Lines seen on a leaf"},
+   {l:"Decomposers",r:"Break down dead plants/animals"},
+   {l:"Vulture",r:"Eats dead animals, cleans nature"},
+   {l:"Spectacled Monkey",r:"State animal of Tripura"},
+   {l:"Web of Life game",r:"Shows how nature is connected"},
+ ],
+ swadhyay:[
+   {t:"Shabdarth (Vocabulary)",items:[
+     {q:"Nature Trail",a:"Prakriti bhraman — jungle ya nature ke area mein plants-animals dekhne jaana."},
+     {q:"Nature Scientist",a:"Wo vyakti jo plants aur animals ka study karta hai."},
+     {q:"Antennae",a:"Insects ke sar par hone wale sense organs, surroundings feel karne ke liye."},
+     {q:"Veins (leaf)",a:"Patton par dikhne wali lines/nasein."},
+     {q:"Decomposers",a:"Fungi aur bacteria jo dead plants-animals ko break down karte hain."},
+     {q:"Food Chain",a:"Ek sequence jisme ek jeev doosre jeev ko khaata hai, energy transfer hoti hai."},
+   ]},
+   {t:"Fill in the blanks (Nature Trail — Textbook pages 35-36)",items:[
+     {q:"The students went for a nature trail at ___.",a:"Pachmarhi."},
+     {q:"The name written on the arch at the forest entrance is Pachmarhi ___ Reserve (MP).",a:"Biosphere."},
+     {q:"Abha Didi is a ___, who studies plants and animals.",a:"Nature scientist."},
+     {q:"The students saw tall trees and ___ birds.",a:"Different (birds)."},
+     {q:"They were excited to see animals like ___, ___, snakes, ___ and tigers.",a:"Monkeys, deer, eagle (sample answers)."},
+   ]},
+   {t:"Zoo/Forest Rules (Let us Learn — Textbook page 37)",items:[
+     {q:"Observe pictures: which actions should we follow in a zoo (✓) and which should we not do (✗)?",a:"✓ Walking calmly and viewing animals from a distance, viewing peacefully with family. ✗ Putting hands in a monkey's cage, feeding a giraffe over the fence, throwing food/litter at animals."},
+     {q:"Why are the rules mentioned on textbook page 37 important to be followed?",a:"The rules keep the animals safe, protect visitors, and help everyone enjoy the zoo peacefully."},
+     {q:"Can you think of rules that should be followed while you are in a zoo or a forest?",a:"(a) We should not feed birds. (b) Please do not tease animals. (c) Please be careful in a new place. (d) Please do not bring polythene bags."},
+     {q:"List the Safety Rules (DOs and DON'Ts) given in the textbook.",a:"1) Be careful in a new place. 2) Do not tease animals. 3) Do not feed animals. 4) Do not damage trees and flowers. 5) Do not bring pets, firearms or weapons. 6) Do not bring polythene bags. 7) Do not damage public utilities. 8) Do not throw garbage in the forest."},
+   ]},
+   {t:"Animal World: Special Features",items:[
+     {q:"1. Giraffe",a:"b. Long neck to eat leaves."},
+     {q:"2. Kangaroo",a:"d. Carries baby in pouch."},
+     {q:"3. Camel",a:"a. Can live without water and has a hump."},
+     {q:"4. Owl",a:"c. Big eyes to see clearly at night."},
+     {q:"5. Horse",a:"f. Strong legs to run fast."},
+     {q:"6. Bear",a:"e. Has thick fur to stay warm in cold places."},
+     {q:"7. Woodpecker",a:"h. Has a strong beak to peck tree bark."},
+     {q:"8. Parrot",a:"g. Can mimic human speech."},
+   ]},
+   {t:"Forest Friends — Same or Different? (Indian Giant Squirrel vs Spectacled Monkey)",items:[
+     {q:"The Indian giant squirrel is bigger than the squirrels we see around us.",a:"True."},
+     {q:"Common squirrels are not red.",a:"True."},
+     {q:"Common squirrels are found in Pachmarhi.",a:"False (the Indian Giant Squirrel, not common squirrels, is found there)."},
+     {q:"The spectacled monkey is the state animal of Tripura.",a:"True."},
+     {q:"It cannot jump from one tree to another.",a:"False (it can jump between trees)."},
+     {q:"Both the animals live mostly on trees.",a:"True."},
+   ]},
+   {t:"Look-alike Animals",items:[
+     {q:"A pigeon is seen more in ___ and a dove is seen more in ___.",a:"City; village."},
+     {q:"A crocodile has a ___ mouth, but an alligator has a ___ one.",a:"Narrow; wide."},
+     {q:"A tortoise has a ___ shell, but a turtle has a ___ shell.",a:"Hard; flat."},
+     {q:"A dove is ___ and ___ than a pigeon.",a:"Smaller; softer."},
+     {q:"A turtle lives mostly in ___ and a tortoise lives on ___.",a:"Water; land."},
+   ]},
+   {t:"Write — Animals and their Features",items:[
+     {q:"Elephant — feature",a:"Long trunk to take food and water."},
+     {q:"Sparrow — feature",a:"Short and strong beak to crack seeds."},
+     {q:"Fox/Dog — feature (sample)",a:"Strong nails and muscles, sharp teeth."},
+     {q:"Lion — feature (sample)",a:"It is a large, powerful wild cat."},
+     {q:"Compare the Indian Giant Squirrel's features with the squirrels you see in your area.",a:"The Indian Giant Squirrel is much bigger and red-coloured, while the common squirrels seen around us are smaller and usually brown/grey with stripes."},
+   ]},
+   {t:"Animal Footprint Mystery",items:[
+     {q:"Frog",a:"Small green webbed footprint."},
+     {q:"Elephant",a:"Large round orange/red footprint."},
+     {q:"Duck",a:"Webbed green footprint."},
+     {q:"Tiger",a:"Grey paw print with claw marks."},
+     {q:"Bear",a:"Large brown paw print."},
+   ]},
+   {t:"Feathered Friends — Riddles",items:[
+     {q:"I am green and have a red beak. I can copy your words when you speak. Who am I?",a:"Parrot."},
+     {q:"I am small and brown in shade. I chirp sweetly and eat grains. Who am I?",a:"Sparrow."},
+     {q:"I dance in the rain. My feathers are very pretty. Who am I?",a:"Peacock."},
+     {q:"I am black and shiny. You can see me flying on your way. Who am I?",a:"Crow."},
+     {q:"I have a headgear like a horn. Who am I?",a:"Hornbill."},
+   ]},
+   {t:"Bird Menu — What do they eat?",items:[
+     {q:"Sparrow",a:"Grains."},
+     {q:"Eagle",a:"Mouse."},
+     {q:"Peacock",a:"Worm."},
+     {q:"Owl",a:"Rat."},
+     {q:"Rooster",a:"Grains."},
+   ]},
+   {t:"Bird Watch — Claws and Beaks",items:[
+     {q:"1. Sharp curved beak, sharp curved claws",a:"Eagle."},
+     {q:"2. Short thick beak, strong feet with spurs",a:"Rooster/Hen."},
+     {q:"3. Flat wide beak, webbed feet",a:"Duck."},
+     {q:"4. Strong pointed beak, sharp claws",a:"Crow."},
+     {q:"5. Short beak, scratching feet",a:"Chick/Hen."},
+     {q:"6. Small beak, pinkish feet",a:"Pigeon."},
+   ]},
+   {t:"Animal Habitats — Where do they live?",items:[
+     {q:"On the land",a:"Cow, lion, elephant, tortoise, snail, crow (sample)."},
+     {q:"In the air",a:"Hummingbird, parrot, butterfly (sample)."},
+     {q:"On the land and in water (both)",a:"Frog, crocodile, snake, turtle (sample)."},
+     {q:"In water",a:"Fish, seahorse, jellyfish, octopus, dolphin, crab (sample)."},
+   ]},
+   {t:"Tiny Animals — Insects",items:[
+     {q:"What are the insects that you find at your home and in your surroundings?",a:"Sample: Ants, cockroaches, mosquitoes, houseflies, spiders (spiders are not insects but commonly seen)."},
+     {q:"Name the insects shown: butterfly, cockroach, beetle, dragonfly, ant, praying mantis, grasshopper",a:"(a) Butterfly (b) Cockroach (c) Beetle (d) Dragonfly (e) Ant (f) Praying mantis (g) Grasshopper."},
+     {q:"What helps a grasshopper sense its surroundings?",a:"Its antennae."},
+     {q:"What does a caterpillar grow into?",a:"A butterfly."},
+     {q:"Name any one harmful insect and the disease it causes.",a:"Insect — Mosquito. Disease — Malaria/Dengue."},
+     {q:"Name any one useful insect and what we get due to it.",a:"Insect — Honeybee. We get — Honey."},
+   ]},
+   {t:"Animals Living in and around Water",items:[
+     {q:"Fish — movement",a:"Swims."},
+     {q:"Crab — movement",a:"Walks."},
+     {q:"Frog — movement",a:"Jumps."},
+     {q:"Turtle — movement",a:"Swims/Walks slowly."},
+     {q:"Crocodile — movement",a:"Swims/Crawls."},
+     {q:"Snakes — movement",a:"Slithers/Swims."},
+   ]},
+   {t:"Magic Leaves Around Us",items:[
+     {q:"Tulsi (Holy Basil) leaf — use",a:"Used in poojas and for medicinal purposes like cough and cold remedies."},
+     {q:"Mint (Pudina) leaf — use",a:"Used in cooking, chutneys, and for digestion."},
+     {q:"Curry leaf — use",a:"Used for flavouring food and hair care."},
+     {q:"Aloe vera leaf — use",a:"Used for skin care and healing burns."},
+     {q:"Neem leaf — use",a:"Used for medicinal purposes, skin problems."},
+     {q:"Betel (Paan) leaf — use",a:"Used in poojas and as a mouth freshener."},
+   ]},
+   {t:"The Leaf's Body — Parts of a Leaf",items:[
+     {q:"Tip",a:"The pointed end of the leaf, at the top."},
+     {q:"Blade",a:"The wide, flat green part of the leaf."},
+     {q:"Vein",a:"The lines running through the leaf blade."},
+     {q:"Petiole",a:"The stalk that joins the leaf to the stem."},
+     {q:"Stipule",a:"Small leaf-like structures at the base of the petiole."},
+     {q:"Axil",a:"The angle between the leaf/petiole and the stem."},
+   ]},
+   {t:"Nature's Chain of Life — Food Chain",items:[
+     {q:"Which animal in this picture eats the grass?",a:"The deer."},
+     {q:"Who eats the deer?",a:"The lion."},
+     {q:"Who does the vulture eat?",a:"The vulture eats dead animals (like the remains left by the lion)."},
+     {q:"If all the grass disappears, what will happen?",a:"The deer will not have food and may starve, which will disturb the whole food chain."},
+     {q:"If no deer are left, how will that affect the lion?",a:"The lion will not have food to eat and may go hungry."},
+     {q:"How does the grass help the lion, even though the lion does not eat grass directly?",a:"The grass is food for the deer, and the deer is food for the lion — so energy from grass reaches the lion indirectly."},
+     {q:"How is the vulture helpful in nature?",a:"The vulture eats dead animals and cleans up the area, which prevents the spread of diseases."},
+     {q:"What happens to dead plants and animals? Who helps break them down?",a:"Dead plants and animals are broken down by decomposers, like fungi and bacteria, which return nutrients to the soil."},
+     {q:"Why is each living thing important?",a:"Each living thing plays a role in the food chain and helps maintain balance in nature."},
+   ]},
+   {t:"Let us Reflect (Textbook page 55)",items:[
+     {q:"Which animal would you love to be? What special abilities would it give you?",a:"Sample answer: I would love to be an eagle, because it can fly high, see very far with sharp eyesight, and soar freely in the sky."},
+     {q:"How do you think different plants and animals are dependent on each other?",a:"Plants give food and oxygen to animals, and animals help spread seeds and pollinate flowers — they depend on each other to survive, like links in a food chain."},
+     {q:"What is the role of a nature scientist?",a:"A nature scientist studies plants and animals, understands their behaviour and habitats, and helps protect and conserve nature."},
+     {q:"Write the names of the following: Your state animal, Your state bird, Your state plant.",a:"Sample answer will vary by state — e.g. for Madhya Pradesh: State animal — Barasingha (Swamp Deer); State bird — Indian Paradise Flycatcher (Dudhraj); State tree — Banyan."},
+   ]},
+   {t:"Find the Treasures of the Forest (Word Search)",items:[
+     {q:"Find hidden words in the puzzle: animals and birds of the forest",a:"Tiger, Sparrow, Egret, Elephant, Deer, Snake, Squirrel, Kingfisher, Banyan."},
+   ]},
+   {t:"Do an Activity / Paper Turtle / Find Out",items:[
+     {q:"Role-play activity — what should the focus be while enacting a forest scene?",a:"The focus should be on our role to protect animals and plants while performing as plants, animals, and visitors."},
+     {q:"How is a paper turtle made?",a:"By folding an old newspaper or used paper following the given origami steps (folding into a diamond shape, then folding the corners to form the turtle's head, legs and shell)."},
+     {q:"Write the name of your state animal, bird, and plant.",a:"Sample answer will vary by state (e.g., for Madhya Pradesh: Barasingha, Dudhraj/Paradise Flycatcher, Banyan tree)."},
+   ]},
+ ]},
+ {id:'e_growing',title:'Growing up with Nature',emoji:'🌾',color:C.mint,scenes:[
+   {art:emoji("🌻"),cap:"Chapter 4 — Growing up with Nature! Reena aur Amit ke saath ek village trip par chalte hain, jaha nature aur culture saath-saath chalte hain.",hi:"नमस्ते बच्चों! आज हम EVS का चौथा पाठ पढ़ेंगे — Growing up with Nature। इस पाठ में हम रीना और अमित के साथ एक गाँव की यात्रा पर चलेंगे, और सीखेंगे कि कैसे प्रकृति और हमारी संस्कृति एक-दूसरे से गहराई से जुड़ी हुई हैं।",en:"Hello children! Today we will study our fourth EVS chapter — Growing up with Nature. In this chapter, we will join Reena and Amit on a village trip, and learn how nature and our culture are deeply connected to each other.",mr:"नमस्कार मुलांनो! आज आपण EVS चा चौथा धडा शिकणार आहोत — Growing up with Nature. या धड्यात आपण रीना आणि अमितसोबत गावाच्या सहलीला जाऊ, आणि निसर्ग व आपली संस्कृती एकमेकांशी किती खोलवर जोडलेली आहे हे शिकू.",dur:16500},
+   {art:bigExpr("Family trip to village!<br>Harvest festival +<br>Fully Solar-Powered Village!"),cap:"Reena aur Amit apni family trip ko lekar bahut excited the. Wo apne gaanv jaa rahe the jo forest ke paas hai. Ye harvest festival ka time tha, aur unka gaanv us din fully solar-powered village bhi banne wala tha!",hi:"रीना और अमित अपनी पारिवारिक यात्रा को लेकर बहुत उत्साहित थे। वे जंगल के पास अपने गाँव जा रहे थे। यह फसल कटाई के त्योहार यानी harvest festival का समय था। इसके अलावा, यह एक खास मौका भी था — उस दिन उनका गाँव पूरी तरह से सौर ऊर्जा से चलने वाला गाँव यानी solar-powered village बनने वाला था! वे पूरे गाँव को जगमगाता देखने के लिए बहुत बेताब थे।",en:"Reena and Amit were excited about a family trip. They were going to their village near a forest. It was the time for a harvest festival. Besides that, it was also a special occasion. On that day, their village was also going to be a fully solar-powered village! They could not wait to see the whole village lit up for the celebrations.",mr:"रीना आणि अमित त्यांच्या कौटुंबिक सहलीबद्दल खूप उत्साहित होते. ते जंगलाजवळील त्यांच्या गावी जात होते. ही कापणी सणाची (harvest festival) वेळ होती. याशिवाय, हा एक खास प्रसंगही होता — त्या दिवशी त्यांचे गाव पूर्णपणे सौरऊर्जेवर चालणारे गाव बनणार होते! संपूर्ण गाव उत्सवासाठी उजळलेले पाहण्याची त्यांना खूप उत्सुकता होती.",dur:19000},
+   {art:bigExpr("Palash Tree! 🌺<br>'Flame of the Forest'"),cap:"Gaanv mein pahunchkar, bachchon ne trees dekhe jo bright orange-red flowers se bhare the. Reena ne poocha — ye kaunse flowers hain? Father ne bataya — ye Palash tree hai. Jab iske flowers khilte hain, poora forest reddish-orange dikhta hai, isliye Palash ko 'flame of the forest' kaha jaata hai.",hi:"गाँव में प्रवेश करते ही, बच्चों ने ऐसे पेड़ देखे जो चमकीले नारंगी-लाल फूलों से भरे थे। रीना ने पूछा, 'ये फूल किस पेड़ के हैं?' उसके पिता मुस्कुराए और बोले — 'यह पलाश का पेड़ है। जब इस पेड़ पर फूल खिलते हैं, तो दूर से पूरा जंगल नारंगी-लाल दिखाई देता है। इसीलिए पलाश को जंगल की आग यानी 'flame of the forest' कहा जाता है।'",en:"As they entered the village, children noticed trees full of bright orange-red flowers. Reena asked, 'What are those flowers called?' Her father smiled and said, 'This is a Palash tree. When the flowers bloom on this tree, the entire forest looks reddish-orange from a distance. So, Palash is called the flame of forest.'",mr:"गावात प्रवेश करताच, मुलांना चमकदार नारिंगी-लाल फुलांनी भरलेली झाडे दिसली. रीनाने विचारले, 'ही कोणती फुले आहेत?' तिचे वडील हसून म्हणाले — 'हे पळस झाड आहे. जेव्हा या झाडावर फुले उमलतात, तेव्हा दुरून संपूर्ण जंगल नारिंगी-लाल दिसते. म्हणूनच पळसाला जंगलाची आग (flame of forest) म्हणतात.'",dur:19000},
+   {art:bigExpr("Village houses:<br>Clay + Hay + Cow dung<br>= Natural materials!"),cap:"Amit ne kaha — ye ghar city ke gharon se kitne alag lagte hain! Wall par decoration kitni sundar hai! Mother ne bataya — ye ghar clay, hay, cow dung aur doosre natural materials se bane hain. Ye painting grandmother ne banayi hai, jisme rice flour aur paani se bani dye use hui hai.",hi:"अमित ने कहा — 'वाह! ये घर शहर के घरों से कितने अलग लगते हैं। दीवार पर बनी सजावट कितनी सुंदर है!' माँ ने बताया — 'अमित, ये घर मिट्टी, घास-फूस, गोबर और दूसरी प्राकृतिक चीज़ों से बनाए जाते हैं। देखो, यह पेंटिंग तुम्हारी दादी ने बनाई है। उन्होंने चावल के आटे और पानी को मिलाकर बनाई गई डाई का इस्तेमाल किया है।'",en:"Amit said, 'Ahh! These houses look so different from houses in the city. The decoration on the wall is so beautiful!' Mother said, 'Amit, these houses are made using clay, hay, cow dung, and other natural materials. Look, this painting is done by your grandmother. She has used a dye made by mixing rice flour and water.'",mr:"अमित म्हणाला, 'अरे वा! ही घरे शहरातील घरांपेक्षा किती वेगळी दिसतात. भिंतीवरची सजावट किती सुंदर आहे!' आई म्हणाली, 'अमित, ही घरे चिखल, गवत, शेण आणि इतर नैसर्गिक वस्तूंपासून बनवली जातात. बघ, ही चित्रकला तुझ्या आजीने केली आहे. तिने तांदळाचे पीठ व पाणी मिसळून बनवलेला रंग वापरला आहे.'",dur:20000},
+   {art:bigExpr("Grandmother painting! 🎨<br>Natural extracts:<br>Flowers + Leaves + Coloured stones"),cap:"Grandmother ne bataya — paint natural extracts se banti hai, jaise flowers, leaves, aur powdered coloured stones. Gond art bhi natural colours se walls par ki jaati hai — trees, animals, birds, humans dikhaye jaate hain.",hi:"दादी ने बताया कि रंग प्राकृतिक चीज़ों से बनाया जाता है — फूलों, पत्तियों के अर्क और रंगीन पत्थरों के पाउडर से। गोंड कला यानी Gond art भी दीवारों पर प्राकृतिक रंगों से बनाई जाती है, जिसमें कलाकार पेड़ों, जानवरों, पक्षियों और इंसानों की तस्वीरें बनाते हैं।",en:"The grandmother told the children that the paint was made of natural extracts of flowers, leaves and the powdered coloured stones. Gond art is a form of painting on walls using natural colours — the artists make pictures of nature like trees, animals, birds and humans.",mr:"आजीने मुलांना सांगितले की रंग फुलं, पानं व रंगीत दगडांच्या पावडरपासून तयार केलेल्या नैसर्गिक अर्कांपासून बनवला जातो. गोंड कला ही भिंतींवर नैसर्गिक रंगांनी केलेली चित्रकला आहे — कलाकार झाडे, प्राणी, पक्षी व माणसांची चित्रे काढतात.",dur:18000},
+   {art:bigExpr("Make Natural Dye! 🌼<br>Step 1: Collect flowers<br>Step 2: Boil → Step 3: Strain!"),cap:"Activity: natural dye banao! Step 1 — hibiscus, beetroot, marigold jaise colouring flowers-leaves collect karo. Step 2 — 1-2 litres paani mein 30 min-1 hour boil karo, dhak kar. Step 3 — liquid ko strain karo, dye taiyaar hai! Ab kapde par dye lagao, raat bhar soak karo.",hi:"गतिविधि — एक प्राकृतिक रंग यानी natural dye बनाओ! स्टेप 1 — हिबिस्कस, चुकंदर, गेंदा जैसे रंग देने वाले फूल-पत्तियाँ इकट्ठा करो। स्टेप 2 — इन्हें 1-2 लीटर पानी में ढककर 30 मिनट से 1 घंटे तक उबालो (किसी बड़े की मदद ज़रूर लो)। स्टेप 3 — तरल को छान लो ताकि पौधों का बचा हुआ हिस्सा निकल जाए, और प्राकृतिक रंग तैयार हो जाएगा! अब इस रंग से कोई हल्के रंग का रुमाल या तौलिया रंगो, और उसे रात भर भिगोकर सुबह निचोड़कर सुखा लो।",en:"Activity — let us prepare a natural dye! Step 1 — collect flowers, leaves, barks and roots such as beetroot, hibiscus and marigold that have colouring properties. Step 2 — boil the collected plant parts in 1-2 litres of water for 30 minutes to an hour, covering the container (take help from an elder). Step 3 — strain the liquid to remove the plant materials, leaving behind the natural dye. Now paint a piece of cloth like a light-coloured handkerchief, soak it overnight, squeeze and dry it the next morning.",mr:"उपक्रम — नैसर्गिक रंग बनवूया! पायरी 1 — हिबिस्कस, बीट, झेंडू यांसारखी रंगदायी फुले, पाने गोळा करा. पायरी 2 — ती 1-2 लिटर पाण्यात झाकून 30 मिनिटे ते 1 तास उकळवा (मोठ्यांची मदत घ्या). पायरी 3 — द्रव गाळून घ्या, वनस्पतींचे अवशेष काढून टाका, नैसर्गिक रंग तयार! आता या रंगाने एखादा हलक्या रंगाचा रुमाल रंगवा, रात्रभर भिजवून सकाळी पिळून वाळवा.",dur:22000},
+   {art:bigExpr("Earthen pots + Neem leaves<br>Bamboo baskets + Cow dung<br>= Grains protected!"),cap:"Bachche farming aur honey extraction ke tools dekhkar curious hue. Grains store karne ke liye earthen pots aur bamboo baskets use hote hain. Earthen pots ke andar neem leaves lagi hoti hain. Bamboo baskets bahar se cow dung se coated hote hain. Isse grains insects-pests se safe rehte hain!",hi:"बच्चे खेती और शहद निकालने में इस्तेमाल होने वाले औज़ार देखकर उत्सुक हो गए। अनाज रखने के लिए घर में मिट्टी के बर्तन और बाँस की टोकरियाँ थीं। मिट्टी के बर्तनों के अंदर नीम की पत्तियाँ लगी होती हैं। बाँस की टोकरियों के बाहर गोबर की परत चढ़ाई जाती है। इस तरीके से, स्टोर किया हुआ अनाज कीड़ों और कीटों से सुरक्षित रहता है।",en:"The children were curious to see the tools used for farming and extracting honey. There were earthen pots and bamboo baskets, in the house, to store grains. Earthen pots were lined inside with neem leaves. The bamboo baskets were coated with cow dung on the outside. With this method, the stored grains remain protected from insects and pests.",mr:"शेती व मध काढण्यासाठी वापरली जाणारी साधने पाहून मुलं उत्सुक झाली. धान्य साठवण्यासाठी घरात मातीची भांडी व बांबूच्या टोपल्या होत्या. मातीच्या भांड्यांच्या आत कडुनिंबाची पाने लावलेली असतात. बांबूच्या टोपल्यांना बाहेरून शेणाचा लेप दिलेला असतो. या पद्धतीने, साठवलेले धान्य कीटक व किडींपासून सुरक्षित राहते.",dur:20000},
+   {art:bigExpr("Jenu Kurubas Tribe 🐝<br>(Karnataka) — 'Jenu' = Honey<br>They SING to apologise to bees!"),cap:"Jenu Kurubas ek tribe hai Karnataka se. Unka naam 'Jenu' shabd se aaya hai, jiska matlab hai honey. Jab wo beehives se honey collect karte hain, toh bees se maafi maangne ke liye gaane gaate hain — ye nature ke prati unka respect dikhata hai.",hi:"जेनु कुरुबास कर्नाटक की एक जनजाति है। उनका नाम 'जेनु' शब्द से आया है, जिसका अर्थ है शहद। जब वे मधुमक्खी के छत्तों से शहद इकट्ठा करते हैं, तो मधुमक्खियों से माफी माँगने के लिए गाने गाते हैं। यह प्रकृति के प्रति उनके सम्मान को दिखाता है।",en:"The Jenu Kurubas is a tribe from Karnataka. Their name comes from the word 'Jenu', which means honey. When they collect honey from beehives, they sing songs to apologise to the bees. This shows their respect for nature.",mr:"जेनु कुरुबास ही कर्नाटकातील एक जमात आहे. त्यांचे नाव 'जेनु' या शब्दावरून आले आहे, ज्याचा अर्थ मध आहे. जेव्हा ते मधाच्या पोळ्यांमधून मध गोळा करतात, तेव्हा मधमाश्यांची माफी मागण्यासाठी गाणी गातात. यातून निसर्गाबद्दलचा त्यांचा आदर दिसून येतो.",dur:17500},
+   {art:bigExpr("Tumri! 🎃<br>Uttarakhand's traditional<br>grain container (dried bottle gourd)"),cap:"Alag-alag jagah traditional tareeke se grains-vegetables preserve karte hain. Jaise 'Tumri' — Uttarakhand mein use hone wala container, jo round ya oval shape ke dried bottle gourd se banaya jaata hai.",hi:"अलग-अलग जगहों पर अनाज और सब्ज़ियों को पारंपरिक तरीके से सुरक्षित रखा जाता है। जैसे 'तुम्री' — उत्तराखंड में इस्तेमाल होने वाला एक कंटेनर, जो गोल या अंडाकार आकार की सूखी लौकी से बनाया जाता है।",en:"In different places, grains and vegetables are preserved in traditional ways. For example, 'Tumri' — a container commonly used in Uttarakhand, constructed with a round or oval shaped dried bottle gourd.",mr:"वेगवेगळ्या ठिकाणी धान्य व भाज्या पारंपरिक पद्धतीने साठवल्या जातात. उदाहरणार्थ 'तुम्री' — उत्तराखंडमध्ये वापरले जाणारे भांडे, जे गोल किंवा अंडाकृती वाळलेल्या भोपळ्यापासून बनवले जाते.",dur:15500},
+   {art:bigExpr("Neem oil mosquito repellent!<br>Reena's First-Aid Box:<br>Medicines + Repellent Cream"),cap:"Grandfather ne box se ek liquid bottle nikaali — ye neem oil se bani mixture hai, hands-feet par rubkar mosquitoes nahi kaatenge. Reena ne bataya — usne bhi ek first-aid box banaya hai jisme medicines aur mosquito repellent cream hai, jo market se khareedi.",hi:"दादा जी ने बॉक्स से एक तरल पदार्थ की बोतल निकाली। दादा जी ने बताया — 'यह नीम के तेल से बना एक मिश्रण है। इसे हाथों और पैरों पर मलने से मच्छर नहीं काटेंगे।' रीना ने पूछा — 'दादा जी, क्या यह फर्स्ट-एड बॉक्स है? मैंने भी एक फर्स्ट-एड बॉक्स तैयार किया है। हमने इसमें कुछ दवाइयाँ और बाज़ार से खरीदी हुई मच्छर भगाने वाली क्रीम रखी है।'",en:"Their grandfather took out a bottle of liquid from a box. Dada ji said, 'This is a mixture made with neem oil. If you rub it on your hands and feet, the mosquitoes will not bite you.' Reena asked, 'Dada ji, is it a first-aid box? I have also prepared a first-aid box. We keep some medicines and mosquito repellent cream in it, bought from the market.'",mr:"आजोबांनी बॉक्समधून एका द्रवाची बाटली काढली. आजोबा म्हणाले, 'हे कडुनिंबाच्या तेलाने बनवलेले मिश्रण आहे. हातापायांना चोळल्यास डास चावणार नाहीत.' रीनाने विचारले, 'आजोबा, हा फर्स्ट-एड बॉक्स आहे का? मीही एक फर्स्ट-एड बॉक्स तयार केला आहे. आम्ही त्यात काही औषधे व बाजारातून विकत घेतलेली मच्छर प्रतिबंधक क्रीम ठेवली आहे.'",dur:20000},
+   {art:bigExpr("Medicinal Plants:<br>Tulsi (leaves) — healing<br>Ajwain (carom seeds) — digestion"),cap:"Discuss with elders karke, plant, uske parts, aur uses jaanna chahiye. Jaise Tulsi (Indian basil) ki leaves ka use hota hai, aur Ajwain (carom seeds) ka bhi apna use hota hai — digestion aur cold-cough mein madad karte hain.",hi:"अपने घर के बड़ों से बात करके, पौधे, उसके अलग-अलग हिस्सों और उनके उपयोगों के बारे में जानना चाहिए। जैसे तुलसी की पत्तियों का इस्तेमाल होता है, और अजवाइन के बीजों का भी अपना खास इस्तेमाल है — ये पाचन में मदद करते हैं और सर्दी-खाँसी में भी उपयोगी होते हैं।",en:"By discussing with elders in the family, we can learn about a plant, its parts, and its uses. For example, the leaves of Indian basil (Tulsi) are used for many purposes, and carom seeds (Ajwain) also have their own uses — they help with digestion and are useful for cold and cough.",mr:"कुटुंबातील मोठ्यांशी चर्चा करून, एखाद्या वनस्पतीचे भाग व त्यांचे उपयोग जाणून घेता येतात. उदाहरणार्थ तुळशीच्या पानांचा वापर अनेक कारणांसाठी होतो, आणि ओव्याचाही (अजवाइन) स्वतःचा उपयोग असतो — ते पचनास मदत करतात आणि सर्दी-खोकल्यासाठी उपयुक्त असतात.",dur:18500},
+   {art:bigExpr("Sparkling Light, Happy Life! ✨<br>Whole village lit up!<br>Prayers to God & Mother Nature"),cap:"Shaam ko poora gaanv colourful lights se lit up hua. Sab log ek bade field mein ikatthe hue, traditional clothes-jewels pehne. Festivities shuru hone se pehle, God aur mother nature ko prayers offer ki gayi.",hi:"शाम को पूरा गाँव रंग-बिरंगी रोशनी से जगमगा उठा। सब लोग एक बड़े मैदान में इकट्ठा हुए। लोगों ने पारंपरिक कपड़े और गहने पहने थे। उत्सव शुरू होने से पहले, भगवान और प्रकृति माँ यानी mother nature की पूजा की गई।",en:"In the evening, the whole village was lit up with colourful lights. Everyone gathered in a big field. People were wearing traditional clothes and jewels. Before the festivities started, prayers were offered to the God and mother nature.",mr:"संध्याकाळी संपूर्ण गाव रंगीबेरंगी दिव्यांनी उजळून निघाले. सर्वजण एका मोठ्या मैदानात जमले. लोकांनी पारंपरिक कपडे व दागिने घातले होते. उत्सव सुरू होण्याआधी, देव व मातृ निसर्गाला प्रार्थना केली गेली.",dur:17500},
+   {art:bigExpr("Dhol & Nagada! 🥁<br>Vibrant beats → Traditional dance!"),cap:"Dhol aur nagada ki awaaz ne poori hawa bhar di. Vibrant beats ne sabke pairon ko thirkane par majboor kar diya. Amit aur Reena bhi shaamil hue aur traditional dance ka anand liya.",hi:"ढोल और नगाड़े की आवाज़ ने पूरे माहौल को भर दिया। जीवंत धुनों ने सबके पैरों को थिरकने पर मजबूर कर दिया। अमित और रीना भी उनके साथ शामिल हुए और पारंपरिक नृत्य का आनंद लिया।",en:"The sound of the dhol and nagada filled the air. Vibrant beats made everyone tap their feet in celebration. Amit and Reena also joined them and enjoyed the traditional dance.",mr:"ढोल आणि नगाऱ्याच्या आवाजाने संपूर्ण वातावरण भरून गेले. जिवंत तालांमुळे सर्वांचे पाय थिरकू लागले. अमित आणि रीनाही त्यांच्यात सामील झाले आणि पारंपरिक नृत्याचा आनंद घेतला.",dur:16500},
+   {art:bigExpr("Sacred Groves! 🌳<br>Small forest patches,<br>protected by local communities"),cap:"Do you know? Sacred Groves chote-chote forest patches hote hain, jo local communities dwara protect kiye jaate hain. Inke trees aur wildlife preserve kiye jaate hain. Ye community ke liye ikattha hone, worship karne, aur nature ki khoobsurti celebrate karne ki jagah hain.",hi:"क्या तुम जानते हो? पवित्र उपवन यानी Sacred Groves जंगल के छोटे-छोटे हिस्से होते हैं, जिन्हें स्थानीय समुदाय संरक्षित रखते हैं। इनके पेड़ और वन्यजीव सुरक्षित रखे जाते हैं। ये community के लिए इकट्ठा होने, पूजा करने और प्रकृति की सुंदरता का जश्न मनाने की महत्वपूर्ण जगहें हैं।",en:"Do you know? Sacred Groves are small patches of forests, protected by local communities. The trees and wildlife within them are preserved. These are important places for the community to gather, worship, and celebrate the beauty of nature.",mr:"तुम्हाला माहीत आहे का? Sacred Groves हे जंगलाचे लहान तुकडे असतात, जे स्थानिक समुदायांकडून संरक्षित केले जातात. त्यातील झाडे व वन्यजीव जपले जातात. समुदायाला एकत्र येण्यासाठी, पूजा करण्यासाठी आणि निसर्गाचे सौंदर्य साजरे करण्यासाठी या महत्त्वाच्या जागा आहेत.",dur:18000},
+   {art:bigExpr("Reena & Amit amazed!<br>Village's beautiful connection<br>with Nature 🌿"),cap:"Reena aur Amit apne gaanv ke logon ka nature ke saath beautiful connection dekhkar amazed hue. Wo sochne lage — hum nature ke liye kya kar sakte hain, aur nature ko sab kuch ke liye kaise thank kar sakte hain.",hi:"रीना और अमित अपने गाँव के लोगों के प्रकृति के साथ इस सुंदर रिश्ते को देखकर हैरान रह गए। वे सोचने लगे कि वे प्रकृति के लिए क्या कर सकते हैं, और वे हर चीज़ के लिए प्रकृति का धन्यवाद कैसे कर सकते हैं।",en:"Reena and Amit were amazed at the beautiful connection the people of their village had with nature. They started thinking about what they could do for nature and how they could thank nature for everything.",mr:"रीना आणि अमित त्यांच्या गावातील लोकांचे निसर्गाशी असलेले सुंदर नाते पाहून थक्क झाले. ते विचार करू लागले की ते निसर्गासाठी काय करू शकतात, आणि प्रत्येक गोष्टीसाठी निसर्गाचे आभार कसे मानू शकतात.",dur:15500},
+   {art:bigExpr("Festivals of Gratitude! 🙏<br>Aadi Perukku → River<br>Nag Panchami → Snakes"),cap:"India mein bahut se festivals nature ko thank karne ke liye manaye jaate hain. Aadi Perukku mein river Ganga jaisi rivers ko thanks diya jaata hai unke paani-life ke liye. Nag Panchami mein snakes ko thank kiya jaata hai aur unki puja ki jaati hai.",hi:"भारत में कई त्योहार प्रकृति का धन्यवाद करने के लिए मनाए जाते हैं। आदि पेरुक्कु में नदियों को पानी और जीवन देने के लिए धन्यवाद दिया जाता है। नाग पंचमी में साँपों को धन्यवाद दिया जाता है और उनकी पूजा की जाती है।",en:"Many festivals in India are celebrated to thank nature. In Aadi Perukku, rivers are thanked for their water and life. In Nag Panchami, snakes are thanked and worshipped.",mr:"भारतात निसर्गाचे आभार मानण्यासाठी अनेक सण साजरे केले जातात. आदि पेरुक्कुमध्ये नद्यांचे पाणी व जीवनासाठी आभार मानले जातात. नाग पंचमीमध्ये सापांचे आभार मानले जातात व त्यांची पूजा केली जाते.",dur:17000},
+   {art:bigExpr("Bihu → Thank nature for harvest<br>Sarhul → Worship Sal trees"),cap:"Bihu manaya jaata hai good harvest ke liye nature ko thank karne ke liye. Sarhul mein Sal trees ki worship ki jaati hai aur nature ko thank kiya jaata hai. Ye sab festivals dikhate hain ki humari sanskriti nature ki kitni respect karti hai.",hi:"बिहू त्योहार अच्छी फसल के लिए प्रकृति को धन्यवाद देने के लिए मनाया जाता है। सरहुल में साल के पेड़ों की पूजा की जाती है और प्रकृति का धन्यवाद किया जाता है। ये सभी त्योहार दिखाते हैं कि हमारी संस्कृति प्रकृति का कितना सम्मान करती है।",en:"Bihu is celebrated to thank nature for a good harvest. In Sarhul, sal trees are worshipped and nature is thanked. All these festivals show how much our culture respects nature.",mr:"बिहू सण चांगल्या कापणीसाठी निसर्गाचे आभार मानण्यासाठी साजरा केला जातो. सरहुलमध्ये साल वृक्षांची पूजा केली जाते व निसर्गाचे आभार मानले जातात. हे सर्व सण दाखवतात की आपली संस्कृती निसर्गाचा किती आदर करते.",dur:16000},
+   {art:bigExpr("Karni Mata Fair → Rats<br>Ganga Dussehra → River Ganga<br>Tulsi Vivah → Tulsi plant<br>Bail Pola → Bulls"),cap:"Aur bhi kayi festivals hain — Karni Mata Fair mein rats ko feed-protect kiya jaata hai. Ganga Dussehra mein holy river Ganga ko respect diya jaata hai. Tulsi Vivah mein Tulsi plant ki ritual wedding hoti hai. Bail Pola mein bulls ko decorate karke unhe farming mein madad ke liye thank kiya jaata hai.",hi:"और भी कई त्योहार हैं — करणी माता मेले में चूहों को खाना खिलाया और सुरक्षित रखा जाता है। गंगा दशहरा में पवित्र नदी गंगा का सम्मान किया जाता है। तुलसी विवाह में तुलसी के पौधे का विधिवत विवाह किया जाता है। बैल पोला में बैलों को सजाया जाता है और खेती में मदद करने के लिए उनका धन्यवाद किया जाता है।",en:"There are many more festivals — in the Karni Mata Fair, rats are fed and protected. In Ganga Dussehra, respect is shown to the holy river Ganga. In Tulsi Vivah, a ritual wedding of the Tulsi plant takes place. In Bail Pola, bulls are decorated to thank and honour them for helping farmers.",mr:"आणखी अनेक सण आहेत — करणी माता मेळ्यात उंदरांना खायला घालून त्यांचे रक्षण केले जाते. गंगा दशहरामध्ये पवित्र गंगा नदीचा आदर केला जातो. तुळशी विवाहात तुळशीच्या रोपाचा विधीवत विवाह केला जातो. बैल पोळ्यामध्ये बैलांना सजवून शेतकऱ्यांना मदत केल्याबद्दल त्यांचे आभार मानले जातात.",dur:19500},
+   {art:bigExpr("Solar Panel ☀️<br>Sunlight → Electricity!<br>Runs fan, bulb & appliances"),cap:"Solar panel sunlight collect karta hai aur use electricity mein badalta hai. Isse generate hui bijli ko solar energy kehte hain. Solar panels se hum fan, bulb jaise appliances chala sakte hain — bina bijli ka bill diye!",hi:"सोलर पैनल सूर्य की रोशनी यानी sunlight को इकट्ठा करता है और उसे बिजली में बदल देता है। सूर्य की रोशनी से बनी इस बिजली को सौर ऊर्जा यानी solar energy कहते हैं। सोलर पैनल की मदद से हम पंखा, बल्ब जैसे उपकरण चला सकते हैं — बिना बिजली का बिल दिए!",en:"A solar panel collects sunlight and turns it into electricity. The electricity generated from sunlight is called solar energy. Solar panels help us run appliances like a fan and a bulb — without an electricity bill!",mr:"सोलर पॅनल सूर्यप्रकाश गोळा करते आणि त्याचे विजेत रूपांतर करते. सूर्यप्रकाशापासून तयार झालेल्या या विजेला सौर ऊर्जा म्हणतात. सोलर पॅनलमुळे आपण पंखा, बल्बसारखी उपकरणे चालवू शकतो — वीजबिल न देता!",dur:17500},
+   {art:bigExpr("Save Electricity! 💡<br>Turn off unused lights/fans<br>Use natural light in daytime"),cap:"Bahut zyada electricity use karne se natural resources kharch hote hain aur environment par asar padta hai. Hume unused lights-fans band karne chahiye, aur din mein natural light use karni chahiye.",hi:"बहुत ज़्यादा बिजली का इस्तेमाल करने से प्राकृतिक संसाधन खर्च होते हैं और पर्यावरण पर असर पड़ता है। हमें जब ज़रूरत न हो तो लाइट-पंखे बंद कर देने चाहिए, और दिन में प्राकृतिक रोशनी का इस्तेमाल करना चाहिए।",en:"Using too much electricity uses up natural resources and affects the environment. We should switch off lights and fans when not needed, and use natural light during the day.",mr:"खूप जास्त वीज वापरल्याने नैसर्गिक साधनसंपत्ती वापरली जाते आणि पर्यावरणावर परिणाम होतो. गरज नसताना दिवे-पंखे बंद केले पाहिजेत, आणि दिवसा नैसर्गिक प्रकाशाचा वापर केला पाहिजे.",dur:16000},
+   {art:bigExpr("Saving Food — Traditional Ways!<br>Sun-drying • Pickling<br>Using salt/sugar • Storing"),cap:"Log traditional tareeke se khaana preserve karte hain — jaise sun-drying (dhoop mein sukhana), oiling and pickling (achaar banana), using salt ya sugar, aur containers mein store karna. Ye tareeke bina fridge ke bhi khaane ko lambe samay tak safe rakhte hain.",hi:"लोग पारंपरिक तरीकों से खाना सुरक्षित रखते हैं — जैसे धूप में सुखाना (sun-drying), तेल और अचार बनाना (oiling and pickling), नमक या चीनी का इस्तेमाल करना, और डिब्बों में भरकर रखना। ये तरीके बिना फ्रिज के भी खाने को लंबे समय तक सुरक्षित रखते हैं।",en:"People preserve food using traditional ways — such as sun-drying, oiling and pickling, using salt or sugar, and storing in containers. These methods keep food safe for a long time, even without a fridge.",mr:"लोक पारंपरिक पद्धतीने अन्न साठवतात — जसे उन्हात वाळवणे, तेल व लोणचे बनवणे, मीठ किंवा साखर वापरणे, आणि डब्यांमध्ये साठवणे. या पद्धतींमुळे फ्रीजशिवायही अन्न दीर्घकाळ सुरक्षित राहते.",dur:17000},
+   {art:bigExpr("Caring for Plants & Animals!<br>✅ Water plants, feed strays<br>❌ Tease animals, pluck flowers"),cap:"Plants aur animals ki care karna zaroori hai — plants ko regularly water do, strays ko clean paani-khaana do, aur trees lagao. Animals ko tease mat karo, flowers mat todo, aur wrappers road par mat feko.",hi:"पौधों और जानवरों की देखभाल करना ज़रूरी है — पौधों को नियमित रूप से पानी दो, आवारा जानवरों को साफ पानी और खाना दो, और पेड़ लगाओ। जानवरों को मत छेड़ो, फूल मत तोड़ो, और सड़क पर कचरा मत फेंको।",en:"It is important to care for plants and animals — water plants regularly, feed clean water and food to stray animals, and plant more trees. Do not tease animals, do not pluck flowers, and do not throw wrappers on the road.",mr:"वनस्पती व प्राण्यांची काळजी घेणे महत्त्वाचे आहे — रोपांना नियमित पाणी द्या, भटक्या प्राण्यांना स्वच्छ पाणी व अन्न द्या, आणि अधिक झाडे लावा. प्राण्यांना छेडू नका, फुले तोडू नका, आणि रस्त्यावर कचरा टाकू नका.",dur:17500},
+   {art:bigExpr("Ways to Care:<br>Reduce paper waste<br>Say no to plastic<br>Reuse old bottles as pots!"),cap:"Nature ki care karne ke aur tareeke — paper waste kam karo, plastic ko na kaho, awareness failao, aur old bottles ya jars ko reuse karke unhe plant pots bana lo!",hi:"प्रकृति की देखभाल करने के और भी तरीके हैं — काग़ज़ की बर्बादी कम करो, प्लास्टिक को ना कहो, जागरूकता फैलाओ, और पुरानी बोतलों या जार को दोबारा इस्तेमाल करके उन्हें पौधों के गमले बना लो!",en:"Here are more ways to care for nature — reduce paper waste, say no to plastic, spread awareness, and reuse old bottles or jars as plant pots!",mr:"निसर्गाची काळजी घेण्याचे आणखी मार्ग — कागदाचा अपव्यय कमी करा, प्लास्टिकला नकार द्या, जागरूकता पसरवा, आणि जुन्या बाटल्या किंवा भांडी पुन्हा वापरून त्यांची रोपांची कुंडी बनवा!",dur:15000},
+   {art:bigExpr("What we use from Nature:<br>Eating→Fruits • Clothing→Cotton<br>Healthcare→Neem"),cap:"Hum apni daily life mein nature se bahut kuch use karte hain — khaane ke liye fruits, kapdon ke liye cotton, healthcare ke liye neem jaisi cheezein. Lekin agar hum natural resources ka zyada use karein, toh forests deplete ho sakte hain, paani-soil-sea products bhi kam ho sakte hain.",hi:"हम अपनी रोज़मर्रा की ज़िंदगी में प्रकृति से बहुत कुछ इस्तेमाल करते हैं — खाने के लिए फल, कपड़ों के लिए कपास, स्वास्थ्य देखभाल के लिए नीम जैसी चीज़ें। लेकिन अगर हम प्राकृतिक संसाधनों का बहुत ज़्यादा इस्तेमाल करें, जैसे लकड़ी का, तो हमारे जंगल खत्म हो सकते हैं। इसी तरह पानी, मिट्टी और समुद्री उत्पाद भी अधिक इस्तेमाल से कम हो सकते हैं।",en:"We use a lot from nature in our daily life — fruits for eating, cotton for clothing, and things like neem for healthcare. But if we overuse natural resources, like wood, our forests can deplete. Similarly, water, soil and sea products can also become scarce if overused.",mr:"आपण रोजच्या जीवनात निसर्गापासून बरेच काही वापरतो — खाण्यासाठी फळे, कपड्यांसाठी कापूस, आरोग्यसेवेसाठी कडुनिंबासारख्या गोष्टी. पण जर आपण लाकडासारख्या नैसर्गिक साधनसंपत्तीचा अतिवापर केला, तर आपली जंगले संपुष्टात येऊ शकतात. त्याचप्रमाणे, पाणी, माती व सागरी उत्पादनेही अतिवापरामुळे कमी होऊ शकतात.",dur:19000},
+   {art:emoji("🌱🙏"),cap:"Shabaash! Hum sabne seekha ki hamari sanskriti aur nature kitne gehre jude hue hain. Hume nature ka respect karna chahiye aur usse jo bhi milta hai, uske liye thankful rehna chahiye!",hi:"शाबाश दोस्तों! हम सबने सीखा कि हमारी संस्कृति और प्रकृति कितनी गहराई से जुड़ी हुई हैं — हमारे घर, खाना, त्योहार, दवाइयाँ, सब कुछ प्रकृति से जुड़ा है। हमें प्रकृति का सम्मान करना चाहिए, उसकी देखभाल करनी चाहिए, और जो कुछ भी वह हमें देती है, उसके लिए हमेशा आभारी रहना चाहिए!",en:"Well done, friends! We all learned how deeply our culture and nature are connected — our homes, food, festivals, medicines, everything is linked to nature. We must respect nature, take care of it, and always stay thankful for everything it gives us!",mr:"शाबास मित्रांनो! आपण सर्वांनी शिकलो की आपली संस्कृती आणि निसर्ग किती खोलवर जोडलेले आहेत — आपली घरे, अन्न, सण, औषधे, सर्वकाही निसर्गाशी जोडलेले आहे. आपण निसर्गाचा आदर केला पाहिजे, त्याची काळजी घेतली पाहिजे, आणि तो आपल्याला जे काही देतो त्यासाठी नेहमी कृतज्ञ राहिले पाहिजे!",dur:18500},
+  ],quiz:[
+   {tag:"Chuno",q:"Reena aur Amit kis trip ke liye excited the?",qe:"What trip were Reena and Amit excited about?",opts:["Family trip to their village","School trip","Shopping trip"],oe:["A family trip to their village","A school trip","A shopping trip"],ans:0},
+   {tag:"Chuno",q:"Unka village kis ke paas tha?",qe:"What was their village near?",opts:["Ek forest","Ek samundar","Ek airport"],oe:["A forest","A sea","An airport"],ans:0},
+   {tag:"Chuno",q:"Us din kaunsa festival tha?",qe:"What festival was it that day?",opts:["Harvest festival","Diwali","Holi"],oe:["Harvest festival","Diwali","Holi"],ans:0},
+   {tag:"Chuno",q:"Unka village us din kya banne wala tha?",qe:"What was their village going to become that day?",opts:["Fully solar-powered village","Ek shehar","Ek factory"],oe:["A fully solar-powered village","A city","A factory"],ans:0},
+   {tag:"Chuno",q:"Palash tree ke flowers kaise dikhte hain?",qe:"What do the flowers of the Palash tree look like?",opts:["Bright orange-red","Neela","Safed"],oe:["Bright orange-red","Blue","White"],ans:0},
+   {tag:"Chuno",q:"Palash tree ko kya kaha jaata hai?",qe:"What is the Palash tree called?",opts:["Flame of the forest","King of trees","Tree of life"],oe:["Flame of the forest","King of trees","Tree of life"],ans:0},
+   {tag:"Chuno",q:"Gujarat mein Palash ko kya kehte hain?",qe:"What is Palash called in Gujarat?",opts:["Kesuda","Tesu","Palas"],oe:["Kesuda","Tesu","Palas"],ans:0},
+   {tag:"Chuno",q:"Village houses kis se bane hote hain?",qe:"What are village houses made of?",opts:["Clay, hay, cow dung","Steel aur glass","Plastic"],oe:["Clay, hay, cow dung","Steel and glass","Plastic"],ans:0},
+   {tag:"Chuno",q:"Grandmother ki painting ka dye kis se bana tha?",qe:"What was grandmother's painting dye made of?",opts:["Rice flour aur paani","Paint tube","Ink pen"],oe:["Rice flour and water","A paint tube","An ink pen"],ans:0},
+   {tag:"Chuno",q:"Paint kis se banti hai (natural)?",qe:"What is natural paint made from?",opts:["Flowers, leaves, coloured stones","Plastic","Metal"],oe:["Flowers, leaves, coloured stones","Plastic","Metal"],ans:0},
+   {tag:"Chuno",q:"Gond art kya hai?",qe:"What is Gond art?",opts:["Walls par natural colours se painting","Ek dance form","Ek khaana"],oe:["Painting on walls using natural colours","A dance form","A food item"],ans:0},
+   {tag:"Chuno",q:"Gond art mein kya dikhaya jaata hai?",qe:"What is shown in Gond art?",opts:["Trees, animals, birds, humans","Sirf cars","Sirf buildings"],oe:["Trees, animals, birds, humans","Only cars","Only buildings"],ans:0},
+   {tag:"Chuno",q:"Natural dye banane ke liye kya collect karte hain?",qe:"What is collected to make a natural dye?",opts:["Hibiscus, beetroot, marigold","Plastic bottles","Metal pieces"],oe:["Hibiscus, beetroot, marigold","Plastic bottles","Metal pieces"],ans:0},
+   {tag:"Chuno",q:"Natural dye banane ka last step kya hai?",qe:"What is the last step in making a natural dye?",opts:["Liquid ko strain karna","Ped lagana","Khaana pakana"],oe:["Straining the liquid","Planting a tree","Cooking food"],ans:0},
+   {tag:"Chuno",q:"Grains store karne ke liye kya use hota hai?",qe:"What is used to store grains?",opts:["Earthen pots aur bamboo baskets","Plastic bags only","Glass jars only"],oe:["Earthen pots and bamboo baskets","Only plastic bags","Only glass jars"],ans:0},
+   {tag:"Chuno",q:"Earthen pots ke andar kya lagaya jaata hai?",qe:"What is lined inside earthen pots?",opts:["Neem leaves","Plastic sheet","Cotton"],oe:["Neem leaves","Plastic sheet","Cotton"],ans:0},
+   {tag:"Chuno",q:"Bamboo baskets bahar se kis se coated hote hain?",qe:"What are bamboo baskets coated with on the outside?",opts:["Cow dung","Paint","Plastic"],oe:["Cow dung","Paint","Plastic"],ans:0},
+   {tag:"Chuno",q:"Neem leaves aur cow dung se grains ko kya faayda hota hai?",qe:"What benefit do neem leaves and cow dung give to grains?",opts:["Insects-pests se protection","Zyada taste","Zyada weight"],oe:["Protection from insects and pests","Better taste","More weight"],ans:0},
+   {tag:"Chuno",q:"Jenu Kurubas kis state ki tribe hai?",qe:"The Jenu Kurubas is a tribe from which state?",opts:["Karnataka","Kerala","Punjab"],oe:["Karnataka","Kerala","Punjab"],ans:0},
+   {tag:"Chuno",q:"'Jenu' shabd ka matlab kya hai?",qe:"What does the word 'Jenu' mean?",opts:["Honey","Water","Fire"],oe:["Honey","Water","Fire"],ans:0},
+   {tag:"Chuno",q:"Jenu Kurubas honey collect karte waqt kya karte hain?",qe:"What do the Jenu Kurubas do while collecting honey?",opts:["Bees se maafi maangne ke liye gaane gaate hain","Bees ko maarte hain","Kuch nahi karte"],oe:["Sing songs to apologise to the bees","Kill the bees","Do nothing"],ans:0},
+   {tag:"Chuno",q:"'Tumri' kya hai?",qe:"What is 'Tumri'?",opts:["Dried bottle gourd se bana grain container","Ek khaana","Ek dance"],oe:["A grain container made of dried bottle gourd","A food item","A dance"],ans:0},
+   {tag:"Chuno",q:"Tumri kis state mein commonly use hota hai?",qe:"In which state is Tumri commonly used?",opts:["Uttarakhand","Kerala","Goa"],oe:["Uttarakhand","Kerala","Goa"],ans:0},
+   {tag:"Chuno",q:"Neem oil ka mixture kis kaam aata hai?",qe:"What is the neem oil mixture used for?",opts:["Mosquito repellent","Khaana banana","Kapde dhona"],oe:["As a mosquito repellent","Cooking food","Washing clothes"],ans:0},
+   {tag:"Chuno",q:"Reena ke first-aid box mein kya hai?",qe:"What is in Reena's first-aid box?",opts:["Medicines aur mosquito repellent cream","Khilone","Kitaabein"],oe:["Medicines and mosquito repellent cream","Toys","Books"],ans:0},
+   {tag:"Chuno",q:"Tulsi plant ka kaunsa part use hota hai?",qe:"Which part of the Tulsi plant is used?",opts:["Leaves","Roots only","Bark only"],oe:["Leaves","Only roots","Only bark"],ans:0},
+   {tag:"Chuno",q:"Ajwain (carom seeds) kis mein madad karte hain?",qe:"What do carom seeds (Ajwain) help with?",opts:["Digestion","Sona","Dekhna"],oe:["Digestion","Sleeping","Seeing"],ans:0},
+   {tag:"Chuno",q:"Shaam ko poora village kaise dikha?",qe:"How did the whole village look in the evening?",opts:["Colourful lights se lit up","Andhera","Dhundh mein"],oe:["Lit up with colourful lights","Dark","Foggy"],ans:0},
+   {tag:"Chuno",q:"Festivities shuru hone se pehle kya kiya gaya?",qe:"What was done before the festivities started?",opts:["Prayers offered to God and nature","Khaana khaya gaya","Sab so gaye"],oe:["Prayers were offered to God and nature","Food was eaten","Everyone went to sleep"],ans:0},
+   {tag:"Chuno",q:"Kaunse instruments ki awaaz air mein filled thi?",qe:"Which instruments' sound filled the air?",opts:["Dhol aur nagada","Guitar","Piano"],oe:["Dhol and nagada","Guitar","Piano"],ans:0},
+   {tag:"Chuno",q:"Sacred Groves kya hain?",qe:"What are Sacred Groves?",opts:["Small forest patches protected by communities","Bade shopping malls","School grounds"],oe:["Small forest patches protected by communities","Big shopping malls","School grounds"],ans:0},
+   {tag:"Chuno",q:"Sacred Groves mein kya preserve kiya jaata hai?",qe:"What is preserved in Sacred Groves?",opts:["Trees aur wildlife","Buildings","Vehicles"],oe:["Trees and wildlife","Buildings","Vehicles"],ans:0},
+   {tag:"Chuno",q:"Sacred Groves community ke liye kya kaam aate hain?",qe:"What are Sacred Groves used for by the community?",opts:["Gather, worship, celebrate nature","Shopping karne ke liye","Sona ke liye"],oe:["Gathering, worship, celebrating nature","Shopping","Sleeping"],ans:0},
+   {tag:"Chuno",q:"Aadi Perukku festival kis cheez ko thank karta hai?",qe:"What does the Aadi Perukku festival thank?",opts:["River (paani-life ke liye)","Sun","Moon"],oe:["The river (for water and life)","The sun","The moon"],ans:0},
+   {tag:"Chuno",q:"Nag Panchami mein kya worship kiya jaata hai?",qe:"What is worshipped during Nag Panchami?",opts:["Snakes","Rats","Cows"],oe:["Snakes","Rats","Cows"],ans:0},
+   {tag:"Chuno",q:"Bihu festival kis liye manaya jaata hai?",qe:"Why is the Bihu festival celebrated?",opts:["Good harvest ke liye thanks","Diwali celebrate karne ke liye","Naya saal ke liye"],oe:["To thank nature for a good harvest","To celebrate Diwali","For New Year"],ans:0},
+   {tag:"Chuno",q:"Sarhul mein kaunse trees worship kiye jaate hain?",qe:"Which trees are worshipped during Sarhul?",opts:["Sal trees","Mango trees","Neem trees"],oe:["Sal trees","Mango trees","Neem trees"],ans:0},
+   {tag:"Chuno",q:"Karni Mata Fair mein kya worship hota hai?",qe:"What is worshipped at the Karni Mata Fair?",opts:["Rats","Elephants","Snakes"],oe:["Rats","Elephants","Snakes"],ans:0},
+   {tag:"Chuno",q:"Ganga Dussehra kis nadi ko respect deta hai?",qe:"Which river does Ganga Dussehra show respect to?",opts:["River Ganga","River Yamuna","River Narmada"],oe:["River Ganga","River Yamuna","River Narmada"],ans:0},
+   {tag:"Chuno",q:"Tulsi Vivah mein kya hota hai?",qe:"What happens during Tulsi Vivah?",opts:["Tulsi plant ki ritual wedding","Ek dance competition","Ek football match"],oe:["A ritual wedding of the Tulsi plant","A dance competition","A football match"],ans:0},
+   {tag:"Chuno",q:"Bail Pola mein kis animal ko thank kiya jaata hai?",qe:"Which animal is thanked during Bail Pola?",opts:["Bulls","Cats","Dogs"],oe:["Bulls","Cats","Dogs"],ans:0},
+   {tag:"Chuno",q:"Bail Pola mein bulls ko kyun thank kiya jaata hai?",qe:"Why are bulls thanked during Bail Pola?",opts:["Farming mein madad karne ke liye","Khaana banane ke liye","Gaana gaane ke liye"],oe:["For helping in farming","For cooking food","For singing songs"],ans:0},
+   {tag:"Chuno",q:"Solar panel kya collect karta hai?",qe:"What does a solar panel collect?",opts:["Sunlight","Paani","Hawa"],oe:["Sunlight","Water","Air"],ans:0},
+   {tag:"Chuno",q:"Sunlight kis mein badalta hai solar panel se?",qe:"What does sunlight turn into through a solar panel?",opts:["Electricity","Paani","Khaana"],oe:["Electricity","Water","Food"],ans:0},
+   {tag:"Chuno",q:"Sunlight se generate hui electricity ko kya kehte hain?",qe:"What is the electricity generated from sunlight called?",opts:["Solar energy","Wind energy","Water energy"],oe:["Solar energy","Wind energy","Water energy"],ans:0},
+   {tag:"Chuno",q:"Solar panels kaunse appliances chalane mein madad karte hain?",qe:"Which appliances do solar panels help run?",opts:["Fan aur bulb","Sirf mobile","Sirf laptop"],oe:["Fan and bulb","Only mobile","Only laptop"],ans:0},
+   {tag:"Chuno",q:"Zyada electricity use karne se kya hota hai?",qe:"What happens when we use too much electricity?",opts:["Natural resources kharch hote hain","Kuch nahi hota","Bijli free ho jaati hai"],oe:["Natural resources get used up","Nothing happens","Electricity becomes free"],ans:0},
+   {tag:"Chuno",q:"Electricity bachane ka ek tareeka batao.",qe:"Name one way to save electricity.",opts:["Unused lights-fans band karna","Zyada lights jalana","Har waqt AC chalana"],oe:["Switching off unused lights and fans","Turning on more lights","Running the AC all the time"],ans:0},
+   {tag:"Chuno",q:"Khaana preserve karne ka ek traditional tareeka batao.",qe:"Name one traditional way to preserve food.",opts:["Sun-drying","Freezer mein rakhna sirf","Kuch nahi"],oe:["Sun-drying","Only freezing","Nothing"],ans:0},
+   {tag:"Chuno",q:"Achaar banane ka tareeka kya kehlata hai?",qe:"What is the method of making pickles called?",opts:["Oiling and pickling","Sun-drying","Cold treatment"],oe:["Oiling and pickling","Sun-drying","Cold treatment"],ans:0},
+   {tag:"Chuno",q:"Khaana preserve karne ke liye kya use hota hai?",qe:"What is used to preserve food?",opts:["Salt aur sugar","Sirf paani","Sirf hawa"],oe:["Salt and sugar","Only water","Only air"],ans:0},
+   {tag:"Chuno",q:"Plants ki care karne ka ek tareeka batao.",qe:"Name one way to take care of plants.",opts:["Regularly water dena","Unhe todna","Unhe ignore karna"],oe:["Watering them regularly","Breaking them","Ignoring them"],ans:0},
+   {tag:"Chuno",q:"Hume animals ke saath kya nahi karna chahiye?",qe:"What should we not do with animals?",opts:["Tease karna","Paani dena","Dekhna"],oe:["Tease them","Give them water","Look at them"],ans:0},
+   {tag:"Chuno",q:"Paper waste kam karne ka ek tareeka batao.",qe:"Name one way to reduce paper waste.",opts:["Dono side use karna","Sirf ek side likhkar phenk dena","Kuch mat karna"],oe:["Using both sides of paper","Writing on one side and throwing it away","Doing nothing"],ans:0},
+   {tag:"Chuno",q:"Old bottles-jars ko kaise reuse kar sakte hain?",qe:"How can old bottles and jars be reused?",opts:["Plant pots ke roop mein","Feek kar","Jalakar"],oe:["As plant pots","By throwing them away","By burning them"],ans:0},
+   {tag:"Chuno",q:"Humein daily eating ke liye nature se kya milta hai?",qe:"What do we get from nature for daily eating?",opts:["Fruits","Metal","Plastic"],oe:["Fruits","Metal","Plastic"],ans:0},
+   {tag:"Chuno",q:"Clothing ke liye nature se kya milta hai?",qe:"What do we get from nature for clothing?",opts:["Cotton","Steel","Glass"],oe:["Cotton","Steel","Glass"],ans:0},
+   {tag:"Chuno",q:"Healthcare ke liye nature se kya milta hai?",qe:"What do we get from nature for healthcare?",opts:["Neem","Sirf tablets","Kuch nahi"],oe:["Neem","Only tablets","Nothing"],ans:0},
+   {tag:"Chuno",q:"Wood ke overuse se kya hota hai?",qe:"What happens when wood is overused?",opts:["Forests deplete ho jaate hain","Forests aur bade ho jaate hain","Kuch nahi hota"],oe:["Forests get depleted","Forests get bigger","Nothing happens"],ans:0},
+   {tag:"Sahi ya Galat?",q:"Palash tree ko 'flame of the forest' kaha jaata hai.",qe:"The Palash tree is called the 'flame of the forest'.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:0},
+   {tag:"Sahi ya Galat?",q:"Village houses sirf steel se bante hain.",qe:"Village houses are made only of steel.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:1},
+   {tag:"Sahi ya Galat?",q:"Jenu Kurubas honey collect karte waqt bees se maafi maangte hain.",qe:"The Jenu Kurubas apologise to bees while collecting honey.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:0},
+   {tag:"Sahi ya Galat?",q:"Solar panel sunlight ko electricity mein badalta hai.",qe:"A solar panel turns sunlight into electricity.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:0},
+   {tag:"Sahi ya Galat?",q:"Sacred Groves ko log kaat sakte hain.",qe:"People can cut down Sacred Groves.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:1},
+   {tag:"Sahi ya Galat?",q:"Bail Pola mein bulls ko thank kiya jaata hai.",qe:"Bulls are thanked during Bail Pola.",opts:["Sahi ✅","Galat ❌"],oe:["True ✅","False ❌"],ans:0},
+   {tag:"Khaali Jagah",q:"The Palash tree is called the ___ of the forest.",qe:"The Palash tree is called the ___ of the forest.",opts:["flame","king","queen"],oe:["flame","king","queen"],ans:0},
+   {tag:"Khaali Jagah",q:"A solar panel collects ___.",qe:"A solar panel collects ___.",opts:["sunlight","rainwater","soil"],oe:["sunlight","rainwater","soil"],ans:0},
+   {tag:"Khaali Jagah",q:"Earthen pots are lined inside with ___ leaves.",qe:"Earthen pots are lined inside with ___ leaves.",opts:["neem","mango","banana"],oe:["neem","mango","banana"],ans:0},
+   {tag:"Khaali Jagah",q:"The Jenu Kurubas tribe is from ___.",qe:"The Jenu Kurubas tribe is from ___.",opts:["Karnataka","Kerala","Punjab"],oe:["Karnataka","Kerala","Punjab"],ans:0},
+   {tag:"Khaali Jagah",q:"In ___, sal trees are worshipped.",qe:"In ___, sal trees are worshipped.",opts:["Sarhul","Bihu","Nag Panchami"],oe:["Sarhul","Bihu","Nag Panchami"],ans:0},
+   {tag:"Khaali Jagah",q:"Sacred Groves are protected by ___ communities.",qe:"Sacred Groves are protected by ___ communities.",opts:["local","foreign","no"],oe:["local","foreign","no"],ans:0},
+  ],
+ qa:[
+   {q:"Village houses natural materials se banane ke kya faayde hain?",a:"Natural materials se bane ghar summer mein cool rehte hain, environment ke liye achhe hain, aur locally available cheezon se aasani se bante hain."},
+   {q:"Hum apne aas-paas nature ki care kaise kar sakte hain?",a:"Hum plants ko regularly water dekar, stray animals ko khaana-paani dekar, ped lagakar, plastic kam use karke, aur paper waste reduce karke nature ki care kar sakte hain."},
+   {q:"Festivals of Gratitude kya sikhate hain?",a:"Ye festivals sikhate hain ki humari sanskriti nature — rivers, snakes, bulls, trees — sab ka respect karti hai aur unke liye thankful hoti hai."},
+   {q:"Solar energy ke kya faayde hain?",a:"Solar energy renewable hai (kabhi khatam nahi hoti), ye pollution nahi failati, aur isse hum bina bijli ka bill diye appliances chala sakte hain."},
+   {q:"Traditional grain storage tareeke (earthen pots, bamboo baskets) kya faayde dete hain?",a:"Ye natural materials grains ko insects aur pests se protect karte hain, bina kisi chemical ke, aur environment-friendly bhi hote hain."},
+   {q:"Agar hum natural resources ka overuse karein toh kya ho sakta hai?",a:"Agar hum wood, paani, ya sea products ka overuse karein, toh forests deplete ho sakte hain, paani ki kami ho sakti hai, aur environment ka balance bigad sakta hai."},
+  ],
+ match:[
+   {l:"Palash tree",r:"Flame of the forest"},
+   {l:"Gond art",r:"Painting on walls with natural colours"},
+   {l:"Natural dye",r:"Made from hibiscus, beetroot, marigold"},
+   {l:"Earthen pots",r:"Lined with neem leaves"},
+   {l:"Bamboo baskets",r:"Coated with cow dung outside"},
+   {l:"Jenu Kurubas",r:"Tribe from Karnataka, collects honey"},
+   {l:"Tumri",r:"Grain container from Uttarakhand"},
+   {l:"Neem oil",r:"Used as mosquito repellent"},
+   {l:"Tulsi (leaves)",r:"Medicinal plant, many uses"},
+   {l:"Ajwain (carom seeds)",r:"Helps in digestion"},
+   {l:"Sacred Groves",r:"Small protected forest patches"},
+   {l:"Aadi Perukku",r:"Thank river for water and life"},
+   {l:"Nag Panchami",r:"Thank snakes and worship them"},
+   {l:"Bihu",r:"Thanking nature for good harvest"},
+   {l:"Sarhul",r:"Worship sal trees"},
+   {l:"Bail Pola",r:"Thank bulls for helping farmers"},
+   {l:"Solar panel",r:"Collects sunlight, makes electricity"},
+   {l:"Tulsi Vivah",r:"Ritual wedding of the Tulsi plant"},
+ ],
+ swadhyay:[
+   {t:"Shabdarth (Vocabulary)",items:[
+     {q:"Solar Energy",a:"Sunlight se generate hui bijli."},
+     {q:"Natural Dye",a:"Flowers, leaves, roots se banaya gaya rang."},
+     {q:"Sacred Groves",a:"Local communities dwara protected chote forest patches."},
+     {q:"Gond Art",a:"Natural colours se walls par ki jaane wali painting."},
+     {q:"Tumri",a:"Uttarakhand ka traditional grain-storage container, dried bottle gourd se bana."},
+     {q:"First-Aid Box",a:"Chot lagne par turant use hone wali medicines aur cheezon ka box."},
+   ]},
+   {t:"A Journey Through a Forest — Fill in the Blanks",items:[
+     {q:"Reena and Amit were excited about a ___ trip.",a:"Family."},
+     {q:"They were going to their village near a ___.",a:"Forest."},
+     {q:"It was a time for ___ festival.",a:"Harvest."},
+     {q:"On that day, their village was also going to be a fully ___ powered village!",a:"Solar."},
+     {q:"They could not wait to see the village lit up for the ___.",a:"Celebrations."},
+   ]},
+   {t:"Welcome to the Village — Palash Tree",items:[
+     {q:"What is the name of the tree shown in the picture?",a:"Palash tree."},
+     {q:"What is the colour of the flowers of the tree?",a:"Bright orange-red."},
+     {q:"What is the tree called due to its bright colour?",a:"Flame of the forest."},
+     {q:"What is this tree called in your region or local language?",a:"Sample: Kesuda (in Gujarat)."},
+     {q:"Write names of five colourful flowers in your area with their local names.",a:"Sample: Palash/Kesuda, Hibiscus/Jaswand, Jasmine/Mogra, Lotus/Kamal, Marigold/Zendu."},
+   ]},
+   {t:"Power from the Sun",items:[
+     {q:"The picture above is of a ___.",a:"Solar panel."},
+     {q:"A solar panel collects ___.",a:"Sunlight."},
+     {q:"Sunlight is turned into ___.",a:"Electricity."},
+     {q:"The electricity generated from sunlight is called ___ energy.",a:"Solar."},
+     {q:"Solar panels help us run appliances like ___ and ___.",a:"Fan and bulb."},
+   ]},
+   {t:"Let us Write — Village Houses (Textbook page 59)",items:[
+     {q:"What materials are used to build village houses?",a:"Clay, hay, cow dung, and other natural materials."},
+     {q:"Who made the beautiful painting on the wall?",a:"The grandmother."},
+     {q:"What did Amit find different in the village houses?",a:"The houses looked very different from city houses, with beautiful wall decorations."},
+     {q:"What natural dye was used for painting the wall?",a:"A dye made by mixing rice flour and water."},
+     {q:"Do you think using natural materials is good for the environment? Why or why not?",a:"Yes, because natural materials like clay and hay do not pollute the environment and can be reused or returned to nature easily."},
+     {q:"Why do you think village houses stay cool in summer?",a:"Because thick clay walls and thatched roofs made of natural materials do not absorb heat easily, keeping the inside cool."},
+   ]},
+   {t:"Art Around Us",items:[
+     {q:"Identify the art forms shown: circular tribal art, sun motif art, folk painting with figures, tree of life mural.",a:"Sample: Warli art, Madhubani/folk sun art, Madhubani painting, Tree of Life (tribal/Gond) mural — names may vary; ask your teacher to confirm regional names."},
+   ]},
+   {t:"Making Natural Dye (Hibiscus)",items:[
+     {q:"Arrange the steps of making dye from hibiscus in order.",a:"1) Fresh hibiscus flowers → 2) Dried/crushed petals → 3) Boiling in water → 4) Straining through a sieve → 5) The final natural dye liquid."},
+     {q:"Yellow colour — natural material",a:"Haldi (turmeric)."},
+     {q:"Pink colour — natural material",a:"Sample: Beetroot or hibiscus."},
+     {q:"Green colour — natural material",a:"Sample: Spinach or mint leaves."},
+     {q:"Orange colour — natural material",a:"Sample: Marigold or carrot."},
+     {q:"Brown colour — natural material",a:"Sample: Tea leaves or coffee."},
+     {q:"Red colour — natural material",a:"Sample: Hibiscus flower."},
+     {q:"Purple colour — natural material",a:"Sample: Jamun (blackberry) or beetroot."},
+   ]},
+   {t:"Tools for Farming and Honey (Textbook pages 60-61)",items:[
+     {q:"What is used to store grains in the house?",a:"Earthen pots and bamboo baskets."},
+     {q:"How are earthen pots protected from insects?",a:"They are lined inside with neem leaves."},
+     {q:"How are bamboo baskets protected?",a:"They are coated with cow dung on the outside."},
+     {q:"What is Gond art?",a:"A form of painting on walls using natural colours, showing trees, animals, birds and humans."},
+   ]},
+   {t:"Traditional Ways of Preserving Grains (Activity 4)",items:[
+     {q:"Tumri — commonly used in which state, and container details?",a:"Uttarakhand — constructed with a round or oval shaped dried bottle gourd."},
+     {q:"Find out one traditional grain-storage method used in your area.",a:"Sample: Kothi/Kothar — a mud or bamboo structure used in many Indian villages to store grains safely."},
+   ]},
+   {t:"First-Aid & Medicinal Plants (Activity 5)",items:[
+     {q:"What things should be kept in a first-aid box?",a:"Bandage, cotton, antiseptic cream, scissors, thermometer, tablets, gloves, band-aids."},
+     {q:"Why is providing first-aid important if someone gets injured?",a:"First-aid helps treat a small injury quickly and prevents it from getting worse until proper medical help is available."},
+     {q:"Indian Basil (Tulsi) — part used and use",a:"Part: Leaves. Use: Helps with cold, cough, and boosting immunity."},
+     {q:"Carom seeds (Ajwain) — part and use",a:"Part: Seeds. Use: Helps in digestion, relieves stomach ache."},
+   ]},
+   {t:"What's Inside a First Aid Box",items:[
+     {q:"Identify: rolled bandage",a:"Bandage roll."},
+     {q:"Identify: strip of tablets",a:"Medicine strip/tablets."},
+     {q:"Identify: injection tool",a:"Syringe."},
+     {q:"Identify: gauze roll",a:"Gauze/cotton roll."},
+     {q:"Identify: digital device to check temperature",a:"Thermometer."},
+     {q:"Identify: small sticky strips",a:"Band-aids."},
+     {q:"Identify: hand protection",a:"Gloves."},
+     {q:"Identify: cutting tool",a:"Scissors."},
+   ]},
+   {t:"Sparkling Light, Happy Life & Electricity",items:[
+     {q:"What instruments filled the air with sound during the celebration?",a:"Dhol and nagada."},
+     {q:"Imagine if there is no light in your area for two days. What changes will you see in your life?",a:"Sample: We would not be able to use fans, lights, TV or charge phones; it would be difficult to study or work at night, and food might spoil without a fridge."},
+     {q:"Name three things that work on electricity around you.",a:"Sample: Fan, bulb/light, refrigerator."},
+     {q:"Write three ways on how we can save electricity at home.",a:"1) Switch off lights and fans when not in use. 2) Use natural light during the day. 3) Use energy-efficient LED bulbs."},
+     {q:"What will happen if we use too much electricity?",a:"It will increase our electricity bill, use up more natural resources, and can also harm the environment."},
+   ]},
+   {t:"Festivals of Gratitude",items:[
+     {q:"1. Aadi Perukku",a:"(b) Thank river for water and life."},
+     {q:"2. Nag Panchami",a:"(c) Thank snakes and worship them."},
+     {q:"3. Bihu",a:"(d) Thanking nature for good harvest."},
+     {q:"4. Sarhul",a:"(a) Worship sal trees and thank nature."},
+   ]},
+   {t:"Look at the Names of Festivals — Fill in the Blanks",items:[
+     {q:"Festival: Karni Mata Fair — What is worshipped?",a:"Rats."},
+     {q:"Festival: Ganga Dussehra — What is worshipped?",a:"River Ganga."},
+     {q:"Festival: Tulsi Vivah — What is worshipped?",a:"Tulsi plant."},
+     {q:"Festival: Bail Pola — What is worshipped?",a:"Bulls."},
+   ]},
+   {t:"Find Traditional Dances of Your Region",items:[
+     {q:"Dance form: Bhangra — which state?",a:"Punjab."},
+     {q:"Find out traditional dances and songs of your own region.",a:"Sample: Lavani (Maharashtra), Garba (Gujarat), Bihu dance (Assam)."},
+   ]},
+   {t:"Saving Food the Traditional Way",items:[
+     {q:"Making jam from fruit — method",a:"Using sugar (cold treatment/heat treatment with sugar)."},
+     {q:"Boiling milk on a stove — method",a:"Heat treatment."},
+     {q:"Making mango pickle — method",a:"Oiling and pickling."},
+     {q:"Storing spices/grains in jars — method",a:"Storing in containers."},
+     {q:"Drying beans/grains under the sun — method",a:"Sun-drying."},
+     {q:"Storing fruits/vegetables in a refrigerator — method",a:"Cold treatment (modern method)."},
+   ]},
+   {t:"Caring for Plants and Animals",items:[
+     {q:"Water plants regularly.",a:"✓ (should do)."},
+     {q:"Tease animals on the street.",a:"✗ (should not do)."},
+     {q:"Throw wrappers on the road.",a:"✗ (should not do)."},
+     {q:"Feed clean water and food to stray animals and birds.",a:"✓ (should do)."},
+     {q:"Pluck flowers.",a:"✗ (should not do)."},
+     {q:"Plant more trees.",a:"✓ (should do)."},
+     {q:"Use only one side of writing paper and throw it away.",a:"✗ (should not do)."},
+     {q:"Reuse old bottles or jars as plant pots.",a:"✓ (should do)."},
+   ]},
+   {t:"Rituals Connected to Animals and Plants (Activity 7)",items:[
+     {q:"Vat Purnima — plant/animal and activity",a:"Banyan tree — Worshipping."},
+     {q:"Hari Jiroti — plant/animal and activity",a:"Fruit-bearing trees — Plantation."},
+     {q:"Kaziranga Elephant Festival — plant/animal and activity",a:"Elephant — Awareness drive."},
+     {q:"Find out one more ritual/festival from your locality connected to plants or animals.",a:"Sample: Nag Panchami — Snakes — Worshipping."},
+   ]},
+   {t:"Let us Reflect — Nature in Our Daily Life",items:[
+     {q:"What are the things that we use from nature in our daily life? (Eating, Clothing, Healthcare, Any other)",a:"Eating — Fruits. Clothing — Cotton. Healthcare — Neem. Any other — Wood (for furniture), Water (for drinking)."},
+     {q:"What challenges arise when we overuse natural resources? (Water, Soil, Sea products, Any other)",a:"Water — overuse can cause water scarcity. Soil — overuse/erosion reduces fertility for farming. Sea products — overfishing can reduce fish populations. Any other — overusing wood depletes forests, as given in the example."},
+   ]},
+ ]},
 ];
 
 /* ---------- speech ---------- */
@@ -8480,6 +9012,8 @@ const HINBOOK=[
 const EVSBOOK=[
  {n:1,id:'e_living',title:'Living Together',emoji:'🤝',color:C.mint,ready:true},
  {n:2,id:'e_neighbour',title:'Exploring Our Neighbourhood',emoji:'🏘️',color:C.sky,ready:true},
+ {n:3,id:'e_nature',title:'Nature Trail',emoji:'🌿',color:C.sky,ready:true},
+ {n:4,id:'e_growing',title:'Growing up with Nature',emoji:'🌾',color:C.mint,ready:true},
 ];
 function subjectBook(id){if(id==='maths')return BOOK;if(id==='computer')return COMPBOOK;if(id==='marathi')return MARBOOK;if(id==='hindi')return HINBOOK;if(id==='evs')return EVSBOOK;return [];}
 /* ---------- NAME REGISTRATION ---------- */
@@ -8492,7 +9026,7 @@ function nameSetup(){
     </div>
     <div class="card">
       <input id="nameInput" type="text" placeholder="Apna naam yahan likho..." maxlength="20" style="width:100%;padding:15px;border-radius:14px;border:2px solid ${C.soft}55;font-size:19px;font-weight:700;text-align:center;box-sizing:border-box;font-family:inherit" onkeydown="if(event.key==='Enter')saveName()"/>
-      <div id="nameErr" style="color:${C.coral};font-weight:800;font-size:13px;margin-top:8px;text-align:center;min-height:16px"></div>
+      <div id="nameErr" style="color:#fff;font-weight:800;font-size:13px;margin-top:8px;text-align:center;min-height:16px"></div>
       <button class="btn" style="background:${C.purple};margin-top:10px" onclick="saveName()">Chalo Shuru Karein! 🚀</button>
     </div>
     <div style="text-align:center;color:${C.soft};font-size:13px;margin-top:14px">💡 Yeh naam quiz mein tumhe pukarne ke liye use hoga</div>`;
@@ -8526,7 +9060,7 @@ function subjects(){
   app.innerHTML=`<div style="text-align:center">
       <div class="fred" style="font-weight:700;font-size:32px;color:${C.purpleDark}">PadhAI 🐘</div>
       <div style="color:${C.soft};font-weight:800;margin-bottom:6px">Class 4 • CBSE • Apna subject chuno</div>
-      <div style="color:${C.purple};font-weight:800;font-size:14px;margin-bottom:18px">👋 Namaste, ${load("padhai_name","Dost")}! <span style="text-decoration:underline;cursor:pointer" onclick="editName()">✏️ naam badlo</span></div></div>
+      <div style="color:${C.purpleDark};font-weight:800;font-size:14px;margin-bottom:18px">👋 Namaste, ${load("padhai_name","Dost")}! <span style="text-decoration:underline;cursor:pointer" onclick="editName()">✏️ naam badlo</span></div></div>
     ${cards}
     <div style="color:${C.soft};font-size:13px;margin-top:8px;text-align:center">💡 Naye subjects dheere-dheere ready ho rahe hain</div>`;
 }
@@ -8668,12 +9202,12 @@ function chapter(){
     const cn=content(c.id);
     action=`<div class="row" style="margin-top:16px">
       <button class="btn" style="background:${c.color};flex:2;font-size:18px" onclick="playLesson('${c.id}')">▶ Video Lesson</button>
-      <button class="btn" style="background:${C.mint};flex:1;font-size:16px" onclick="playQuiz('${c.id}')">📝 Quiz</button></div>`;
+      <button class="btn" style="background:${C.mint};color:${C.purple};flex:1;font-size:16px" onclick="playQuiz('${c.id}')">📝 Quiz</button></div>`;
     let extra='';
     if(cn.qa&&cn.qa.length){extra+=`<button class="btn" style="background:${C.purple};flex:1;font-size:15px" onclick="openQA('${c.id}')">💬 Sawaal-Jawab</button>`;}
     if(cn.match&&cn.match.length){extra+=`<button class="btn" style="background:${C.coral};flex:1;font-size:15px" onclick="openMatch('${c.id}')">🔗 Match & Fill</button>`;}
-    if(cn.swadhyay&&cn.swadhyay.length){extra+=`<button class="btn" style="background:${C.sky};flex:1;font-size:15px" onclick="openSwadhyay('${c.id}')">📖 स्वाध्याय (उत्तरांसह)</button>`;}
-    if(cn.workbook&&cn.workbook.length){extra+=`<button class="btn" style="background:${C.yellow};color:${C.ink};flex:1;font-size:15px" onclick="playWorkbook('${c.id}')">📘 Workbook (Answers)</button>`;}
+    if(cn.swadhyay&&cn.swadhyay.length){extra+=`<button class="btn" style="background:${C.sky};color:${C.purple};flex:1;font-size:15px" onclick="openSwadhyay('${c.id}')">📖 स्वाध्याय (उत्तरांसह)</button>`;}
+    if(cn.workbook&&cn.workbook.length){extra+=`<button class="btn" style="background:${C.yellow};color:${C.purple};flex:1;font-size:15px" onclick="playWorkbook('${c.id}')">📘 Workbook (Answers)</button>`;}
     if(extra){action+=`<div class="row" style="margin-top:10px">${extra}</div>`;}
   } else {
     action=`<div style="text-align:center;margin-top:16px;color:${C.soft};font-weight:800;font-size:15px">🔒 Yeh chapter jald ready ho raha hai!</div>`;
@@ -8683,7 +9217,7 @@ function chapter(){
     bonus=`<div class="card" style="margin-top:14px"><div class="fred" style="font-weight:700;font-size:16px;color:${C.purpleDark};margin-bottom:10px">🎯 Is chapter ki extra practice:</div>`;
     c.bonus.forEach(b=>{ bonus+=`<div class="row" style="margin-bottom:9px">
         <button class="btn" style="background:${C.purple};flex:2;font-size:15px;padding:11px" onclick="playLesson('${b.id}')">▶ ${b.label}</button>
-        <button class="btn" style="background:${C.mint};flex:1;font-size:15px;padding:11px" onclick="playQuiz('${b.id}')">📝</button></div>`;});
+        <button class="btn" style="background:${C.mint};color:${C.purple};flex:1;font-size:15px;padding:11px" onclick="playQuiz('${b.id}')">📝</button></div>`;});
     bonus+=`</div>`;
   }
   app.innerHTML=`
@@ -8730,9 +9264,9 @@ function lesson(){
       <button class="btn" style="background:#B6ABDB;flex:1" onclick="prevScene()">⏮</button>
       <button class="btn" style="background:${C.purple};flex:2" id="pp" onclick="togglePlay()">⏸ Pause</button>
       <button class="btn" style="background:#B6ABDB;flex:1" onclick="nextScene(true)">⏭</button></div>
-    <div id="voiceNote" style="text-align:center;color:${C.coral};font-weight:800;font-size:12px;margin-top:10px;line-height:1.4"></div>
+    <div id="voiceNote" style="text-align:center;color:#fff;font-weight:800;font-size:12px;margin-top:10px;line-height:1.4"></div>
     <div style="text-align:center;margin-top:8px">
-      <button class="btn" id="qbtn" style="background:${C.mint};width:auto;display:inline-block">${state.playMode==='workbook'?'Chapter pe wapas ✅':'Quiz pe jao 📝'}</button></div>`;
+      <button class="btn" id="qbtn" style="background:${C.mint};color:${C.purple};width:auto;display:inline-block">${state.playMode==='workbook'?'Chapter pe wapas ✅':'Quiz pe jao 📝'}</button></div>`;
   document.getElementById("qbtn").setAttribute("onclick",state.playMode==='workbook'?"go('chapter')":"playQuiz('"+state.cid+"')");
   markLang();markSpeed();checkVoice();showScene();
 }
@@ -8782,16 +9316,16 @@ function quiz(){const q=Q()[state.qi];
   const qText=(lang==='en'&&q.qe)?q.qe:q.q;
   const optsArr=(lang==='en'&&q.oe)?q.oe:q.opts;
   let optsHTML="";if(q.visual){q.visual.forEach((o,i)=>{optsHTML+=`<button class="opt" id="o${i}" onclick="pick(${i})">${circleSVG(o.p,o.s,o.v,70)}</button>`;});}else{optsArr.forEach((o,i)=>{optsHTML+=`<button class="opt" id="o${i}" onclick="pick(${i})">${o}</button>`;});}
-  const langBtn=(l,label)=>`<button onclick="quizSetLang('${l}')" style="border:none;padding:5px 13px;border-radius:16px;font-weight:800;font-size:12px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#fff':'background:#fff;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
+  const langBtn=(l,label)=>`<button onclick="quizSetLang('${l}')" style="border:none;padding:5px 13px;border-radius:16px;font-weight:800;font-size:12px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#FFD400':'background:#5C0000;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
   const toggle=hasEn?`<div class="row" style="justify-content:center;gap:6px;margin-bottom:10px">${langBtn('hi','🇮🇳 Hinglish')} ${langBtn('en','🔤 English')}</div>`:'';
   app.innerHTML=`<div class="topbar"><button class="link" onclick="go('chapter')">← Band</button>
       <span style="color:${C.soft};font-weight:800">${content(state.cid).emoji} ${lang==='en'?'Question':'Sawaal'} ${state.qi+1}/${Q().length}</span>
       <span style="color:${C.mint};font-weight:800">⭐ ${state.score}</span></div>
     ${toggle}
-    <div class="card">${q.tag?`<div style="display:inline-block;background:#EFEAFF;color:${C.purpleDark};font-weight:800;font-size:12px;padding:5px 12px;border-radius:20px;margin-bottom:10px">${q.tag}</div>`:''}<div class="fred" style="font-weight:700;font-size:20px;color:${C.purpleDark};margin-bottom:16px">${qText}</div>
+    <div class="card">${q.tag?`<div style="display:inline-block;background:#FFECB3;color:${C.purple};font-weight:800;font-size:12px;padding:5px 12px;border-radius:20px;margin-bottom:10px">${q.tag}</div>`:''}<div class="fred" style="font-weight:700;font-size:20px;color:${C.ink};margin-bottom:16px">${qText}</div>
       <div>${optsHTML}</div><div id="next"></div></div>`;
 }
-function pick(i){if(state.picked!==null)return;state.picked=i;const q=Q()[state.qi];const n=q.visual?q.visual.length:q.opts.length;for(let k=0;k<n;k++){const el=document.getElementById("o"+k);el.onclick=null;if(k===q.ans){el.style.background="#E3FBF1";el.style.borderColor=C.mint;el.innerHTML+='<span style="margin-left:auto;font-size:22px">✅</span>';}else if(k===i){el.style.background="#FFEAE6";el.style.borderColor=C.coral;el.innerHTML+='<span style="margin-left:auto;font-size:22px">❌</span>';}}
+function pick(i){if(state.picked!==null)return;state.picked=i;const q=Q()[state.qi];const n=q.visual?q.visual.length:q.opts.length;for(let k=0;k<n;k++){const el=document.getElementById("o"+k);el.onclick=null;if(k===q.ans){el.style.background="#1B5E20";el.style.color="#FFD400";el.style.borderColor=C.mint;el.innerHTML+='<span style="margin-left:auto;font-size:22px">✅</span>';}else if(k===i){el.style.background="#4A0000";el.style.color="#FFD400";el.style.borderColor=C.coral;el.innerHTML+='<span style="margin-left:auto;font-size:22px">❌</span>';}}
   if(i===q.ans){state.score++;const un=load("padhai_name","");
     if(LANG==='en')speakOne(un?("Well done "+un+"! Correct!"):"Correct! Well done!","en");
     else if(LANG==='mr')speakOne(un?("शाब्बास "+un+"! एकदम बरोबर!"):"शाब्बास! एकदम बरोबर!","mr");
@@ -8824,15 +9358,15 @@ function qaScreen(){
     const qText=(lang==='en'&&qa.qe)?qa.qe:qa.q;
     const aText=(lang==='en'&&qa.ae)?qa.ae:qa.a;
     items+=`<div class="card" style="margin-bottom:10px;padding:0;overflow:hidden">
-      <div onclick="qaToggle(${i})" style="cursor:pointer;padding:14px;display:flex;gap:10px;align-items:flex-start;background:${open?C.sky+'22':'#fff'}">
-        <span style="font-weight:900;color:${C.purple};font-size:15px">Q${i+1}.</span>
+      <div onclick="qaToggle(${i})" style="cursor:pointer;padding:14px;display:flex;gap:10px;align-items:flex-start;background:${open?C.sky+'22':'#5C0000'}">
+        <span style="font-weight:900;color:${C.purpleDark};font-size:15px">Q${i+1}.</span>
         <span style="flex:1;font-weight:800;color:${C.ink};font-size:15px">${qText}</span>
         <span style="color:${C.soft};font-size:18px">${open?'▲':'▼'}</span>
       </div>
       ${open?`<div style="padding:0 14px 14px 40px;color:${C.ink};font-size:15px;line-height:1.5;border-top:1px dashed ${C.soft}55"><div style="height:8px"></div><b style="color:${C.mint}">${lang==='en'?'✓ Answer:':'✓ Jawab:'}</b> ${aText}</div>`:''}
     </div>`;
   });
-  const btn=(l,label)=>`<button onclick="qaSetLang('${l}')" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#fff':'background:#fff;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
+  const btn=(l,label)=>`<button onclick="qaSetLang('${l}')" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#FFD400':'background:#5C0000;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
   app.innerHTML=`
     <div class="topbar"><button class="link" onclick="go('chapter')">← Chapter</button></div>
     <div style="text-align:center;margin-bottom:12px">
@@ -8895,7 +9429,7 @@ function swScreen(){
     sec.items.forEach((it,ii)=>{
       const k=si+'-'+ii;const open=!!state.swOpen[k];const speaking=state.swPlayingKey===k;
       rows+=`<div class="card" style="margin-bottom:8px;padding:0;overflow:hidden;${speaking?'box-shadow:0 0 0 2.5px '+C.mint+';':''}">
-        <div style="cursor:pointer;padding:10px 8px 10px 14px;display:flex;gap:8px;align-items:flex-start;background:${speaking?C.mint+'1f':open?C.sky+'18':'#fff'}">
+        <div style="cursor:pointer;padding:10px 8px 10px 14px;display:flex;gap:8px;align-items:flex-start;background:${speaking?C.mint+'1f':open?C.sky+'18':'#5C0000'}">
           <span onclick="swToggle('${k}')" style="flex:1;font-weight:800;color:${C.ink};font-size:15px">${it.q}</span>
           <button onclick="event.stopPropagation();swPlayItem(${si},${ii})" title="Suno" style="border:none;background:${speaking?C.mint:C.purple+'22'};color:${speaking?'#fff':C.purpleDark};border-radius:50%;width:34px;height:34px;min-width:34px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center${speaking?';animation:ring 1.4s ease-out infinite':''}">${speaking?'⏸':'🔊'}</button>
           <span onclick="swToggle('${k}')" style="color:${C.soft};font-size:16px;padding-top:8px">${open?'▲':'▼'}</span>
@@ -8915,8 +9449,8 @@ function swScreen(){
       <div style="color:${C.soft};font-weight:800;font-size:13px;margin-bottom:10px">पुस्तकातील सर्व प्रश्न-उत्तरे, रिकाम्या जागा व गृहकृती — उत्तरांसह (🔊 आवाज़ के साथ)</div>
       <div class="row" style="justify-content:center;gap:8px;flex-wrap:wrap">
         ${(state.swPlayAllActive)?`<button onclick="swStopAll()" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:${C.coral};color:#fff">⏹ Sab Band Karo</button>`:`<button onclick="swPlayAll()" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:${C.purple};color:#fff">🔊 Sab Suno (Poora)</button>`}
-        <button onclick="swExpandAll(true)" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:${C.mint};color:#fff">सर्व उत्तरे दाखवा</button>
-        <button onclick="swExpandAll(false)" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:#fff;color:${C.soft};border:1.5px solid ${C.soft}55">सर्व लपवा</button>
+        <button onclick="swExpandAll(true)" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:${C.mint};color:${C.purple}">सर्व उत्तरे दाखवा</button>
+        <button onclick="swExpandAll(false)" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:#5C0000;color:${C.soft};border:1.5px solid ${C.soft}55">सर्व लपवा</button>
       </div>
       ${anyPlaying?`<div style="color:${C.mint};font-weight:900;font-size:13px;margin-top:8px">🔊 Bol raha hoon... sawaal aur uska jawaab</div>`:''}
     </div>
@@ -8965,10 +9499,10 @@ function matchScreen(){
     </div>
     ${finished?`<div class="card pop" style="text-align:center;background:${C.mint}22;margin-bottom:12px"><div style="font-size:40px">🎉</div><div class="fred" style="font-weight:700;font-size:20px;color:${C.purpleDark}">Shabaash! Saare jode sahi!</div><button class="btn" style="background:${C.coral};margin-top:10px" onclick="setupMatch();render()">🔁 Phir se</button></div>`:''}
     <div class="row" style="align-items:flex-start;gap:10px">
-      <div style="flex:1"><div style="font-weight:900;color:${C.purple};font-size:13px;margin-bottom:8px;text-align:center">👉 Column A</div>${left}</div>
-      <div style="flex:1"><div style="font-weight:900;color:${C.coral};font-size:13px;margin-bottom:8px;text-align:center">Column B</div>${right}</div>
+      <div style="flex:1"><div style="font-weight:900;color:${C.purpleDark};font-size:13px;margin-bottom:8px;text-align:center">👉 Column A</div>${left}</div>
+      <div style="flex:1"><div style="font-weight:900;color:${C.purpleDark};font-size:13px;margin-bottom:8px;text-align:center">Column B</div>${right}</div>
     </div>
-    ${state.matchWrong!=null?`<div style="text-align:center;color:${C.coral};font-weight:800;font-size:14px;margin-top:8px">❌ Galat jodi! Phir se try karo</div>`:''}
+    ${state.matchWrong!=null?`<div style="text-align:center;color:#fff;font-weight:800;font-size:14px;margin-top:8px">❌ Galat jodi! Phir se try karo</div>`:''}
     <div style="height:20px"></div>`;
 }
 if(!load("padhai_name",null))state.screen='nameSetup';
