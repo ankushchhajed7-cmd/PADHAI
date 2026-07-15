@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>PadhAI - Class 4 Maths</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#7A0C0C">
+<meta name="theme-color" content="#E63950">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
@@ -15,12 +15,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap">
 <style>
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  :root{--bg:#7A0C0C;--ink:#FFECB3;--soft:#FFCC80;--purple:#E53935;--purpleDark:#FFD400;--yellow:#FFC107;--coral:#FF5252;--mint:#FFD600;--sky:#FFAB00;}
+  :root{--bg:#E63950;--ink:#FFF8E7;--soft:#FFDDE2;--purple:#7A1030;--purpleDark:#FFFFFF;--yellow:#FFD447;--coral:#FF8FA0;--mint:#FFE49A;--sky:#FFC1CC;}
   html,body{margin:0;padding:0;}
   body{background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:18px 14px 30px;-webkit-font-smoothing:antialiased;}
   .wrap{width:100%;max-width:440px;}
   .fred{font-family:Fredoka,system-ui,sans-serif;}
-  .card{background:#C62828;border-radius:24px;padding:20px;box-shadow:0 12px 38px rgba(0,0,0,.35);}
+  .card{background:#F2596B;border-radius:24px;padding:20px;box-shadow:0 12px 38px rgba(0,0,0,.28);}
   .btn{border:none;border-radius:18px;padding:14px 22px;font-size:18px;font-weight:800;font-family:Fredoka,system-ui;color:#FFD400;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.25);width:100%;}
   .btn:active{transform:translateY(2px);box-shadow:0 3px 0 rgba(0,0,0,.25);}
   .row{display:flex;gap:10px;}
@@ -28,18 +28,18 @@
   @keyframes pop{0%{transform:scale(.6) rotate(-6deg);opacity:0;}60%{transform:scale(1.1) rotate(2deg);}100%{transform:scale(1) rotate(0);opacity:1;}}
   @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
   @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-7px) rotate(3deg);}}
-  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(229,57,53,.4);}100%{box-shadow:0 0 0 18px rgba(229,57,53,0);}}
+  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(122,16,48,.4);}100%{box-shadow:0 0 0 18px rgba(122,16,48,0);}}
   .pop{animation:pop .6s ease;} .fade{animation:fade .5s ease;} .float{animation:floaty 3s ease-in-out infinite;}
   .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
   .link{background:none;border:none;color:var(--soft);font-weight:800;font-size:16px;cursor:pointer;font-family:Nunito;}
-  .bar{width:100%;height:9px;background:#5C0000;border-radius:9px;overflow:hidden;}
+  .bar{width:100%;height:9px;background:#C43F55;border-radius:9px;overflow:hidden;}
   .bar>i{display:block;height:100%;background:var(--purple);border-radius:9px;width:0%;transition:width .3s;}
-  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#5C0000;border:3px solid #8E0000;border-radius:18px;padding:14px;margin-bottom:11px;cursor:pointer;font-family:Nunito;font-weight:800;font-size:17px;color:var(--ink);}
+  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#C43F55;border:3px solid #7A1030;border-radius:18px;padding:14px;margin-bottom:11px;cursor:pointer;font-family:Nunito;font-weight:800;font-size:17px;color:var(--ink);}
   .caption{font-weight:800;font-size:18px;line-height:1.55;text-align:center;min-height:88px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
   .stage{min-height:185px;display:flex;align-items:center;justify-content:center;}
-  .seg{display:flex;background:#5C0000;border-radius:13px;padding:3px;gap:3px;}
+  .seg{display:flex;background:#C43F55;border-radius:13px;padding:3px;gap:3px;}
   .seg button{flex:1;border:none;background:none;padding:9px 2px;border-radius:10px;font-weight:800;font-family:Nunito;font-size:13px;color:var(--soft);cursor:pointer;}
-  .seg button.on{background:#FFD400;color:var(--purple);box-shadow:0 2px 6px rgba(0,0,0,.3);}
+  .seg button.on{background:#FFD447;color:var(--purple);box-shadow:0 2px 6px rgba(0,0,0,.3);}
   .mascot{position:relative;width:50px;height:50px;border-radius:50%;background:#FFF3D6;display:flex;align-items:center;justify-content:center;font-size:28px;margin:8px auto 0;}
   .mascot.talk{animation:bob .6s ease-in-out infinite,ring 1.4s ease-out infinite;}
 </style>
@@ -47,7 +47,7 @@
 <body>
 <div class="wrap" id="app"></div>
 <script>
-const C={purple:"#E53935",purpleDark:"#FFD400",yellow:"#FFC107",coral:"#FF5252",mint:"#FFD600",sky:"#FFAB00",soft:"#FFCC80",ink:"#FFECB3"};
+const C={purple:"#7A1030",purpleDark:"#FFFFFF",yellow:"#FFD447",coral:"#FF8FA0",mint:"#FFE49A",sky:"#FFC1CC",soft:"#FFDDE2",ink:"#FFF8E7"};
 const app=document.getElementById("app");
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 function load(k,d){try{const x=localStorage.getItem(k);return x?JSON.parse(x):d;}catch(e){return d;}}
@@ -9316,13 +9316,13 @@ function quiz(){const q=Q()[state.qi];
   const qText=(lang==='en'&&q.qe)?q.qe:q.q;
   const optsArr=(lang==='en'&&q.oe)?q.oe:q.opts;
   let optsHTML="";if(q.visual){q.visual.forEach((o,i)=>{optsHTML+=`<button class="opt" id="o${i}" onclick="pick(${i})">${circleSVG(o.p,o.s,o.v,70)}</button>`;});}else{optsArr.forEach((o,i)=>{optsHTML+=`<button class="opt" id="o${i}" onclick="pick(${i})">${o}</button>`;});}
-  const langBtn=(l,label)=>`<button onclick="quizSetLang('${l}')" style="border:none;padding:5px 13px;border-radius:16px;font-weight:800;font-size:12px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#FFD400':'background:#5C0000;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
+  const langBtn=(l,label)=>`<button onclick="quizSetLang('${l}')" style="border:none;padding:5px 13px;border-radius:16px;font-weight:800;font-size:12px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#fff':'background:#C43F55;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
   const toggle=hasEn?`<div class="row" style="justify-content:center;gap:6px;margin-bottom:10px">${langBtn('hi','🇮🇳 Hinglish')} ${langBtn('en','🔤 English')}</div>`:'';
   app.innerHTML=`<div class="topbar"><button class="link" onclick="go('chapter')">← Band</button>
       <span style="color:${C.soft};font-weight:800">${content(state.cid).emoji} ${lang==='en'?'Question':'Sawaal'} ${state.qi+1}/${Q().length}</span>
       <span style="color:${C.mint};font-weight:800">⭐ ${state.score}</span></div>
     ${toggle}
-    <div class="card">${q.tag?`<div style="display:inline-block;background:#FFECB3;color:${C.purple};font-weight:800;font-size:12px;padding:5px 12px;border-radius:20px;margin-bottom:10px">${q.tag}</div>`:''}<div class="fred" style="font-weight:700;font-size:20px;color:${C.ink};margin-bottom:16px">${qText}</div>
+    <div class="card">${q.tag?`<div style="display:inline-block;background:#FFE49A;color:${C.purple};font-weight:800;font-size:12px;padding:5px 12px;border-radius:20px;margin-bottom:10px">${q.tag}</div>`:''}<div class="fred" style="font-weight:700;font-size:20px;color:${C.ink};margin-bottom:16px">${qText}</div>
       <div>${optsHTML}</div><div id="next"></div></div>`;
 }
 function pick(i){if(state.picked!==null)return;state.picked=i;const q=Q()[state.qi];const n=q.visual?q.visual.length:q.opts.length;for(let k=0;k<n;k++){const el=document.getElementById("o"+k);el.onclick=null;if(k===q.ans){el.style.background="#1B5E20";el.style.color="#FFD400";el.style.borderColor=C.mint;el.innerHTML+='<span style="margin-left:auto;font-size:22px">✅</span>';}else if(k===i){el.style.background="#4A0000";el.style.color="#FFD400";el.style.borderColor=C.coral;el.innerHTML+='<span style="margin-left:auto;font-size:22px">❌</span>';}}
@@ -9358,7 +9358,7 @@ function qaScreen(){
     const qText=(lang==='en'&&qa.qe)?qa.qe:qa.q;
     const aText=(lang==='en'&&qa.ae)?qa.ae:qa.a;
     items+=`<div class="card" style="margin-bottom:10px;padding:0;overflow:hidden">
-      <div onclick="qaToggle(${i})" style="cursor:pointer;padding:14px;display:flex;gap:10px;align-items:flex-start;background:${open?C.sky+'22':'#5C0000'}">
+      <div onclick="qaToggle(${i})" style="cursor:pointer;padding:14px;display:flex;gap:10px;align-items:flex-start;background:${open?C.sky+'22':'#C43F55'}">
         <span style="font-weight:900;color:${C.purpleDark};font-size:15px">Q${i+1}.</span>
         <span style="flex:1;font-weight:800;color:${C.ink};font-size:15px">${qText}</span>
         <span style="color:${C.soft};font-size:18px">${open?'▲':'▼'}</span>
@@ -9366,7 +9366,7 @@ function qaScreen(){
       ${open?`<div style="padding:0 14px 14px 40px;color:${C.ink};font-size:15px;line-height:1.5;border-top:1px dashed ${C.soft}55"><div style="height:8px"></div><b style="color:${C.mint}">${lang==='en'?'✓ Answer:':'✓ Jawab:'}</b> ${aText}</div>`:''}
     </div>`;
   });
-  const btn=(l,label)=>`<button onclick="qaSetLang('${l}')" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#FFD400':'background:#5C0000;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
+  const btn=(l,label)=>`<button onclick="qaSetLang('${l}')" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#fff':'background:#C43F55;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
   app.innerHTML=`
     <div class="topbar"><button class="link" onclick="go('chapter')">← Chapter</button></div>
     <div style="text-align:center;margin-bottom:12px">
@@ -9429,7 +9429,7 @@ function swScreen(){
     sec.items.forEach((it,ii)=>{
       const k=si+'-'+ii;const open=!!state.swOpen[k];const speaking=state.swPlayingKey===k;
       rows+=`<div class="card" style="margin-bottom:8px;padding:0;overflow:hidden;${speaking?'box-shadow:0 0 0 2.5px '+C.mint+';':''}">
-        <div style="cursor:pointer;padding:10px 8px 10px 14px;display:flex;gap:8px;align-items:flex-start;background:${speaking?C.mint+'1f':open?C.sky+'18':'#5C0000'}">
+        <div style="cursor:pointer;padding:10px 8px 10px 14px;display:flex;gap:8px;align-items:flex-start;background:${speaking?C.mint+'1f':open?C.sky+'18':'#C43F55'}">
           <span onclick="swToggle('${k}')" style="flex:1;font-weight:800;color:${C.ink};font-size:15px">${it.q}</span>
           <button onclick="event.stopPropagation();swPlayItem(${si},${ii})" title="Suno" style="border:none;background:${speaking?C.mint:C.purple+'22'};color:${speaking?'#fff':C.purpleDark};border-radius:50%;width:34px;height:34px;min-width:34px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center${speaking?';animation:ring 1.4s ease-out infinite':''}">${speaking?'⏸':'🔊'}</button>
           <span onclick="swToggle('${k}')" style="color:${C.soft};font-size:16px;padding-top:8px">${open?'▲':'▼'}</span>
@@ -9450,7 +9450,7 @@ function swScreen(){
       <div class="row" style="justify-content:center;gap:8px;flex-wrap:wrap">
         ${(state.swPlayAllActive)?`<button onclick="swStopAll()" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:${C.coral};color:#fff">⏹ Sab Band Karo</button>`:`<button onclick="swPlayAll()" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:${C.purple};color:#fff">🔊 Sab Suno (Poora)</button>`}
         <button onclick="swExpandAll(true)" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:${C.mint};color:${C.purple}">सर्व उत्तरे दाखवा</button>
-        <button onclick="swExpandAll(false)" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:#5C0000;color:${C.soft};border:1.5px solid ${C.soft}55">सर्व लपवा</button>
+        <button onclick="swExpandAll(false)" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:#C43F55;color:${C.soft};border:1.5px solid ${C.soft}55">सर्व लपवा</button>
       </div>
       ${anyPlaying?`<div style="color:${C.mint};font-weight:900;font-size:13px;margin-top:8px">🔊 Bol raha hoon... sawaal aur uska jawaab</div>`:''}
     </div>
