@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>PadhAI - Class 4 Maths</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#E63950">
+<meta name="theme-color" content="#E85D4E">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
@@ -15,12 +15,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap">
 <style>
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  :root{--bg:#E63950;--ink:#FFF8E7;--soft:#FFDDE2;--purple:#7A1030;--purpleDark:#FFFFFF;--yellow:#FFD447;--coral:#FF8FA0;--mint:#FFE49A;--sky:#FFC1CC;}
+  :root{--bg:#FDF6EC;--ink:#4A2C2A;--soft:#8B6F5C;--purple:#E85D4E;--purpleDark:#B33A2F;--yellow:#F5A623;--coral:#F2705C;--mint:#6FBF73;--sky:#F7C873;}
   html,body{margin:0;padding:0;}
   body{background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:18px 14px 30px;-webkit-font-smoothing:antialiased;}
   .wrap{width:100%;max-width:440px;}
   .fred{font-family:Fredoka,system-ui,sans-serif;}
-  .card{background:#F2596B;border-radius:24px;padding:20px;box-shadow:0 12px 38px rgba(0,0,0,.28);}
+  .card{background:#FFFFFF;border-radius:24px;padding:20px;box-shadow:0 8px 26px rgba(74,44,42,.12);}
   .btn{border:none;border-radius:18px;padding:14px 22px;font-size:18px;font-weight:800;font-family:Fredoka,system-ui;color:#FFD400;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.25);width:100%;}
   .btn:active{transform:translateY(2px);box-shadow:0 3px 0 rgba(0,0,0,.25);}
   .row{display:flex;gap:10px;}
@@ -28,18 +28,18 @@
   @keyframes pop{0%{transform:scale(.6) rotate(-6deg);opacity:0;}60%{transform:scale(1.1) rotate(2deg);}100%{transform:scale(1) rotate(0);opacity:1;}}
   @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
   @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-7px) rotate(3deg);}}
-  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(122,16,48,.4);}100%{box-shadow:0 0 0 18px rgba(122,16,48,0);}}
+  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(232,93,78,.4);}100%{box-shadow:0 0 0 18px rgba(232,93,78,0);}}
   .pop{animation:pop .6s ease;} .fade{animation:fade .5s ease;} .float{animation:floaty 3s ease-in-out infinite;}
   .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
   .link{background:none;border:none;color:var(--soft);font-weight:800;font-size:16px;cursor:pointer;font-family:Nunito;}
-  .bar{width:100%;height:9px;background:#C43F55;border-radius:9px;overflow:hidden;}
+  .bar{width:100%;height:9px;background:#F2E6D9;border-radius:9px;overflow:hidden;}
   .bar>i{display:block;height:100%;background:var(--purple);border-radius:9px;width:0%;transition:width .3s;}
-  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#C43F55;border:3px solid #7A1030;border-radius:18px;padding:14px;margin-bottom:11px;cursor:pointer;font-family:Nunito;font-weight:800;font-size:17px;color:var(--ink);}
+  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#FFF3ED;border:3px solid #F2D9CC;border-radius:18px;padding:14px;margin-bottom:11px;cursor:pointer;font-family:Nunito;font-weight:800;font-size:17px;color:var(--ink);}
   .caption{font-weight:800;font-size:18px;line-height:1.55;text-align:center;min-height:88px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
   .stage{min-height:185px;display:flex;align-items:center;justify-content:center;}
-  .seg{display:flex;background:#C43F55;border-radius:13px;padding:3px;gap:3px;}
+  .seg{display:flex;background:#F2E6D9;border-radius:13px;padding:3px;gap:3px;}
   .seg button{flex:1;border:none;background:none;padding:9px 2px;border-radius:10px;font-weight:800;font-family:Nunito;font-size:13px;color:var(--soft);cursor:pointer;}
-  .seg button.on{background:#FFD447;color:var(--purple);box-shadow:0 2px 6px rgba(0,0,0,.3);}
+  .seg button.on{background:#F5A623;color:#fff;box-shadow:0 2px 6px rgba(74,44,42,.25);}
   .mascot{position:relative;width:50px;height:50px;border-radius:50%;background:#FFF3D6;display:flex;align-items:center;justify-content:center;font-size:28px;margin:8px auto 0;}
   .mascot.talk{animation:bob .6s ease-in-out infinite,ring 1.4s ease-out infinite;}
 </style>
@@ -47,7 +47,7 @@
 <body>
 <div class="wrap" id="app"></div>
 <script>
-const C={purple:"#7A1030",purpleDark:"#FFFFFF",yellow:"#FFD447",coral:"#FF8FA0",mint:"#FFE49A",sky:"#FFC1CC",soft:"#FFDDE2",ink:"#FFF8E7"};
+const C={purple:"#E85D4E",purpleDark:"#B33A2F",yellow:"#F5A623",coral:"#F2705C",mint:"#6FBF73",sky:"#F7C873",soft:"#8B6F5C",ink:"#4A2C2A"};
 const app=document.getElementById("app");
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 function load(k,d){try{const x=localStorage.getItem(k);return x?JSON.parse(x):d;}catch(e){return d;}}
@@ -587,7 +587,7 @@ const CH=[
    {art:emoji("🐘"),cap:"Chapter 5 — Sharing and Measuring! Aaj fractions (hisson) ki duniya.",hi:"नमस्ते दोस्तों! आज पाँचवाँ चॅप्टर — शेयरिंग एंड मेज़रिंग। इसमें हम सीखेंगे कि किसी चीज़ को बराबर हिस्सों में कैसे बाँटते हैं। इन्हीं हिस्सों को fractions यानी भिन्न कहते हैं।",en:"Namaste friends! Today is chapter five, Sharing and Measuring. We will learn how to share a thing into equal parts. These parts are called fractions.",mr:"नमस्कार मित्रांनो! आज पाचवा धडा — शेअरिंग अँड मेजरिंग. यात आपण शिकू की एखादी गोष्ट समान भागांत कशी वाटायची. याच भागांना fractions म्हणजे अपूर्णांक म्हणतात.",dur:11000},
    {art:circleSVG(1,0,false,150),cap:"WHOLE: ek poori cheez = 1. Jaise ek poori dhokla.",hi:"सबसे पहले — पूरी चीज़ को होल यानी एक कहते हैं। जैसे एक पूरा ढोकला या एक पूरी रोटी। अभी इसे किसी ने बाँटा नहीं है।",en:"First — a full thing is called a whole, which is one. Like one full dhokla or one full roti. Nobody has shared it yet.",mr:"सर्वात आधी — पूर्ण वस्तूला होल म्हणजे एक म्हणतात. जसे एक पूर्ण ढोकळा किंवा एक पूर्ण पोळी. अजून कोणी ती वाटलेली नाही.",dur:10000},
    {art:circleSVG(2,1,true,150),cap:"HALF (½): cheez ko 2 BARABAR hisson mein baanto. Ek hissa = ½.",hi:"अब इसे दो बराबर हिस्सों में बाँटो। हर एक हिस्से को आधा यानी half कहते हैं, और लिखते हैं एक बटा दो। दो बराबर होना बहुत ज़रूरी है।",en:"Now share it into two equal parts. Each part is called a half, written as one over two. Being two equal parts is very important.",mr:"आता त्याला दोन समान भागांत वाटा. प्रत्येक भागाला अर्धा म्हणजे half म्हणतात, आणि लिहितो एक भागिले दोन. दोन समान असणं खूप महत्त्वाचं.",dur:11000},
-   {art:`<div style="display:flex;flex-direction:column;gap:8px;align-items:center">${barSVG(2,1,true,220)}<div style="font-weight:800;color:${C.mint}">✓ Barabar — yeh HALF hai</div>${barSVG(2,1,false,220)}<div style="font-weight:800;color:#fff">✗ Barabar nahi — yeh half NAHI</div></div>`,cap:"Magic word: EQUAL! Agar tukde barabar nahi, to wo half nahi.",hi:"सबसे ज़रूरी शब्द — बराबर! अगर किसी चीज़ को दो हिस्सों में बाँटा पर वे बराबर नहीं हैं, तो वह आधा नहीं कहलाता। हिस्से एक जैसे साइज़ के होने चाहिए।",en:"The most important word — equal! If a thing is split into two parts but they are not equal, it is not a half. The parts must be the same size.",mr:"सर्वात महत्त्वाचा शब्द — समान! एखादी गोष्ट दोन भागांत वाटली पण ते समान नसतील, तर तो अर्धा नाही. भाग सारख्या आकाराचे असले पाहिजेत.",dur:11000},
+   {art:`<div style="display:flex;flex-direction:column;gap:8px;align-items:center">${barSVG(2,1,true,220)}<div style="font-weight:800;color:${C.mint}">✓ Barabar — yeh HALF hai</div>${barSVG(2,1,false,220)}<div style="font-weight:800;color:${C.purpleDark}">✗ Barabar nahi — yeh half NAHI</div></div>`,cap:"Magic word: EQUAL! Agar tukde barabar nahi, to wo half nahi.",hi:"सबसे ज़रूरी शब्द — बराबर! अगर किसी चीज़ को दो हिस्सों में बाँटा पर वे बराबर नहीं हैं, तो वह आधा नहीं कहलाता। हिस्से एक जैसे साइज़ के होने चाहिए।",en:"The most important word — equal! If a thing is split into two parts but they are not equal, it is not a half. The parts must be the same size.",mr:"सर्वात महत्त्वाचा शब्द — समान! एखादी गोष्ट दोन भागांत वाटली पण ते समान नसतील, तर तो अर्धा नाही. भाग सारख्या आकाराचे असले पाहिजेत.",dur:11000},
    {art:`<div style="display:flex;gap:10px">${barSVG(2,1,true,90)}${circleSVG(2,1,false,80)}${circleSVG(2,1,true,80)}</div>`,cap:"Half banane ke kai tareeke: seedha, aadi, tircha — sab theek agar barabar.",hi:"आधा बनाने के कई तरीके हैं। किसी कागज़ को बीच से सीधा मोड़ो, या आड़ा मोड़ो, या कोने से कोने तक तिरछा मोड़ो — हर तरीके से आधा बनता है, बशर्ते दोनों हिस्से बराबर हों।",en:"There are many ways to make a half. Fold a paper straight down the middle, or across, or diagonally corner to corner — each way makes a half, as long as both parts are equal.",mr:"अर्धा बनवण्याचे अनेक मार्ग आहेत. कागद मधोमध सरळ दुमडा, किंवा आडवा, किंवा कोपऱ्यापासून कोपऱ्यापर्यंत तिरका — प्रत्येक मार्गाने अर्धा होतो, जर दोन्ही भाग समान असतील.",dur:11500},
    {art:circleSVG(4,1,false,150),cap:"QUARTER (¼): cheez ko 4 BARABAR hisson mein baanto. Ek = ¼.",hi:"अब चीज़ को चार बराबर हिस्सों में बाँटो। हर एक हिस्से को क्वार्टर यानी quarter कहते हैं, और लिखते हैं एक बटा चार।",en:"Now share the thing into four equal parts. Each part is called a quarter, written as one over four.",mr:"आता गोष्ट चार समान भागांत वाटा. प्रत्येक भागाला क्वार्टर म्हणतात, आणि लिहितो एक भागिले चार.",dur:10500},
    {art:`<div style="display:flex;gap:14px;align-items:center">${circleSVG(2,1,true,90)}<div style="font-size:22px;color:#6B5E94">=</div>${circleSVG(4,2,false,90)}</div>`,cap:"Ikra-Samina: 2 QUARTERS milke 1 HALF! To dono barabar.",hi:"किताब की कहानी — समीना को लगा कि दो क्वार्टर, एक हाफ से बड़े हैं। पर असल में दो क्वार्टर मिलकर एक हाफ ही बनते हैं! यानी दोनों बराबर हैं। समीना धोखे में आ गई।",en:"The book's story — Samina thought two quarters were bigger than one half. But really, two quarters together make exactly one half! So both are equal. Samina was tricked.",mr:"पुस्तकातली गोष्ट — समीनाला वाटलं दोन क्वार्टर, एका हाफपेक्षा मोठे आहेत. पण खरंतर दोन क्वार्टर मिळून एक हाफच होतो! म्हणजे दोन्ही समान आहेत. समीना फसली.",dur:12000},
@@ -9273,7 +9273,7 @@ function nameSetup(){
     </div>
     <div class="card">
       <input id="nameInput" type="text" placeholder="Apna naam yahan likho..." maxlength="20" style="width:100%;padding:15px;border-radius:14px;border:2px solid ${C.soft}55;font-size:19px;font-weight:700;text-align:center;box-sizing:border-box;font-family:inherit" onkeydown="if(event.key==='Enter')saveName()"/>
-      <div id="nameErr" style="color:#fff;font-weight:800;font-size:13px;margin-top:8px;text-align:center;min-height:16px"></div>
+      <div id="nameErr" style="color:${C.purpleDark};font-weight:800;font-size:13px;margin-top:8px;text-align:center;min-height:16px"></div>
       <button class="btn" style="background:${C.purple};margin-top:10px" onclick="saveName()">Chalo Shuru Karein! 🚀</button>
     </div>
     <div style="text-align:center;color:${C.soft};font-size:13px;margin-top:14px">💡 Yeh naam quiz mein tumhe pukarne ke liye use hoga</div>`;
@@ -9511,7 +9511,7 @@ function lesson(){
       <button class="btn" style="background:#B6ABDB;flex:1" onclick="prevScene()">⏮</button>
       <button class="btn" style="background:${C.purple};flex:2" id="pp" onclick="togglePlay()">⏸ Pause</button>
       <button class="btn" style="background:#B6ABDB;flex:1" onclick="nextScene(true)">⏭</button></div>
-    <div id="voiceNote" style="text-align:center;color:#fff;font-weight:800;font-size:12px;margin-top:10px;line-height:1.4"></div>
+    <div id="voiceNote" style="text-align:center;color:${C.soft};font-weight:800;font-size:12px;margin-top:10px;line-height:1.4"></div>
     <div style="text-align:center;margin-top:8px">
       <button class="btn" id="qbtn" style="background:${C.mint};color:${C.purple};width:auto;display:inline-block">${state.playMode==='workbook'?'Chapter pe wapas ✅':'Quiz pe jao 📝'}</button></div>`;
   document.getElementById("qbtn").setAttribute("onclick",state.playMode==='workbook'?"go('chapter')":"playQuiz('"+state.cid+"')");
@@ -9567,16 +9567,16 @@ function quiz(){const q=Q()[state.qi];
   if(state.qShuffleIdx!==state.qi){state.qShuffle=shuffleArr([...Array(n).keys()]);state.qShuffleIdx=state.qi;state.qCorrectPos=state.qShuffle.indexOf(q.ans);}
   const order=state.qShuffle;
   let optsHTML="";if(q.visual){order.forEach((origI,p)=>{const o=q.visual[origI];optsHTML+=`<button class="opt" id="o${p}" onclick="pick(${p})">${circleSVG(o.p,o.s,o.v,70)}</button>`;});}else{order.forEach((origI,p)=>{optsHTML+=`<button class="opt" id="o${p}" onclick="pick(${p})">${optsArr[origI]}</button>`;});}
-  const langBtn=(l,label)=>`<button onclick="quizSetLang('${l}')" style="border:none;padding:5px 13px;border-radius:16px;font-weight:800;font-size:12px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#fff':'background:#C43F55;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
+  const langBtn=(l,label)=>`<button onclick="quizSetLang('${l}')" style="border:none;padding:5px 13px;border-radius:16px;font-weight:800;font-size:12px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#fff':'background:#F2E6D9;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
   const toggle=hasEn?`<div class="row" style="justify-content:center;gap:6px;margin-bottom:10px">${langBtn('hi','🇮🇳 Hinglish')} ${langBtn('en','🔤 English')}</div>`:'';
   app.innerHTML=`<div class="topbar"><button class="link" onclick="go('chapter')">← Band</button>
       <span style="color:${C.soft};font-weight:800">${content(state.cid).emoji} ${lang==='en'?'Question':'Sawaal'} ${state.qi+1}/${Q().length}</span>
       <span style="color:${C.mint};font-weight:800">⭐ ${state.score}</span></div>
     ${toggle}
-    <div class="card">${q.tag?`<div style="display:inline-block;background:#FFE49A;color:${C.purple};font-weight:800;font-size:12px;padding:5px 12px;border-radius:20px;margin-bottom:10px">${q.tag}</div>`:''}<div class="fred" style="font-weight:700;font-size:20px;color:${C.ink};margin-bottom:16px">${qText}</div>
+    <div class="card">${q.tag?`<div style="display:inline-block;background:#FDECC8;color:${C.purple};font-weight:800;font-size:12px;padding:5px 12px;border-radius:20px;margin-bottom:10px">${q.tag}</div>`:''}<div class="fred" style="font-weight:700;font-size:20px;color:${C.ink};margin-bottom:16px">${qText}</div>
       <div>${optsHTML}</div><div id="next"></div></div>`;
 }
-function pick(i){if(state.picked!==null)return;state.picked=i;const q=Q()[state.qi];const n=q.visual?q.visual.length:q.opts.length;const correctPos=state.qCorrectPos;for(let k=0;k<n;k++){const el=document.getElementById("o"+k);el.onclick=null;if(k===correctPos){el.style.background="#1B5E20";el.style.color="#FFD400";el.style.borderColor=C.mint;el.innerHTML+='<span style="margin-left:auto;font-size:22px">✅</span>';}else if(k===i){el.style.background="#4A0000";el.style.color="#FFD400";el.style.borderColor=C.coral;el.innerHTML+='<span style="margin-left:auto;font-size:22px">❌</span>';}}
+function pick(i){if(state.picked!==null)return;state.picked=i;const q=Q()[state.qi];const n=q.visual?q.visual.length:q.opts.length;const correctPos=state.qCorrectPos;for(let k=0;k<n;k++){const el=document.getElementById("o"+k);el.onclick=null;if(k===correctPos){el.style.background="#E3F5E5";el.style.color="#1B5E20";el.style.borderColor=C.mint;el.innerHTML+='<span style="margin-left:auto;font-size:22px">✅</span>';}else if(k===i){el.style.background="#FCE4E0";el.style.color="#8B231A";el.style.borderColor=C.coral;el.innerHTML+='<span style="margin-left:auto;font-size:22px">❌</span>';}}
   if(i===correctPos){state.score++;const un=load("padhai_name","");
     if(LANG==='en')speakOne(un?("Well done "+un+"! Correct!"):"Correct! Well done!","en");
     else if(LANG==='mr')speakOne(un?("शाब्बास "+un+"! एकदम बरोबर!"):"शाब्बास! एकदम बरोबर!","mr");
@@ -9609,7 +9609,7 @@ function qaScreen(){
     const qText=(lang==='en'&&qa.qe)?qa.qe:qa.q;
     const aText=(lang==='en'&&qa.ae)?qa.ae:qa.a;
     items+=`<div class="card" style="margin-bottom:10px;padding:0;overflow:hidden">
-      <div onclick="qaToggle(${i})" style="cursor:pointer;padding:14px;display:flex;gap:10px;align-items:flex-start;background:${open?C.sky+'22':'#C43F55'}">
+      <div onclick="qaToggle(${i})" style="cursor:pointer;padding:14px;display:flex;gap:10px;align-items:flex-start;background:${open?C.sky+'22':'#F2E6D9'}">
         <span style="font-weight:900;color:${C.purpleDark};font-size:15px">Q${i+1}.</span>
         <span style="flex:1;font-weight:800;color:${C.ink};font-size:15px">${qText}</span>
         <span style="color:${C.soft};font-size:18px">${open?'▲':'▼'}</span>
@@ -9617,7 +9617,7 @@ function qaScreen(){
       ${open?`<div style="padding:0 14px 14px 40px;color:${C.ink};font-size:15px;line-height:1.5;border-top:1px dashed ${C.soft}55"><div style="height:8px"></div><b style="color:${C.mint}">${lang==='en'?'✓ Answer:':'✓ Jawab:'}</b> ${aText}</div>`:''}
     </div>`;
   });
-  const btn=(l,label)=>`<button onclick="qaSetLang('${l}')" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#fff':'background:#C43F55;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
+  const btn=(l,label)=>`<button onclick="qaSetLang('${l}')" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#fff':'background:#F2E6D9;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
   app.innerHTML=`
     <div class="topbar"><button class="link" onclick="go('chapter')">← Chapter</button></div>
     <div style="text-align:center;margin-bottom:12px">
@@ -9680,7 +9680,7 @@ function swScreen(){
     sec.items.forEach((it,ii)=>{
       const k=si+'-'+ii;const open=!!state.swOpen[k];const speaking=state.swPlayingKey===k;
       rows+=`<div class="card" style="margin-bottom:8px;padding:0;overflow:hidden;${speaking?'box-shadow:0 0 0 2.5px '+C.mint+';':''}">
-        <div style="cursor:pointer;padding:10px 8px 10px 14px;display:flex;gap:8px;align-items:flex-start;background:${speaking?C.mint+'1f':open?C.sky+'18':'#C43F55'}">
+        <div style="cursor:pointer;padding:10px 8px 10px 14px;display:flex;gap:8px;align-items:flex-start;background:${speaking?C.mint+'1f':open?C.sky+'18':'#F2E6D9'}">
           <span onclick="swToggle('${k}')" style="flex:1;font-weight:800;color:${C.ink};font-size:15px">${it.q}</span>
           <button onclick="event.stopPropagation();swPlayItem(${si},${ii})" title="Suno" style="border:none;background:${speaking?C.mint:C.purple+'22'};color:${speaking?'#fff':C.purpleDark};border-radius:50%;width:34px;height:34px;min-width:34px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center${speaking?';animation:ring 1.4s ease-out infinite':''}">${speaking?'⏸':'🔊'}</button>
           <span onclick="swToggle('${k}')" style="color:${C.soft};font-size:16px;padding-top:8px">${open?'▲':'▼'}</span>
@@ -9701,7 +9701,7 @@ function swScreen(){
       <div class="row" style="justify-content:center;gap:8px;flex-wrap:wrap">
         ${(state.swPlayAllActive)?`<button onclick="swStopAll()" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:${C.coral};color:#fff">⏹ Sab Band Karo</button>`:`<button onclick="swPlayAll()" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:${C.purple};color:#fff">🔊 Sab Suno (Poora)</button>`}
         <button onclick="swExpandAll(true)" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:${C.mint};color:${C.purple}">सर्व उत्तरे दाखवा</button>
-        <button onclick="swExpandAll(false)" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:#C43F55;color:${C.soft};border:1.5px solid ${C.soft}55">सर्व लपवा</button>
+        <button onclick="swExpandAll(false)" style="border:none;padding:7px 16px;border-radius:20px;font-weight:800;font-size:13px;cursor:pointer;background:#F2E6D9;color:${C.soft};border:1.5px solid ${C.soft}55">सर्व लपवा</button>
       </div>
       ${anyPlaying?`<div style="color:${C.mint};font-weight:900;font-size:13px;margin-top:8px">🔊 Bol raha hoon... sawaal aur uska jawaab</div>`:''}
     </div>
@@ -9753,7 +9753,7 @@ function matchScreen(){
       <div style="flex:1"><div style="font-weight:900;color:${C.purpleDark};font-size:13px;margin-bottom:8px;text-align:center">👉 Column A</div>${left}</div>
       <div style="flex:1"><div style="font-weight:900;color:${C.purpleDark};font-size:13px;margin-bottom:8px;text-align:center">Column B</div>${right}</div>
     </div>
-    ${state.matchWrong!=null?`<div style="text-align:center;color:#fff;font-weight:800;font-size:14px;margin-top:8px">❌ Galat jodi! Phir se try karo</div>`:''}
+    ${state.matchWrong!=null?`<div style="text-align:center;color:${C.purpleDark};font-weight:800;font-size:14px;margin-top:8px">❌ Galat jodi! Phir se try karo</div>`:''}
     <div style="height:20px"></div>`;
 }
 if(!load("padhai_name",null))state.screen='nameSetup';
