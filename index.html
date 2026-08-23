@@ -12721,6 +12721,180 @@ function restartQuizAny(){
   startQuiz();
 }
 
+
+/* ================= Gattu se poocho (AI doubt solver) ================= */
+const ASK_MODELS=['gemini-2.5-flash','gemini-2.0-flash','gemini-flash-latest','gemini-1.5-flash'];
+const ASK_SYS=[
+"Tum 'Gattu' ho - ek pyaara, sabra rakhne wala haathi teacher jo Bharat ke Class 4 ke bachche ko padhata hai.",
+"NIYAM:",
+"1. Hamesha SIMPLE HINGLISH mein jawab do (Roman script). Agar bachcha English mein poochhe to English mein, Marathi mein poochhe to Marathi mein.",
+"2. Jawab CHHOTA rakho - 3 se 6 line. Mushkil shabd mat use karo.",
+"3. Maths ka sawaal ho to STEP BY STEP hal karke dikhao, phir final jawab bold-jaisa likho.",
+"4. Har subject chalega - Maths, EVS, Science, English, Hindi, Marathi, Computer, GK, History, Geography.",
+"5. Rozmarra ki Indian misaalein do (roti, rupaye, cricket, kirana dukaan, school).",
+"6. Pyaar se baat karo, hausla badhao. Kabhi-kabhi ek chhota sawaal poochh kar bachche ko sochne do.",
+"7. Emoji thoda-bahut use karo, par zyada nahi.",
+"8. Agar sawaal bachchon ke laayak NAHI hai (darawna, ladai-jhagda, adult, dawai/ilaaj, ya kisi ko nuksaan) to pyaar se mana kar do aur kaho: 'Ye sawaal mere liye nahi hai beta. Apne mummy-papa ya teacher se poochho.' Aur padhai ki taraf mod do.",
+"9. Kabhi bhi apne aap ko AI ya computer program mat kaho - tum bas Gattu ho.",
+"10. Formatting: markdown ke ** * # jaise chinh mat use karo, seedha saaf text likho."
+].join('\n');
+
+function askEsc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function askMsgs(){return load("padhai_chat",[]);}
+function askSave(m){save("padhai_chat",m.slice(-40));}
+function askKey(){return load("padhai_key","");}
+
+function openAsk(){state.screen='ask';state.askBusy=false;render();}
+
+function askSetKey(){
+  const el=document.getElementById('askKeyInput');
+  const k=el?el.value.trim():'';
+  if(!k){alert('Pehle API key paste karo.');return;}
+  save("padhai_key",k);save("padhai_model","");
+  render();
+}
+function askForgetKey(){
+  if(!confirm('API key hata dein?'))return;
+  save("padhai_key","");render();
+}
+function askClear(){
+  if(!confirm('Poori baat-cheet mita dein?'))return;
+  askSave([]);render();
+}
+function askChip(t){const el=document.getElementById('askInput');if(el){el.value=t;askSend();}}
+
+function askScrollEnd(){
+  const box=document.getElementById('askBox');
+  if(box)box.scrollTop=box.scrollHeight+9999;
+}
+
+async function askCall(history){
+  const key=askKey();
+  const contents=history.slice(-10).map(function(m){
+    return {role:(m.role==='user'?'user':'model'),parts:[{text:m.text}]};
+  });
+  const body={contents:contents,systemInstruction:{parts:[{text:ASK_SYS}]},
+              generationConfig:{temperature:0.6,maxOutputTokens:700}};
+  const saved=load("padhai_model","");
+  const list=saved?[saved].concat(ASK_MODELS.filter(function(m){return m!==saved;})):ASK_MODELS;
+  let lastErr='';
+  for(let i=0;i<list.length;i++){
+    try{
+      const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+list[i]+':generateContent?key='+encodeURIComponent(key),
+        {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      const j=await r.json();
+      if(!r.ok){lastErr=(j&&j.error&&j.error.message)?j.error.message:('HTTP '+r.status);continue;}
+      const c=j.candidates&&j.candidates[0];
+      const txt=c&&c.content&&c.content.parts?c.content.parts.map(function(p){return p.text||'';}).join(''):'';
+      if(!txt){lastErr='Khaali jawab aaya';continue;}
+      save("padhai_model",list[i]);
+      return txt.trim();
+    }catch(e){lastErr=e.message||'Network problem';}
+  }
+  throw new Error(lastErr||'Jawab nahi mila');
+}
+
+async function askSend(){
+  if(state.askBusy)return;
+  const el=document.getElementById('askInput');
+  const q=el?el.value.trim():'';
+  if(!q)return;
+  if(!askKey()){alert('Pehle API key daalo.');return;}
+  const msgs=askMsgs();
+  msgs.push({role:'user',text:q});
+  askSave(msgs);
+  if(el)el.value='';
+  state.askBusy=true;render();askScrollEnd();
+  try{
+    const ans=await askCall(msgs);
+    const m2=askMsgs();m2.push({role:'gattu',text:ans});askSave(m2);
+  }catch(e){
+    const m2=askMsgs();
+    m2.push({role:'gattu',text:'Oh! Abhi jawab nahi mil paaya 😔\n('+(e.message||'net check karo')+')\nInternet check karke phir se try karo.'});
+    askSave(m2);
+  }
+  state.askBusy=false;render();askScrollEnd();
+}
+
+function askSpeak(i){
+  const m=askMsgs();
+  if(!m[i])return;
+  shutup();
+  speakOne(m[i].text.replace(/[*#`]/g,''),(LANG==='en'?'en':(LANG==='mr'?'mr':'hi')));
+}
+
+function askScreen(){
+  const key=askKey();
+  const msgs=askMsgs();
+  const name=load("padhai_name","dost");
+
+  if(!key){
+    app.innerHTML='<div class="topbar"><button class="link" onclick="go(\'subjects\')">← Band</button>'+
+      '<span style="color:'+C.soft+';font-weight:800">🐘 Gattu se poocho</span><span></span></div>'+
+      '<div class="card">'+
+      '<div style="font-size:52px;text-align:center">🐘🔑</div>'+
+      '<div class="fred" style="font-weight:700;font-size:22px;color:'+C.purpleDark+';text-align:center;margin:8px 0">Ek baar setup karna hai</div>'+
+      '<div style="color:'+C.ink+';font-size:15px;font-weight:700;line-height:1.6">'+
+        'Gattu ko sawaal samajhne ke liye ek <b>free Google Gemini API key</b> chahiye.<br><br>'+
+        '<b>1.</b> Chrome mein kholo: <span style="color:'+C.purple+'">aistudio.google.com/apikey</span><br>'+
+        '<b>2.</b> Google account se login karo<br>'+
+        '<b>3.</b> "Create API key" dabao<br>'+
+        '<b>4.</b> Key copy karke neeche paste karo'+
+      '</div>'+
+      '<input id="askKeyInput" placeholder="AIza... yahan paste karo" style="width:100%;box-sizing:border-box;margin-top:14px;padding:14px;border-radius:16px;border:3px solid '+C.soft+'55;font-family:Nunito;font-weight:800;font-size:15px">'+
+      '<button class="btn" style="background:'+C.mint+';color:'+C.purple+';margin-top:12px" onclick="askSetKey()">✅ Save karo</button>'+
+      '<div style="color:'+C.soft+';font-size:12px;font-weight:800;margin-top:12px;text-align:center">🔒 Key sirf is phone mein save hogi, kahin bheji nahi jaayegi.</div>'+
+      '</div>';
+    return;
+  }
+
+  let chat='';
+  if(!msgs.length){
+    chat='<div style="text-align:center;padding:18px 6px">'+
+      '<div style="font-size:56px">🐘</div>'+
+      '<div class="fred" style="font-weight:700;font-size:21px;color:'+C.purpleDark+';margin-top:6px">Namaste '+askEsc(name)+'!</div>'+
+      '<div style="color:'+C.soft+';font-weight:800;font-size:14px;margin-top:4px">Koi bhi sawaal poochho — kisi bhi subject ka!</div></div>';
+  }
+  msgs.forEach(function(m,i){
+    if(m.role==='user'){
+      chat+='<div style="display:flex;justify-content:flex-end;margin-bottom:10px">'+
+        '<div style="max-width:82%;background:'+C.purple+';color:#fff;font-weight:800;font-size:15px;line-height:1.5;padding:11px 14px;border-radius:18px 18px 4px 18px;white-space:pre-wrap">'+askEsc(m.text)+'</div></div>';
+    }else{
+      chat+='<div style="display:flex;gap:8px;margin-bottom:10px">'+
+        '<div style="font-size:26px;flex-shrink:0">🐘</div>'+
+        '<div style="max-width:82%">'+
+          '<div style="background:#FFF3ED;border:2px solid '+C.soft+'33;color:'+C.ink+';font-weight:700;font-size:15px;line-height:1.6;padding:11px 14px;border-radius:18px 18px 18px 4px;white-space:pre-wrap">'+askEsc(m.text)+'</div>'+
+          '<button class="link" style="font-size:13px;padding:4px 2px" onclick="askSpeak('+i+')">🔊 Sunno</button>'+
+        '</div></div>';
+    }
+  });
+  if(state.askBusy){
+    chat+='<div style="display:flex;gap:8px;margin-bottom:10px"><div style="font-size:26px">🐘</div>'+
+      '<div style="background:#FFF3ED;border:2px solid '+C.soft+'33;color:'+C.soft+';font-weight:800;font-size:15px;padding:11px 14px;border-radius:18px">Gattu soch raha hai… 💭</div></div>';
+  }
+
+  let chips='';
+  if(!msgs.length){
+    const ideas=['Fractions kya hote hain?','Paudhe khaana kaise banate hain?','Present tense samjhao','Bharat ka rashtriya pashu kaun hai?','25 × 14 kaise karein?'];
+    chips='<div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px">'+
+      ideas.map(function(t){
+        return '<button onclick="askChip(\''+t.replace(/'/g,"\\'")+'\')" style="border:2px solid '+C.soft+'44;background:#FDF3E3;color:'+C.purpleDark+';font-family:Nunito;font-weight:800;font-size:13px;padding:7px 12px;border-radius:16px;cursor:pointer">'+t+'</button>';
+      }).join('')+'</div>';
+  }
+
+  app.innerHTML='<div class="topbar"><button class="link" onclick="go(\'subjects\')">← Band</button>'+
+    '<span style="color:'+C.soft+';font-weight:800">🐘 Gattu se poocho</span>'+
+    '<button class="link" style="font-size:14px" onclick="askClear()">🗑️</button></div>'+
+    '<div id="askBox" style="background:#FFFFFF;border-radius:22px;padding:14px;box-shadow:0 8px 26px rgba(74,44,42,.12);max-height:60vh;overflow-y:auto;margin-bottom:12px">'+chat+'</div>'+
+    chips+
+    '<div style="display:flex;gap:8px;align-items:flex-end">'+
+      '<textarea id="askInput" rows="2" placeholder="Apna sawaal likho…" style="flex:1;box-sizing:border-box;padding:12px;border-radius:16px;border:3px solid '+C.soft+'55;font-family:Nunito;font-weight:800;font-size:15px;resize:none"></textarea>'+
+      '<button onclick="askSend()" '+(state.askBusy?'disabled':'')+' style="border:none;border-radius:16px;background:'+(state.askBusy?C.soft:C.coral)+';color:#FFD400;font-family:Fredoka;font-weight:800;font-size:20px;padding:14px 18px;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.22)">➤</button>'+
+    '</div>'+
+    '<div style="text-align:center;margin-top:10px"><button class="link" style="font-size:12px" onclick="askForgetKey()">🔑 API key badlo</button></div>';
+  setTimeout(askScrollEnd,0);
+}
+
 function streakCard(){
   const s=streakGet(),today=streakToday(),goal=s.goal||10;
   const pct=Math.min(100,Math.round(today*100/goal));
@@ -12740,11 +12914,17 @@ function streakCard(){
       '<div style="flex:1">'+
         '<div class="fred" style="font-weight:700;font-size:19px;color:'+C.purpleDark+'">Meri Galtiyan</div>'+
         '<div style="color:'+(wc?C.coral:C.mint)+';font-weight:800;font-size:12px">'+(wc?(wc+' sawaal dobara karo'):'Sab saaf hai! 🎉')+'</div>'+
+      '</div><div style="font-size:26px;color:'+C.soft+'">›</div></div>'+
+    '<div class="card" style="margin-bottom:12px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#FFF6EC,#FDECC8)" onclick="openAsk()">'+
+      '<div style="font-size:34px">🙋</div>'+
+      '<div style="flex:1">'+
+        '<div class="fred" style="font-weight:700;font-size:19px;color:'+C.purpleDark+'">Gattu se kuch bhi poocho</div>'+
+        '<div style="color:'+C.purple+';font-weight:800;font-size:12px">Koi bhi subject • koi bhi doubt 💬</div>'+
       '</div><div style="font-size:26px;color:'+C.soft+'">›</div></div>';
 }
 
 function go(s){shutup();clearTimeout(state.timer);if(EXAMINT&&s!=='quiz'){clearInterval(EXAMINT);EXAMINT=null;}state.token++;state.swPlayingKey=null;state.swPlayAllActive=false;state.screen=s;render();}
-function render(){if(state.screen==="nameSetup")return nameSetup();if(state.screen==="subjects")return subjects();if(state.screen==="home")return home();if(state.screen==="chapter")return chapter();if(state.screen==="lesson")return lesson();if(state.screen==="quiz")return quiz();if(state.screen==="result")return result();if(state.screen==="qa")return qaScreen();if(state.screen==="match")return matchScreen();if(state.screen==="swadhyay")return swScreen();}
+function render(){if(state.screen==="nameSetup")return nameSetup();if(state.screen==="ask")return askScreen();if(state.screen==="subjects")return subjects();if(state.screen==="home")return home();if(state.screen==="chapter")return chapter();if(state.screen==="lesson")return lesson();if(state.screen==="quiz")return quiz();if(state.screen==="result")return result();if(state.screen==="qa")return qaScreen();if(state.screen==="match")return matchScreen();if(state.screen==="swadhyay")return swScreen();}
 
 // ---- The 6 subjects ----
 const SUBJECTS=[
