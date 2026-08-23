@@ -12642,8 +12642,108 @@ let LANG=load("padhai_lang","hi");
 let state={screen:"subjects",subj:'maths',bi:0,cid:'shapes',scene:0,playing:false,token:0,timer:null,sceneStart:0,qi:0,picked:null,score:0,playMode:'lesson'};
 function content(id){return CH.find(c=>c.id===id)||CH[0];}
 function S(){const cn=content(state.cid);return (state.playMode==='workbook')?(cn.workbook||[]):(cn.scenes||[]);}
-function Q(){return content(state.cid).quiz;}
-function go(s){shutup();clearTimeout(state.timer);state.token++;state.swPlayingKey=null;state.swPlayAllActive=false;state.screen=s;render();}
+function Q(){return state.customQ?state.customQ:content(state.cid).quiz;}
+
+/* ================= Streak • Mistake bank • Exam mode ================= */
+let EXAMINT=null;
+function dkey(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+function todayKey(){return dkey(new Date());}
+
+function streakGet(){const s=load("padhai_streak",{last:null,days:0,today:0,goal:10});if(!s.goal)s.goal=10;return s;}
+function streakBump(){
+  const s=streakGet(),t=todayKey();
+  if(s.last!==t){
+    const yk=dkey(new Date(Date.now()-86400000));
+    s.days=(s.last===yk)?((s.days||0)+1):1;
+    s.last=t;s.today=0;
+  }
+  s.today=(s.today||0)+1;save("padhai_streak",s);return s;
+}
+function streakToday(){const s=streakGet();return (s.last===todayKey())?(s.today||0):0;}
+
+function wrongGet(){return load("padhai_wrong",{});}
+function wrongAdd(cid,qi){const w=wrongGet();w[cid]=w[cid]||[];if(w[cid].indexOf(qi)<0)w[cid].push(qi);save("padhai_wrong",w);}
+function wrongDel(cid,qi){const w=wrongGet();if(w[cid]){w[cid]=w[cid].filter(function(x){return x!==qi;});if(!w[cid].length)delete w[cid];}save("padhai_wrong",w);}
+function wrongCount(){const w=wrongGet();let t=0;for(const k in w)t+=w[k].length;return t;}
+function wrongList(subjId){
+  const w=wrongGet(),out=[];
+  let ids=null;
+  if(subjId){try{ids=subjectBook(subjId).map(function(c){return c.id;});}catch(e){ids=null;}}
+  for(const cid in w){
+    if(ids&&ids.indexOf(cid)<0)continue;
+    const cn=CH.find(function(c){return c.id===cid;});
+    if(!cn||!cn.quiz)continue;
+    w[cid].forEach(function(qi){if(cn.quiz[qi])out.push({cid:cid,qi:qi,q:cn.quiz[qi]});});
+  }
+  return out;
+}
+
+function startMistakes(subjId){
+  const list=wrongList(subjId);
+  if(!list.length){alert('Abhi koi galti nahi hai! Shabaash 🎉');return;}
+  const picked=shuffleArr(list).slice(0,20);
+  state.customQ=picked.map(function(x){return x.q;});
+  state.customMeta=picked.map(function(x){return {cid:x.cid,qi:x.qi};});
+  state.cid=picked[0].cid;
+  state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;
+  state.examMode=false;state.mistakeMode=true;state.mistakeSubj=subjId||null;
+  state.exAns=null;state.examEnd=null;
+  go('quiz');
+}
+
+function startExam(cid){
+  state.cid=cid;
+  const list=(content(cid).quiz)||[];
+  if(!list.length)return;
+  const cnt=Math.min(25,list.length);
+  const idx=shuffleArr(list.map(function(_,i){return i;})).slice(0,cnt);
+  state.customQ=idx.map(function(i){return list[i];});
+  state.customMeta=idx.map(function(i){return {cid:cid,qi:i};});
+  state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;
+  state.examMode=true;state.mistakeMode=false;state.exAns=[];
+  state.examEnd=Date.now()+cnt*90*1000;
+  go('quiz');
+}
+
+function examTick(){
+  const el=document.getElementById('examclock');
+  if(!el||!state.examEnd||!state.examMode){if(EXAMINT){clearInterval(EXAMINT);EXAMINT=null;}return;}
+  let s=Math.max(0,Math.round((state.examEnd-Date.now())/1000));
+  const m=Math.floor(s/60),ss=s%60;
+  el.textContent='⏱️ '+m+':'+(ss<10?'0':'')+ss;
+  el.style.color=(s<60)?C.coral:C.purple;
+  if(s<=0){clearInterval(EXAMINT);EXAMINT=null;finishQuiz();}
+}
+
+function restartQuizAny(){
+  if(state.mistakeMode)return startMistakes(state.mistakeSubj);
+  if(state.examMode)return startExam(state.cid);
+  startQuiz();
+}
+
+function streakCard(){
+  const s=streakGet(),today=streakToday(),goal=s.goal||10;
+  const pct=Math.min(100,Math.round(today*100/goal));
+  const wc=wrongCount();
+  const done=today>=goal;
+  return '<div class="card" style="margin-bottom:12px;padding:14px">'+
+    '<div class="row" style="align-items:center;gap:12px">'+
+      '<div style="font-size:34px">'+(done?'🎉':'🔥')+'</div>'+
+      '<div style="flex:1">'+
+        '<div class="fred" style="font-weight:700;font-size:19px;color:'+C.purpleDark+'">'+(s.days||0)+' din ki streak!</div>'+
+        '<div style="color:'+C.soft+';font-weight:800;font-size:12px">Aaj: '+today+'/'+goal+' sawaal'+(done?' — ho gaya! 🌟':'')+'</div>'+
+        '<div style="background:#F2E6D9;border-radius:10px;height:10px;margin-top:6px;overflow:hidden">'+
+          '<div style="background:'+(done?C.mint:C.yellow)+';height:10px;width:'+pct+'%"></div></div>'+
+      '</div></div></div>'+
+    '<div class="card" style="margin-bottom:12px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:14px" onclick="'+(wc?'startMistakes()':"alert('Abhi koi galti nahi hai! Shabaash 🎉')")+'">'+
+      '<div style="font-size:34px">❌</div>'+
+      '<div style="flex:1">'+
+        '<div class="fred" style="font-weight:700;font-size:19px;color:'+C.purpleDark+'">Meri Galtiyan</div>'+
+        '<div style="color:'+(wc?C.coral:C.mint)+';font-weight:800;font-size:12px">'+(wc?(wc+' sawaal dobara karo'):'Sab saaf hai! 🎉')+'</div>'+
+      '</div><div style="font-size:26px;color:'+C.soft+'">›</div></div>';
+}
+
+function go(s){shutup();clearTimeout(state.timer);if(EXAMINT&&s!=='quiz'){clearInterval(EXAMINT);EXAMINT=null;}state.token++;state.swPlayingKey=null;state.swPlayAllActive=false;state.screen=s;render();}
 function render(){if(state.screen==="nameSetup")return nameSetup();if(state.screen==="subjects")return subjects();if(state.screen==="home")return home();if(state.screen==="chapter")return chapter();if(state.screen==="lesson")return lesson();if(state.screen==="quiz")return quiz();if(state.screen==="result")return result();if(state.screen==="qa")return qaScreen();if(state.screen==="match")return matchScreen();if(state.screen==="swadhyay")return swScreen();}
 
 // ---- The 6 subjects ----
@@ -12812,10 +12912,12 @@ function subjects(){
         </div>
         <div style="font-size:26px;color:${C.soft}">›</div>
       </div>`;});
+  const topCards=streakCard();
   app.innerHTML=`<div style="text-align:center">
       <div class="fred" style="font-weight:700;font-size:32px;color:${C.purpleDark}">PadhAI 🐘</div>
       <div style="color:${C.soft};font-weight:800;margin-bottom:6px">Class 4 • CBSE • Apna subject chuno</div>
       <div style="color:${C.purpleDark};font-weight:800;font-size:14px;margin-bottom:18px">👋 Namaste, ${load("padhai_name","Dost")}! <span style="text-decoration:underline;cursor:pointer" onclick="editName()">✏️ naam badlo</span></div></div>
+    ${topCards}
     ${cards}
     <div style="color:${C.soft};font-size:13px;margin-top:8px;text-align:center">💡 Naye subjects dheere-dheere ready ho rahe hain</div>`;
 }
@@ -12989,7 +13091,8 @@ function chapter(){
     const hasLes=!!(cn.scenes&&cn.scenes.length);
     action=`<div class="row" style="margin-top:16px">
       ${hasLes?`<button class="btn" style="background:${c.color};flex:2;font-size:18px" onclick="playLesson('${c.id}')">▶ Video Lesson</button>`:''}
-      <button class="btn" style="background:${C.mint};color:${C.purple};flex:1;font-size:16px" onclick="playQuiz('${c.id}')">📝 Quiz</button></div>`;
+      <button class="btn" style="background:${C.mint};color:${C.purple};flex:1;font-size:16px" onclick="playQuiz('${c.id}')">📝 Quiz</button></div>
+      <div class="row" style="margin-top:8px"><button class="btn" style="background:${C.yellow};color:${C.purpleDark};flex:1;font-size:15px" onclick="startExam('${c.id}')">⏱️ Exam Mode (timer)</button></div>`;
     let extra='';
     if(cn.qa&&cn.qa.length){extra+=`<button class="btn" style="background:${C.purple};flex:1;font-size:15px" onclick="openQA('${c.id}')">💬 Sawaal-Jawab</button>`;}
     if(cn.match&&cn.match.length){extra+=`<button class="btn" style="background:${C.coral};flex:1;font-size:15px" onclick="openMatch('${c.id}')">🔗 Match & Fill</button>`;}
@@ -13095,7 +13198,7 @@ function togglePlay(){state.playing=!state.playing;setPP();if(state.playing)runS
 function setPP(){const b=document.getElementById("pp");if(b)b.textContent=state.playing?"⏸ Pause":"▶ Chalao";}
 
 /* ---------- QUIZ ---------- */
-function startQuiz(){state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;go('quiz');}
+function startQuiz(){state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;state.customQ=null;state.customMeta=null;state.examMode=false;state.mistakeMode=false;state.exAns=null;state.examEnd=null;go('quiz');}
 function quizSetLang(l){state.quizLang=l;quiz();}
 function shuffleArr(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
 function quiz(){const q=Q()[state.qi];
@@ -13110,31 +13213,80 @@ function quiz(){const q=Q()[state.qi];
   const langBtn=(l,label)=>`<button onclick="quizSetLang('${l}')" style="border:none;padding:5px 13px;border-radius:16px;font-weight:800;font-size:12px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#fff':'background:#F2E6D9;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
   const toggle=hasEn?`<div class="row" style="justify-content:center;gap:6px;margin-bottom:10px">${langBtn('hi','🇮🇳 Hinglish')} ${langBtn('en','🔤 English')}</div>`:'';
   app.innerHTML=`<div class="topbar"><button class="link" onclick="go('chapter')">← Band</button>
-      <span style="color:${C.soft};font-weight:800">${content(state.cid).emoji} ${lang==='en'?'Question':'Sawaal'} ${state.qi+1}/${Q().length}</span>
-      <span style="color:${C.mint};font-weight:800">⭐ ${state.score}</span></div>
+      <span style="color:${C.soft};font-weight:800">${state.mistakeMode?'❌':(state.examMode?'📝':content(state.cid).emoji)} ${lang==='en'?'Question':'Sawaal'} ${state.qi+1}/${Q().length}</span>
+      ${state.examMode?`<span id="examclock" style="color:${C.purple};font-weight:800">⏱️</span>`:`<span style="color:${C.mint};font-weight:800">⭐ ${state.score}</span>`}</div>
     ${toggle}
     <div class="card">${q.tag?`<div style="display:inline-block;background:#FDECC8;color:${C.purple};font-weight:800;font-size:12px;padding:5px 12px;border-radius:20px;margin-bottom:10px">${q.tag}</div>`:''}<div class="fred" style="font-weight:700;font-size:20px;color:${C.ink};margin-bottom:16px">${qText}</div>
       <div>${optsHTML}</div><div id="next"></div></div>`;
+  if(state.examMode){if(!EXAMINT)EXAMINT=setInterval(examTick,1000);examTick();}
 }
-function pick(i){if(state.picked!==null)return;state.picked=i;const q=Q()[state.qi];const n=q.visual?q.visual.length:q.opts.length;const correctPos=state.qCorrectPos;for(let k=0;k<n;k++){const el=document.getElementById("o"+k);el.onclick=null;if(k===correctPos){el.style.background="#E3F5E5";el.style.color="#1B5E20";el.style.borderColor=C.mint;el.innerHTML+='<span style="margin-left:auto;font-size:22px">✅</span>';}else if(k===i){el.style.background="#FCE4E0";el.style.color="#8B231A";el.style.borderColor=C.coral;el.innerHTML+='<span style="margin-left:auto;font-size:22px">❌</span>';}}
-  if(i===correctPos){state.score++;const un=load("padhai_name","");
-    if(LANG==='en')speakOne(un?("Well done "+un+"! Correct!"):"Correct! Well done!","en");
-    else if(LANG==='mr')speakOne(un?("शाब्बास "+un+"! एकदम बरोबर!"):"शाब्बास! एकदम बरोबर!","mr");
-    else speakOne(un?("शाबाश "+un+"! बिलकुल सही!"):"शाबाश! बिलकुल सही!","hi");}
-  else{const un=load("padhai_name","");
-    if(LANG==='en')speakOne(un?(un+", this is wrong. The right answer is in green."):"The right answer is in green.","en");
-    else if(LANG==='mr')speakOne(un?(un+" बाळा, हे उत्तर चुकीचे आहे. बरोबर उत्तर हिरव्या रंगात आहे."):"बरोबर उत्तर हिरव्या रंगात आहे.","mr");
-    else speakOne(un?(un+" बेटा, यह जवाब गलत है। सही जवाब हरे रंग में है।"):"सही जवाब हरे रंग में है।","hi");}
-  const last=state.qi===Q().length-1;document.getElementById("next").innerHTML=`<button class="btn" style="background:${C.purple};margin-top:6px" onclick="${last?"finishQuiz()":"nextQ()"}">${last?"Result dekho 🎉":"Agla sawaal →"}</button>`;}
+function pick(i){
+  if(state.picked!==null)return;
+  state.picked=i;
+  const q=Q()[state.qi];
+  const n=q.visual?q.visual.length:q.opts.length;
+  const correctPos=state.qCorrectPos;
+  const right=(i===correctPos);
+  const meta=(state.customMeta&&state.customMeta[state.qi])?state.customMeta[state.qi]:{cid:state.cid,qi:state.qi};
+  if(right)state.score++;
+  if(state.examMode){
+    state.exAns=state.exAns||[];state.exAns[state.qi]={right:right,pick:i};
+    for(let k=0;k<n;k++){const el=document.getElementById("o"+k);if(!el)continue;el.onclick=null;
+      if(k===i){el.style.background="#EDE7FA";el.style.borderColor=C.purple;el.innerHTML+='<span style="margin-left:auto;font-size:20px">✔️</span>';}}
+  }else{
+    for(let k=0;k<n;k++){const el=document.getElementById("o"+k);if(!el)continue;el.onclick=null;
+      if(k===correctPos){el.style.background="#E3F5E5";el.style.color="#1B5E20";el.style.borderColor=C.mint;el.innerHTML+='<span style="margin-left:auto;font-size:22px">✅</span>';}
+      else if(k===i){el.style.background="#FCE4E0";el.style.color="#8B231A";el.style.borderColor=C.coral;el.innerHTML+='<span style="margin-left:auto;font-size:22px">❌</span>';}}
+    const un=load("padhai_name","");
+    if(right){
+      if(LANG==='en')speakOne(un?("Well done "+un+"! Correct!"):"Correct! Well done!","en");
+      else if(LANG==='mr')speakOne(un?("शाब्बास "+un+"! एकदम बरोबर!"):"शाब्बास! एकदम बरोबर!","mr");
+      else speakOne(un?("शाबाश "+un+"! बिलकुल सही!"):"शाबाश! बिलकुल सही!","hi");
+    }else{
+      if(LANG==='en')speakOne(un?(un+", this is wrong. The right answer is in green."):"The right answer is in green.","en");
+      else if(LANG==='mr')speakOne(un?(un+" बाळा, हे उत्तर चुकीचे आहे. बरोबर उत्तर हिरव्या रंगात आहे."):"बरोबर उत्तर हिरव्या रंगात आहे.","mr");
+      else speakOne(un?(un+" बेटा, यह जवाब गलत है। सही जवाब हरे रंग में है।"):"सही जवाब हरे रंग में है।","hi");
+    }
+  }
+  if(meta&&meta.cid){ if(right)wrongDel(meta.cid,meta.qi); else wrongAdd(meta.cid,meta.qi); }
+  streakBump();
+  const last=state.qi===Q().length-1;
+  document.getElementById("next").innerHTML=`<button class="btn" style="background:${C.purple};margin-top:6px" onclick="${last?"finishQuiz()":"nextQ()"}">${last?"Result dekho 🎉":"Agla sawaal →"}</button>`;
+}
 function nextQ(){shutup();state.qi++;state.picked=null;quiz();}
-function finishQuiz(){shutup();const pr=load("padhai_prog",{});pr[state.cid]=pr[state.cid]||{};pr[state.cid].best=Math.max(pr[state.cid].best==null?0:pr[state.cid].best,state.score);save("padhai_prog",pr);go('result');}
-function result(){const tot=Q().length;const pct=state.score/tot,icon=pct===1?"🏆":pct>=.5?"🌟":"🌱";const msg=pct===1?"Perfect! Tum champion ho!":pct>=.5?"Bahut achhe! Thodi aur practice 💪":"Koi baat nahi, phir se try karo 🌱";
+function finishQuiz(){
+  shutup();
+  if(EXAMINT){clearInterval(EXAMINT);EXAMINT=null;}
+  const pr=load("padhai_prog",{});
+  pr[state.cid]=pr[state.cid]||{};
+  if(state.examMode){pr[state.cid].exam=Math.max(pr[state.cid].exam||0,state.score);save("padhai_prog",pr);}
+  else if(!state.customQ){pr[state.cid].best=Math.max(pr[state.cid].best==null?0:pr[state.cid].best,state.score);save("padhai_prog",pr);}
+  go('result');
+}
+function result(){
+  const tot=Q().length;
+  const pct=tot?state.score/tot:0;
+  const icon=pct===1?"🏆":pct>=.5?"🌟":"🌱";
+  const msg=pct===1?"Perfect! Tum champion ho!":pct>=.5?"Bahut achhe! Thodi aur practice 💪":"Koi baat nahi, phir se try karo 🌱";
+  let extra='';
+  if(state.mistakeMode){
+    const left=wrongCount();
+    extra=`<div style="background:#FDECC8;border-radius:14px;padding:12px;margin:0 0 14px;font-weight:800;color:${C.purpleDark};font-size:15px">${left?('❌ Ab '+left+' galtiyan baaki hain'):'🎉 Sab galtiyan saaf ho gayi!'}</div>`;
+  }else if(state.examMode){
+    extra=`<div style="background:#FDECC8;border-radius:14px;padding:12px;margin:0 0 14px;font-weight:800;color:${C.purpleDark};font-size:15px">⏱️ Exam Mode • ${state.score} / ${tot} marks</div>`;
+  }
+  const st=streakGet(),today=streakToday(),goal=st.goal||10;
+  const sline=`<div style="color:${C.soft};font-weight:800;font-size:13px;margin-bottom:16px">🔥 ${st.days||0} din ki streak &nbsp;•&nbsp; aaj ${today}/${goal} sawaal${today>=goal?' ✅':''}</div>`;
+  const homeBtn=state.mistakeMode?`<button class="btn" style="background:${C.purple};flex:1" onclick="go('subjects')">🏠 Home</button>`
+                                 :`<button class="btn" style="background:${C.purple};flex:1" onclick="go('home')">🏠 Home</button>`;
   app.innerHTML=`<div style="height:24px"></div><div class="card" style="text-align:center">
       <div class="pop" style="font-size:74px">${icon}</div>
       <div class="fred" style="font-weight:700;font-size:27px;color:${C.purpleDark}">${state.score} / ${tot} sahi!</div>
-      <div style="font-weight:800;color:${C.soft};margin:10px 0 22px;font-size:18px">${msg}</div>
-      <div class="row"><button class="btn" style="background:${C.coral};flex:1" onclick="startQuiz()">🔁 Phir se</button>
-        <button class="btn" style="background:${C.purple};flex:1" onclick="go('home')">🏠 Home</button></div></div>`;}
+      <div style="font-weight:800;color:${C.soft};margin:10px 0 14px;font-size:18px">${msg}</div>
+      ${extra}${sline}
+      <div class="row"><button class="btn" style="background:${C.coral};flex:1" onclick="restartQuizAny()">🔁 Phir se</button>
+        ${homeBtn}</div></div>`;
+}
 
 /* ---------- Q&A (Sawaal-Jawab: padhne/yaad karne ke liye) ---------- */
 function openQA(id){state.cid=id;state.qaOpen=-1;if(!state.qaLang)state.qaLang='hi';go('qa');}
