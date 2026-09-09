@@ -9625,7 +9625,7 @@ function shutup(){if('speechSynthesis' in window)speechSynthesis.cancel();}
 let LANG=load("padhai_lang","hi");
 
 /* ---------- state ---------- */
-let state={screen:"subjects",subj:'maths',bi:0,cid:'shapes',scene:0,playing:false,token:0,timer:null,sceneStart:0,qi:0,picked:null,score:0,playMode:'lesson'};
+let state={screen:"subjects",subj:'maths',bi:0,cid:'shapes',scene:0,playing:false,token:0,timer:null,sceneStart:0,qi:0,picked:null,score:0,playMode:'lesson',mistakes:[],showMistakes:false};
 function content(id){return CH.find(c=>c.id===id)||CH[0];}
 function S(){const cn=content(state.cid);return (state.playMode==='workbook')?(cn.workbook||[]):(cn.scenes||[]);}
 function Q(){return content(state.cid).quiz;}
@@ -10013,7 +10013,7 @@ function togglePlay(){state.playing=!state.playing;setPP();if(state.playing)runS
 function setPP(){const b=document.getElementById("pp");if(b)b.textContent=state.playing?"⏸ Pause":"▶ Chalao";}
 
 /* ---------- QUIZ ---------- */
-function startQuiz(){state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;go('quiz');}
+function startQuiz(){state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;state.mistakes=[];state.showMistakes=false;go('quiz');}
 function quizSetLang(l){state.quizLang=l;quiz();}
 function shuffleArr(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
 function quiz(){const q=Q()[state.qi];
@@ -10043,11 +10043,16 @@ function showAnswerState(){const q=Q()[state.qi];const n=q.visual?q.visual.lengt
   if(nextEl)nextEl.innerHTML=`<button class="btn" style="background:${C.purple};margin-top:6px" onclick="${last?"finishQuiz()":"nextQ()"}">${last?"Result dekho 🎉":"Agla sawaal →"}</button>`;
 }
 function pick(i){if(state.picked!==null)return;state.picked=i;const q=Q()[state.qi];const correctPos=state.qCorrectPos;showAnswerState();
+  const lang=state.quizLang||'hi';
+  const qText=(lang==='en'&&q.qe)?q.qe:q.q;
+  const optsArr=(lang==='en'&&q.oe)?q.oe:q.opts;
+  const order=state.qShuffle;
   if(i===correctPos){state.score++;const un=load("padhai_name","");
     if(LANG==='en')speakOne(un?("Well done "+un+"! Correct!"):"Correct! Well done!","en");
     else if(LANG==='mr')speakOne(un?("शाब्बास "+un+"! एकदम बरोबर!"):"शाब्बास! एकदम बरोबर!","mr");
     else speakOne(un?("शाबाश "+un+"! बिलकुल सही!"):"शाबाश! बिलकुल सही!","hi");}
   else{const un=load("padhai_name","");
+    if(!q.visual&&optsArr){state.mistakes.push({q:qText,user:optsArr[order[i]],correct:optsArr[order[correctPos]]});}
     if(LANG==='en')speakOne(un?(un+", this is wrong. The right answer is in green."):"The right answer is in green.","en");
     else if(LANG==='mr')speakOne(un?(un+" बाळा, हे उत्तर चुकीचे आहे. बरोबर उत्तर हिरव्या रंगात आहे."):"बरोबर उत्तर हिरव्या रंगात आहे.","mr");
     else speakOne(un?(un+" बेटा, यह जवाब गलत है। सही जवाब हरे रंग में है।"):"सही जवाब हरे रंग में है।","hi");}
@@ -10055,12 +10060,27 @@ function pick(i){if(state.picked!==null)return;state.picked=i;const q=Q()[state.
 function nextQ(){shutup();state.qi++;state.picked=null;quiz();}
 function finishQuiz(){shutup();const pr=load("padhai_prog",{});pr[state.cid]=pr[state.cid]||{};pr[state.cid].best=Math.max(pr[state.cid].best==null?0:pr[state.cid].best,state.score);save("padhai_prog",pr);go('result');}
 function result(){const tot=Q().length;const pct=state.score/tot,icon=pct===1?"🏆":pct>=.5?"🌟":"🌱";const msg=pct===1?"Perfect! Tum champion ho!":pct>=.5?"Bahut achhe! Thodi aur practice 💪":"Koi baat nahi, phir se try karo 🌱";
+  const mistakes=state.mistakes||[];
+  let mistakesHTML='';
+  if(mistakes.length>0){
+    const listHTML=mistakes.map((m,i)=>`<div class="card" style="text-align:left;margin-bottom:10px;padding:14px">
+        <div style="font-weight:800;color:${C.ink};margin-bottom:8px">Q${i+1}. ${m.q}</div>
+        <div style="color:${C.coral};font-weight:800;font-size:14px;margin-bottom:4px">❌ Tumne diya: ${m.user}</div>
+        <div style="color:${C.mint};font-weight:800;font-size:14px">✅ Sahi jawab: ${m.correct}</div>
+      </div>`).join('');
+    mistakesHTML=`<div style="margin-top:16px;text-align:left">
+      <button class="btn" style="background:${C.sky};color:${C.purple}" onclick="toggleMistakes()">${state.showMistakes?'▲':'▼'} Galat Jawab Dekho (${mistakes.length})</button>
+      ${state.showMistakes?`<div style="margin-top:12px">${listHTML}</div>`:''}
+    </div>`;
+  }
   app.innerHTML=`<div style="height:24px"></div><div class="card" style="text-align:center">
       <div class="pop" style="font-size:74px">${icon}</div>
       <div class="fred" style="font-weight:700;font-size:27px;color:${C.purpleDark}">${state.score} / ${tot} sahi!</div>
       <div style="font-weight:800;color:${C.soft};margin:10px 0 22px;font-size:18px">${msg}</div>
       <div class="row"><button class="btn" style="background:${C.coral};flex:1" onclick="startQuiz()">🔁 Phir se</button>
-        <button class="btn" style="background:${C.purple};flex:1" onclick="go('home')">🏠 Home</button></div></div>`;}
+        <button class="btn" style="background:${C.purple};flex:1" onclick="go('home')">🏠 Home</button></div>
+      ${mistakesHTML}</div>`;}
+function toggleMistakes(){state.showMistakes=!state.showMistakes;result();}
 
 /* ---------- Q&A (Sawaal-Jawab: padhne/yaad karne ke liye) ---------- */
 function openQA(id){state.cid=id;state.qaOpen=-1;state.qaPlayingKey=null;state.qaPlayAllActive=false;if(!state.qaLang)state.qaLang='hi';go('qa');}
