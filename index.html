@@ -5,49 +5,152 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>PadhAI - Class 4 Maths</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#E85D4E">
+<meta name="theme-color" content="#0B6E5F">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="PadhAI">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@500;600;700;800&family=Karla:wght@400;500;600;700;800&family=Mukta:wght@400;600;700;800&display=swap">
 <style>
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  :root{--bg:#FDF6EC;--ink:#4A2C2A;--soft:#8B6F5C;--purple:#E85D4E;--purpleDark:#B33A2F;--yellow:#F5A623;--coral:#F2705C;--mint:#6FBF73;--sky:#F7C873;}
-  html,body{margin:0;padding:0;}
-  body{background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:18px 14px 30px;-webkit-font-smoothing:antialiased;}
-  .wrap{width:100%;max-width:440px;}
-  .fred{font-family:Fredoka,system-ui,sans-serif;}
-  .card{background:#FFFFFF;border-radius:24px;padding:20px;box-shadow:0 8px 26px rgba(74,44,42,.12);}
-  .btn{border:none;border-radius:18px;padding:14px 22px;font-size:18px;font-weight:800;font-family:Fredoka,system-ui;color:#FFD400;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.25);width:100%;}
-  .btn:active{transform:translateY(2px);box-shadow:0 3px 0 rgba(0,0,0,.25);}
-  .row{display:flex;gap:10px;}
-  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-  @keyframes pop{0%{transform:scale(.6) rotate(-6deg);opacity:0;}60%{transform:scale(1.1) rotate(2deg);}100%{transform:scale(1) rotate(0);opacity:1;}}
-  @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
-  @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-7px) rotate(3deg);}}
-  @keyframes ring{0%{box-shadow:0 0 0 0 rgba(232,93,78,.4);}100%{box-shadow:0 0 0 18px rgba(232,93,78,0);}}
-  .pop{animation:pop .6s ease;} .fade{animation:fade .5s ease;} .float{animation:floaty 3s ease-in-out infinite;}
-  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-  .link{background:none;border:none;color:var(--soft);font-weight:800;font-size:16px;cursor:pointer;font-family:Nunito;}
-  .bar{width:100%;height:9px;background:#F2E6D9;border-radius:9px;overflow:hidden;}
-  .bar>i{display:block;height:100%;background:var(--purple);border-radius:9px;width:0%;transition:width .3s;}
-  .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#FFF3ED;border:3px solid #F2D9CC;border-radius:18px;padding:14px;margin-bottom:11px;cursor:pointer;font-family:Nunito;font-weight:800;font-size:17px;color:var(--ink);}
-  .caption{font-weight:800;font-size:18px;line-height:1.55;text-align:center;min-height:88px;display:flex;align-items:center;justify-content:center;padding:0 4px;}
-  .stage{min-height:185px;display:flex;align-items:center;justify-content:center;}
-  .seg{display:flex;background:#F2E6D9;border-radius:13px;padding:3px;gap:3px;}
-  .seg button{flex:1;border:none;background:none;padding:9px 2px;border-radius:10px;font-weight:800;font-family:Nunito;font-size:13px;color:var(--soft);cursor:pointer;}
-  .seg button.on{background:#F5A623;color:#fff;box-shadow:0 2px 6px rgba(74,44,42,.25);}
-  .mascot{position:relative;width:50px;height:50px;border-radius:50%;background:#FFF3D6;display:flex;align-items:center;justify-content:center;font-size:28px;margin:8px auto 0;}
-  .mascot.talk{animation:bob .6s ease-in-out infinite,ring 1.4s ease-out infinite;}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  :root{
+    --paper:#FBFAF7; --surface:#FFFFFF; --sunk:#F3F1EC;
+    --ink:#16233A; --ink2:#41506B; --soft:#7C8AA3;
+    --brand:#0B6E5F; --brand-d:#075246; --brand-w:#E6F2EF;
+    --gold:#E29A1F; --gold-w:#FDF3E0; --gold-d:#8A5A07;
+    --red:#C2413A; --red-w:#FBECEA;
+    --line:#E7E4DD;
+    --r1:10px; --r2:14px; --r3:20px;
+    --sh:0 1px 2px rgba(22,35,58,.06),0 6px 16px -8px rgba(22,35,58,.14);
+    --bg:var(--paper); --purple:var(--brand); --purpleDark:var(--brand-d);
+    --yellow:var(--gold); --coral:var(--red); --mint:var(--brand); --sky:var(--gold);
+  }
+  html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:Karla,Mukta,system-ui,sans-serif;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    padding:14px 15px 26px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body.hasnav{padding-bottom:104px}
+  .wrap{width:100%;max-width:440px}
+  .fred{font-family:Gabarito,Mukta,sans-serif;letter-spacing:-.018em}
+
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r2);
+    padding:15px;box-shadow:var(--sh)}
+  .btn{border:none;border-radius:var(--r2);padding:13px 18px;font-size:15.5px;font-weight:700;
+    font-family:Gabarito,Mukta,sans-serif;letter-spacing:-.015em;color:#fff;background:var(--brand);
+    cursor:pointer;width:100%}
+  .btn:active{transform:scale(.985)}
+  .btn.gh{background:var(--surface);color:var(--brand);border:1.5px solid var(--line)}
+  .row{display:flex;gap:9px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;min-height:34px}
+  .link{background:none;border:none;color:var(--soft);font-weight:700;font-size:14px;cursor:pointer;
+    font-family:Karla,Mukta,sans-serif;padding:0}
+  .iconbtn{width:34px;height:34px;border-radius:11px;border:1px solid var(--line);background:var(--surface);
+    display:grid;place-items:center;font-size:15px;color:var(--ink2);cursor:pointer}
+
+  .bar{width:100%;height:6px;background:var(--sunk);border-radius:99px;overflow:hidden}
+  .bar>i{display:block;height:100%;background:var(--brand);border-radius:99px;width:0%;transition:width .3s}
+  .trk{height:5px;background:var(--sunk);border-radius:99px;overflow:hidden;margin-top:7px}
+  .trk>i{display:block;height:100%;background:var(--brand);border-radius:99px}
+
+  .opt{display:flex;align-items:center;gap:11px;width:100%;text-align:left;background:var(--surface);
+    border:1.5px solid var(--line);border-radius:var(--r2);padding:13px;margin-bottom:9px;cursor:pointer;
+    font-family:Karla,Mukta,sans-serif;font-weight:600;font-size:15px;color:var(--ink)}
+  .optk{width:25px;height:25px;border-radius:8px;background:var(--sunk);color:var(--soft);display:grid;
+    place-items:center;font-family:Gabarito;font-size:12px;font-weight:700;flex:0 0 auto}
+
+  .sec{font-size:12px;font-weight:700;color:var(--soft);margin:19px 2px 9px;display:flex;
+    justify-content:space-between;align-items:center}
+  .tag{display:inline-block;font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:7px;
+    background:var(--sunk);color:var(--ink2)}
+  .tag.b{background:var(--brand-w);color:var(--brand-d)}
+  .tag.g{background:var(--gold-w);color:var(--gold-d)}
+  .tag.r{background:var(--red-w);color:var(--red)}
+
+  .tile{display:flex;align-items:center;gap:12px;padding:12px 13px;background:var(--surface);
+    border:1px solid var(--line);border-radius:var(--r2);margin-bottom:8px;box-shadow:var(--sh);cursor:pointer}
+  .tile .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:18px;
+    background:var(--sunk);flex:0 0 auto}
+  .tile .g1{flex:1;min-width:0}
+  .tile .n{font-family:Gabarito,Mukta,sans-serif;font-size:14.5px;font-weight:700;letter-spacing:-.015em}
+  .tile .s{font-size:11.5px;color:var(--soft);font-weight:600;margin-top:2px}
+  .tile .ch{color:#C3C9D4;font-size:17px}
+
+  .hero{background:linear-gradient(160deg,var(--brand) 0%,var(--brand-d) 100%);border-radius:var(--r3);
+    padding:17px;color:#fff;position:relative;overflow:hidden;cursor:pointer}
+  .hero:after{content:"";position:absolute;right:-32px;top:-32px;width:130px;height:130px;border-radius:50%;
+    background:rgba(255,255,255,.07)}
+  .stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:11px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r2);padding:11px 8px;
+    text-align:center}
+  .stat b{display:block;font-family:Gabarito,Mukta,sans-serif;font-size:20px;font-weight:700;letter-spacing:-.02em}
+  .stat span{font-size:10px;color:var(--soft);font-weight:700}
+  .quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .qa2{background:var(--surface);border:1px solid var(--line);border-radius:var(--r2);padding:12px;
+    box-shadow:var(--sh);cursor:pointer}
+  .qa2 .ic{width:31px;height:31px;border-radius:9px;display:grid;place-items:center;font-size:15px;margin-bottom:7px}
+  .qa2 .t{font-family:Gabarito,Mukta,sans-serif;font-size:13px;font-weight:700;letter-spacing:-.015em}
+  .qa2 .s{font-size:10.5px;color:var(--soft);font-weight:600;margin-top:2px}
+
+  .ring{position:relative;flex:0 0 auto}
+  .ring svg{transform:rotate(-90deg);display:block}
+  .ring span{position:absolute;inset:0;display:grid;place-items:center;font-family:Gabarito,Mukta,sans-serif;
+    font-size:10.5px;font-weight:700}
+
+  .seg{display:flex;background:var(--sunk);border-radius:var(--r1);padding:3px;gap:3px}
+  .seg button{flex:1;border:none;background:none;padding:8px 2px;border-radius:8px;font-weight:700;
+    font-family:Karla,Mukta,sans-serif;font-size:12.5px;color:var(--soft);cursor:pointer}
+  .seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(22,35,58,.12)}
+
+  .qprog{display:flex;gap:2.5px;margin-top:11px}
+  .qprog i{flex:1;height:3px;border-radius:2px;background:var(--sunk)}
+  .qprog i.d{background:var(--brand)} .qprog i.w{background:var(--red)} .qprog i.c{background:var(--ink2)}
+  .expl{background:var(--brand-w);border-left:3px solid var(--brand);border-radius:0 var(--r1) var(--r1) 0;
+    padding:11px 13px;font-size:13.5px;line-height:1.6;font-weight:600;margin-top:4px}
+
+  .foot{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);padding:11px 15px calc(18px + env(safe-area-inset-bottom));z-index:40}
+  .foot .in{max-width:440px;margin:0 auto}
+  body.hasfoot{padding-bottom:110px}
+
+  .nav{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.95);backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);display:flex;padding:7px 4px calc(12px + env(safe-area-inset-bottom));z-index:40}
+  .nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--soft);
+    font-size:10.5px;font-weight:700;cursor:pointer;position:relative;padding-top:4px}
+  .nav a i{font-style:normal;font-size:19px;line-height:1}
+  .nav a.on{color:var(--brand)}
+  .nav a.on:before{content:"";position:absolute;top:-7px;width:24px;height:3px;border-radius:0 0 3px 3px;background:var(--brand)}
+
+  .brk{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);
+    font-size:13px;font-weight:600}
+  .brk .bd{width:62px;height:5px;background:var(--sunk);border-radius:99px;overflow:hidden;flex:0 0 auto}
+  .brk .bd i{display:block;height:100%;border-radius:99px}
+  .wk{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;height:94px;margin:6px 0 2px}
+  .wk div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+  .wk i{width:100%;background:var(--brand);border-radius:5px 5px 2px 2px;display:block;min-height:3px}
+  .wk i.dim{background:var(--sunk)}
+  .wk u{text-decoration:none;font-size:10px;color:var(--soft);font-weight:700}
+
+  .caption{font-weight:600;font-size:17px;line-height:1.55;text-align:center;min-height:88px;display:flex;
+    align-items:center;justify-content:center;padding:0 4px}
+  .stage{min-height:185px;display:flex;align-items:center;justify-content:center}
+  .mascot{position:relative;width:46px;height:46px;border-radius:13px;background:var(--brand-w);display:flex;
+    align-items:center;justify-content:center;font-size:25px;margin:8px auto 0}
+  .mascot.talk{animation:bob .6s ease-in-out infinite}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes pop{0%{transform:scale(.7);opacity:0}60%{transform:scale(1.06)}100%{transform:scale(1);opacity:1}}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+  .pop{animation:pop .45s ease} .fade{animation:fade .4s ease} .float{animation:floaty 3s ease-in-out infinite}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap" id="app"></div>
 <script>
-const C={purple:"#E85D4E",purpleDark:"#B33A2F",yellow:"#F5A623",coral:"#F2705C",mint:"#6FBF73",sky:"#F7C873",soft:"#8B6F5C",ink:"#4A2C2A"};
+const C={purple:"#0B6E5F",purpleDark:"#075246",yellow:"#E29A1F",coral:"#C2413A",mint:"#0B6E5F",sky:"#E29A1F",soft:"#7C8AA3",ink:"#16233A",line:"#E7E4DD",sunk:"#F3F1EC",surface:"#FFFFFF"};
 const app=document.getElementById("app");
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 function load(k,d){try{const x=localStorage.getItem(k);return x?JSON.parse(x):d;}catch(e){return d;}}
@@ -12644,6 +12747,51 @@ function content(id){return CH.find(c=>c.id===id)||CH[0];}
 function S(){const cn=content(state.cid);return (state.playMode==='workbook')?(cn.workbook||[]):(cn.scenes||[]);}
 function Q(){return state.customQ?state.customQ:content(state.cid).quiz;}
 
+
+/* ============ UI kit ============ */
+function ringSVG(p,txt,sz,col){sz=sz||42;col=col||'var(--brand)';const r=sz/2-4,c=2*Math.PI*r;
+  return `<div class="ring" style="width:${sz}px;height:${sz}px"><svg width="${sz}" height="${sz}">
+  <circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="var(--sunk)" stroke-width="4"/>
+  <circle cx="${sz/2}" cy="${sz/2}" r="${r}" fill="none" stroke="${col}" stroke-width="4" stroke-linecap="round"
+   stroke-dasharray="${c}" stroke-dashoffset="${c*(1-Math.max(0,Math.min(1,p)))}"/></svg><span>${txt}</span></div>`;}
+
+function navBar(active){
+  const it=[['home','🏠','Home',"go('subjects')"],['study','📚','Padho',"navStudy()"],
+            ['prog','📈','Progress',"go('progress')"],['ask','🐘','Gattu',"openAsk()"]];
+  return `<div class="nav">${it.map(([k,i,l,fn])=>
+    `<a class="${active===k?'on':''}" onclick="${fn}"><i>${i}</i>${l}</a>`).join('')}</div>`;
+}
+function navStudy(){const l=load("padhai_last",null);if(l&&l.subj){state.subj=l.subj;go('home');}else go('subjects');}
+function setChrome(mode){document.body.classList.toggle('hasnav',mode==='nav');
+  document.body.classList.toggle('hasfoot',mode==='foot');}
+
+/* ============ daily + topic log ============ */
+function daysGet(){return load("padhai_days",{});}
+function dayBump(){const d=daysGet(),t=todayKey();d[t]=(d[t]||0)+1;
+  const keys=Object.keys(d);if(keys.length>90){keys.sort();keys.slice(0,keys.length-90).forEach(k=>delete d[k]);}
+  save("padhai_days",d);}
+function last7(){const out=[],nm=['Ravi','Som','Mangal','Budh','Guru','Shukra','Shani'];const d=daysGet();
+  for(let i=6;i>=0;i--){const dt=new Date(Date.now()-i*86400000);
+    out.push({l:nm[dt.getDay()].slice(0,3),v:d[dkey(dt)]||0});}return out;}
+function topicGet(){return load("padhai_topic",{});}
+function topicBump(tag,right){if(!tag)return;const t=topicGet();
+  t[tag]=t[tag]||{r:0,w:0};t[tag][right?'r':'w']++;save("padhai_topic",t);}
+function topicRank(){const t=topicGet();const arr=[];
+  for(const k in t){const o=t[k],tot=o.r+o.w;if(tot<3)continue;arr.push({n:k,p:Math.round(o.r*100/tot),t:tot});}
+  arr.sort((a,b)=>b.p-a.p);return arr;}
+
+/* ============ subject / chapter progress ============ */
+function subjStat(id){
+  const bk=subjectBook(id),prog=load("padhai_prog",{});let done=0,total=0,q=0,qd=0;
+  bk.forEach(c=>{if(!c.ready)return;total++;const cc=content(c.id);if(!cc)return;
+    const nq=(cc.quiz||[]).length;q+=nq;const p=prog[c.id]||{};
+    if(p.best!=null){qd+=p.best;const hl=!!(cc.scenes&&cc.scenes.length);if(hl?p.lesson:true)done++;}});
+  return {done:done,total:total,q:q,qd:qd,pct:q?qd/q:0};
+}
+function chapPct(c){if(!c.ready)return 0;const cc=content(c.id);if(!cc)return 0;
+  const nq=(cc.quiz||[]).length;if(!nq)return 0;const p=(load("padhai_prog",{})[c.id])||{};
+  return p.best!=null?Math.min(1,p.best/nq):0;}
+
 /* ================= Streak • Mistake bank • Exam mode ================= */
 let EXAMINT=null;
 function dkey(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
@@ -12657,7 +12805,7 @@ function streakBump(){
     s.days=(s.last===yk)?((s.days||0)+1):1;
     s.last=t;s.today=0;
   }
-  s.today=(s.today||0)+1;save("padhai_streak",s);return s;
+  s.today=(s.today||0)+1;save("padhai_streak",s);dayBump();return s;
 }
 function streakToday(){const s=streakGet();return (s.last===todayKey())?(s.today||0):0;}
 
@@ -12686,7 +12834,7 @@ function startMistakes(subjId){
   state.customMeta=picked.map(function(x){return {cid:x.cid,qi:x.qi};});
   state.cid=picked[0].cid;
   state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;
-  state.examMode=false;state.mistakeMode=true;state.mistakeSubj=subjId||null;
+  state.examMode=false;state.mistakeMode=true;state.mixMode=false;state.qStatus=[];state.mistakeSubj=subjId||null;
   state.exAns=null;state.examEnd=null;
   go('quiz');
 }
@@ -12700,7 +12848,7 @@ function startExam(cid){
   state.customQ=idx.map(function(i){return list[i];});
   state.customMeta=idx.map(function(i){return {cid:cid,qi:i};});
   state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;
-  state.examMode=true;state.mistakeMode=false;state.exAns=[];
+  state.examMode=true;state.mistakeMode=false;state.mixMode=false;state.qStatus=[];state.exAns=[];
   state.examEnd=Date.now()+cnt*90*1000;
   go('quiz');
 }
@@ -12824,6 +12972,7 @@ function askSpeak(i){
 }
 
 function askScreen(){
+  setChrome('none');
   const key=askKey();
   const msgs=askMsgs();
   const name=load("padhai_name","dost");
@@ -12924,7 +13073,7 @@ function streakCard(){
 }
 
 function go(s){shutup();clearTimeout(state.timer);if(EXAMINT&&s!=='quiz'){clearInterval(EXAMINT);EXAMINT=null;}state.token++;state.swPlayingKey=null;state.swPlayAllActive=false;state.screen=s;render();}
-function render(){if(state.screen==="nameSetup")return nameSetup();if(state.screen==="ask")return askScreen();if(state.screen==="subjects")return subjects();if(state.screen==="home")return home();if(state.screen==="chapter")return chapter();if(state.screen==="lesson")return lesson();if(state.screen==="quiz")return quiz();if(state.screen==="result")return result();if(state.screen==="qa")return qaScreen();if(state.screen==="match")return matchScreen();if(state.screen==="swadhyay")return swScreen();}
+function render(){if(state.screen==="nameSetup")return nameSetup();if(state.screen==="ask")return askScreen();if(state.screen==="progress")return progressScreen();if(state.screen==="subjects")return subjects();if(state.screen==="home")return home();if(state.screen==="chapter")return chapter();if(state.screen==="lesson")return lesson();if(state.screen==="quiz")return quiz();if(state.screen==="result")return result();if(state.screen==="qa")return qaScreen();if(state.screen==="match")return matchScreen();if(state.screen==="swadhyay")return swScreen();}
 
 // ---- The 6 subjects ----
 const SUBJECTS=[
@@ -13053,6 +13202,7 @@ const EHFBOOK=[
 function subjectBook(id){if(id==='ehf')return EHFBOOK;if(id==='nces')return NCESBOOK;if(id==='maths')return BOOK;if(id==='computer')return COMPBOOK;if(id==='english')return ENGBOOK;if(id==='marathi')return MARBOOK;if(id==='hindi')return HINBOOK;if(id==='evs')return EVSBOOK;return [];}
 /* ---------- NAME REGISTRATION ---------- */
 function nameSetup(){
+  setChrome('none');
   app.innerHTML=`
     <div style="text-align:center;margin-top:50px">
       <div class="pop" style="font-size:70px">🐘</div>
@@ -13077,30 +13227,89 @@ function saveName(){
 function editName(){state.screen='nameSetup';render();setTimeout(()=>{const el=document.getElementById("nameInput");if(el)el.value=load("padhai_name","");},0);}
 
 function subjects(){
-  const prog=load("padhai_prog",{});let cards='';
-  SUBJECTS.forEach((s,i)=>{
-    const bk=subjectBook(s.id);
-    let done=0,total=0;
-    if(s.ready){bk.forEach(c=>{if(c.ready){total++;const cc=content(c.id);const pc=prog[c.id]||{};const hl=!!(cc&&cc.scenes&&cc.scenes.length);if(hl?pc.lesson:(pc.best!=null))done++;}});}
-    const status=s.ready?`📚 ${total} ${s.unit||'chapters'} ${total?`&nbsp;•&nbsp; ✅ ${done} done`:''}`:'🔒 Jald aa raha hai';
-    cards+=`<div class="card" style="margin-bottom:12px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:14px;${s.ready?'':'opacity:.72'}" onclick="openSubject('${s.id}')">
-        <div style="font-size:38px">${s.emoji}</div>
-        <div style="flex:1">
-          <div class="fred" style="font-weight:700;font-size:20px;color:${C.purpleDark}">${s.title}</div>
-          <div style="color:${s.color};font-weight:800;font-size:12px">${s.sub}</div>
-          <div style="color:${C.soft};font-weight:800;font-size:12px;margin-top:3px">${status}</div>
-        </div>
-        <div style="font-size:26px;color:${C.soft}">›</div>
-      </div>`;});
-  const topCards=streakCard();
-  app.innerHTML=`<div style="text-align:center">
-      <div class="fred" style="font-weight:700;font-size:32px;color:${C.purpleDark}">PadhAI 🐘</div>
-      <div style="color:${C.soft};font-weight:800;margin-bottom:6px">Class 4 • CBSE • Apna subject chuno</div>
-      <div style="color:${C.purpleDark};font-weight:800;font-size:14px;margin-bottom:18px">👋 Namaste, ${load("padhai_name","Dost")}! <span style="text-decoration:underline;cursor:pointer" onclick="editName()">✏️ naam badlo</span></div></div>
-    ${topCards}
+  setChrome('nav');
+  const name=load("padhai_name","dost");
+  const st=streakGet(),today=streakToday(),goal=st.goal||10,wc=wrongCount();
+  const last=load("padhai_last",null);
+  let hero='';
+  if(last&&last.cid){
+    const cc=content(last.cid);
+    const sj=SUBJECTS.find(x=>x.id===last.subj);
+    if(cc&&sj){
+      const bk=subjectBook(last.subj);const ci=bk.findIndex(x=>x.id===last.cid);
+      const c=ci>=0?bk[ci]:null;const pct=c?chapPct(c):0;
+      hero=`<div class="hero" onclick="resumeLast()">
+        <div style="font-size:11px;font-weight:700;opacity:.82">Jahan chhoda tha</div>
+        <div class="fred" style="font-size:19px;font-weight:700;margin-top:3px">${sj.title} · ${cc.title}</div>
+        <div style="font-size:12px;opacity:.86;margin-top:3px">${c?((c.label||'Chapter')+' '+c.n):''} · ${(cc.quiz||[]).length} sawaal</div>
+        <div style="height:5px;background:rgba(255,255,255,.22);border-radius:99px;margin-top:12px;overflow:hidden">
+          <i style="display:block;height:100%;background:#fff;border-radius:99px;width:${Math.round(pct*100)}%"></i></div>
+        <button class="btn" style="background:#fff;color:var(--brand-d);margin-top:13px">Aage padho</button></div>`;
+    }
+  }
+  if(!hero){
+    hero=`<div class="hero" onclick="go('subjects')">
+      <div style="font-size:11px;font-weight:700;opacity:.82">Shuruaat karo</div>
+      <div class="fred" style="font-size:19px;font-weight:700;margin-top:3px">Apna pehla subject chuno</div>
+      <div style="font-size:12px;opacity:.86;margin-top:3px">Neeche list se koi bhi subject kholo</div></div>`;
+  }
+  const qa=(ic,bg,fg,t,s,fn)=>`<div class="qa2" onclick="${fn}">
+    <div class="ic" style="background:${bg};color:${fg}">${ic}</div>
+    <div class="t">${t}</div><div class="s">${s}</div></div>`;
+
+  let cards='';
+  SUBJECTS.forEach(s=>{
+    const st2=s.ready?subjStat(s.id):{total:0,pct:0,q:0};
+    cards+=`<div class="tile" onclick="openSubject('${s.id}')" style="${s.ready?'':'opacity:.6'}">
+      <div class="ic">${s.emoji}</div>
+      <div class="g1"><div class="n">${s.title}</div>
+        <div class="s">${s.ready?(st2.total+' '+(s.unit||'chapters')+(st2.q?' · '+st2.q+' sawaal':'')):'Jald aa raha hai'}</div>
+        ${s.ready&&st2.q?`<div class="trk"><i style="width:${Math.round(st2.pct*100)}%"></i></div>`:''}</div>
+      ${s.ready&&st2.q?ringSVG(st2.pct,Math.round(st2.pct*100)+'%'):'<div class="ch">🔒</div>'}</div>`;});
+
+  app.innerHTML=`
+    <div class="topbar">
+      <div><div class="fred" style="font-size:19px;font-weight:700">Namaste, ${name}</div>
+        <div style="font-size:11.5px;color:var(--soft);font-weight:600">${niceDate()}</div></div>
+      <div class="iconbtn" onclick="editName()">✏️</div>
+    </div>
+    ${hero}
+    <div class="stats">
+      <div class="stat"><b>${st.days||0}</b><span>din streak</span></div>
+      <div class="stat"><b>${today}/${goal}</b><span>aaj ke sawaal</span></div>
+      <div class="stat"><b style="color:${wc?'var(--red)':'var(--brand)'}">${wc}</b><span>galtiyan</span></div>
+    </div>
+    <div class="sec">Aaj kya karein</div>
+    <div class="quick">
+      ${qa('↺','var(--red-w)','var(--red)','Galtiyan sudhaaro',wc?(wc+' sawaal'):'Sab saaf hai',wc?"startMistakes()":"alert('Abhi koi galti nahi hai! Shabaash 🎉')")}
+      ${qa('🎲','var(--brand-w)','var(--brand)','Mix practice','Sab chapters se 20',"startMix()")}
+      ${qa('📈','var(--gold-w)','var(--gold-d)','Meri progress','Hafte ka hisaab',"go('progress')")}
+      ${qa('🐘','var(--sunk)','var(--ink2)','Gattu se poocho','Koi bhi doubt',"openAsk()")}
+    </div>
+    <div class="sec">Subjects</div>
     ${cards}
-    <div style="color:${C.soft};font-size:13px;margin-top:8px;text-align:center">💡 Naye subjects dheere-dheere ready ho rahe hain</div>`;
+    ${navBar('home')}`;
 }
+function niceDate(){const d=new Date();
+  const D=['Ravivaar','Somvaar','Mangalvaar','Budhvaar','Guruvaar','Shukravaar','Shanivaar'];
+  const M=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  return D[d.getDay()]+' · '+d.getDate()+' '+M[d.getMonth()];}
+function resumeLast(){const l=load("padhai_last",null);if(!l||!l.cid)return go('subjects');
+  state.subj=l.subj;const bk=subjectBook(l.subj);const i=bk.findIndex(x=>x.id===l.cid);
+  state.bi=i>=0?i:0;go('chapter');}
+function startMix(){
+  const bk=subjectBook(state.subj||'nces');const pool=[];
+  SUBJECTS.filter(s=>s.ready).forEach(s=>subjectBook(s.id).forEach(c=>{
+    if(!c.ready)return;const cc=content(c.id);if(!cc||!cc.quiz)return;
+    cc.quiz.forEach((q,qi)=>pool.push({q:q,cid:c.id,qi:qi}));}));
+  if(!pool.length)return;
+  const pick=shuffleArr(pool).slice(0,20);
+  state.customQ=pick.map(x=>x.q);state.customMeta=pick.map(x=>({cid:x.cid,qi:x.qi}));
+  state.cid=pick[0].cid;state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;
+  state.examMode=false;state.mistakeMode=false;state.mixMode=true;state.qStatus=[];
+  state.exAns=null;state.examEnd=null;go('quiz');
+}
+
 function openSubject(id){const s=SUBJECTS.find(x=>x.id===id);if(!s||!s.ready){return;}state.subj=id;go('home');}
 
 // ---- The real 14 book chapters (Maths Mela Class 4) ----
@@ -13238,72 +13447,111 @@ const ABOUT={
  h_aditya:["सूर्य क्या है — तारा या राजा?","आदित्य-एल 1 — भारत का सूर्य मिशन","लगरांज बिंदु का रहस्य","सौर ऊर्जा, सूर्य के नाम व स्वाध्याय"],
 };
 function home(){
-  const subj=curSubject();const bk=subjectBook(subj.id);
-  const prog=load("padhai_prog",{});let cards='';
-  bk.forEach((c,i)=>{const p=(c.ready&&prog[c.id])||{};
-    const cc=c.ready?content(c.id):null;const hl=!!(cc&&cc.scenes&&cc.scenes.length);
-    const status=c.ready?`${hl?((p.lesson?'✅ Lesson':'⬜ Lesson')+' &nbsp;•&nbsp; '):''}${p.best!=null?('⭐ '+p.best+(cc?'/'+cc.quiz.length:'')):'⬜ Quiz ('+(cc?cc.quiz.length:0)+' sawaal)'}`:'🔒 Jald aa raha hai';
-    cards+=`<div class="card" style="margin-bottom:11px;padding:14px;cursor:pointer;display:flex;align-items:center;gap:13px;${c.ready?'':'opacity:.78'}" onclick="openChapter(${i})">
-        <div style="font-size:32px">${c.emoji}</div>
-        <div style="flex:1">
-          <div style="font-size:11px;font-weight:800;color:${c.color}">${c.label||'CHAPTER'} ${c.n}</div>
-          <div class="fred" style="font-weight:700;font-size:18px;color:${C.purpleDark}">${c.title}</div>
-          <div style="color:${C.soft};font-weight:800;font-size:12px;margin-top:2px">${status}</div>
-        </div>
-        <div style="font-size:26px;color:${C.soft}">›</div>
-      </div>`;});
-  if(!bk.length){cards=`<div class="card" style="text-align:center;padding:26px;color:${C.soft};font-weight:800">🔒 Is subject ke chapters jald ready ho rahe hain!</div>`;}
+  setChrome('nav');
+  const subj=curSubject();const bk=subjectBook(subj.id);const st=subjStat(subj.id);
+  const prog=load("padhai_prog",{});
+  let cards='';
+  bk.forEach((c,i)=>{
+    const cc=c.ready?content(c.id):null;
+    const p=(c.ready&&prog[c.id])||{};
+    const nq=cc?(cc.quiz||[]).length:0;
+    const pct=chapPct(c);
+    const full=pct>=1;
+    let sline;
+    if(!c.ready) sline='Jald aa raha hai';
+    else if(p.best!=null) sline=nq+' sawaal · best '+p.best+'/'+nq;
+    else sline=nq+' sawaal · shuru nahi kiya';
+    cards+=`<div class="tile" onclick="openChapter(${i})" style="${c.ready?'':'opacity:.6'}">
+      <div class="ic">${c.emoji}</div>
+      <div class="g1">
+        <div class="s" style="margin:0 0 2px;color:var(--brand);font-weight:700">${c.label||'Chapter'} ${c.n}</div>
+        <div class="n">${c.title}</div>
+        <div class="s">${sline}</div>
+        ${c.ready&&nq?`<div class="trk"><i style="width:${Math.round(pct*100)}%"></i></div>`:''}</div>
+      ${!c.ready?'<div class="ch">🔒</div>':(full?'<div style="color:var(--brand);font-size:20px">✓</div>':ringSVG(pct,Math.round(pct*100)+'%'))}</div>`;});
+  if(!bk.length)cards=`<div class="card" style="text-align:center;padding:26px;color:var(--soft);font-weight:700">Is subject ke chapters jald ready ho rahe hain</div>`;
+
   app.innerHTML=`
-    <div class="topbar"><button class="link" onclick="go('subjects')">← Saare subjects</button></div>
-    <div style="text-align:center">
-      <div style="font-size:40px">${subj.emoji}</div>
-      <div class="fred" style="font-weight:700;font-size:26px;color:${C.purpleDark}">${subj.title}</div>
-      <div style="color:${C.soft};font-weight:800;margin-bottom:16px">Class 4 • CBSE • ${subj.sub}</div></div>
-    ${cards}`;
+    <div class="topbar">
+      <button class="link" onclick="go('subjects')">←</button>
+      <div style="flex:1"><div class="fred" style="font-size:18px;font-weight:700">${subj.title}</div>
+        <div style="font-size:11.5px;color:var(--soft);font-weight:600">${subj.sub}</div></div>
+    </div>
+    <div class="card" style="display:flex;align-items:center;gap:14px">
+      ${ringSVG(st.pct,Math.round(st.pct*100)+'%',56)}
+      <div style="flex:1">
+        <div class="fred" style="font-size:15px;font-weight:700">${st.qd} / ${st.q} sawaal sahi</div>
+        <div style="font-size:11.5px;color:var(--soft);font-weight:600;margin-top:2px">${st.total} ${subj.unit||'chapters'} mein se ${st.done} shuru kiye</div>
+      </div>
+    </div>
+    <div class="sec">${subj.unit==='parts'?'Parts':'Chapters'}</div>
+    ${cards}
+    ${navBar('study')}`;
 }
 function openChapter(i){state.bi=i;go('chapter');}
 function chapter(){
-  const c=subjectBook(state.subj)[state.bi];const prog=load("padhai_prog",{});const p=(c.ready&&prog[c.id])||{};
-  const topics=(ABOUT[c.ready?c.id:c.n]||[]).map(t=>`<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:8px"><span style="color:${c.color};font-weight:900">•</span><span style="font-weight:700;color:${C.ink};font-size:15px">${t}</span></div>`).join('');
-  let action='';
-  if(c.ready){
-    const cn=content(c.id);
-    const hasLes=!!(cn.scenes&&cn.scenes.length);
-    action=`<div class="row" style="margin-top:16px">
-      ${hasLes?`<button class="btn" style="background:${c.color};flex:2;font-size:18px" onclick="playLesson('${c.id}')">▶ Video Lesson</button>`:''}
-      <button class="btn" style="background:${C.mint};color:${C.purple};flex:1;font-size:16px" onclick="playQuiz('${c.id}')">📝 Quiz</button></div>
-      <div class="row" style="margin-top:8px"><button class="btn" style="background:${C.yellow};color:${C.purpleDark};flex:1;font-size:15px" onclick="startExam('${c.id}')">⏱️ Exam Mode (timer)</button></div>`;
-    let extra='';
-    if(cn.qa&&cn.qa.length){extra+=`<button class="btn" style="background:${C.purple};flex:1;font-size:15px" onclick="openQA('${c.id}')">💬 Sawaal-Jawab</button>`;}
-    if(cn.match&&cn.match.length){extra+=`<button class="btn" style="background:${C.coral};flex:1;font-size:15px" onclick="openMatch('${c.id}')">🔗 Match & Fill</button>`;}
-    if(cn.swadhyay&&cn.swadhyay.length){extra+=`<button class="btn" style="background:${C.sky};color:${C.purple};flex:1;font-size:15px" onclick="openSwadhyay('${c.id}')">${state.subj==='english'?'📖 Full Answers':'📖 स्वाध्याय (उत्तरांसह)'}</button>`;}
-    if(cn.workbook&&cn.workbook.length){extra+=`<button class="btn" style="background:${C.yellow};color:${C.purple};flex:1;font-size:15px" onclick="playWorkbook('${c.id}')">📘 Workbook (Answers)</button>`;}
-    if(extra){action+=`<div class="row" style="margin-top:10px">${extra}</div>`;}
-  } else {
-    action=`<div style="text-align:center;margin-top:16px;color:${C.soft};font-weight:800;font-size:15px">🔒 Yeh chapter jald ready ho raha hai!</div>`;
+  setChrome('foot');
+  const c=subjectBook(state.subj)[state.bi];
+  const prog=load("padhai_prog",{});const p=(c.ready&&prog[c.id])||{};
+  const cc=c.ready?content(c.id):null;
+  const nq=cc?(cc.quiz||[]).length:0;
+  const pct=chapPct(c);
+  if(c.ready)save("padhai_last",{subj:state.subj,cid:c.id});
+
+  const topics=(ABOUT[c.ready?c.id:c.n]||[]);
+  const tHTML=topics.length?`<div class="card" style="padding:2px 14px">${topics.map((t,i)=>
+    `<div style="display:flex;gap:10px;padding:11px 0;${i<topics.length-1?'border-bottom:1px solid var(--line)':''}">
+      <div style="width:5px;height:5px;border-radius:50%;background:var(--brand);margin-top:7px;flex:0 0 auto"></div>
+      <div style="font-size:13.5px;line-height:1.5;font-weight:600">${t}</div></div>`).join('')}</div>`:'';
+
+  // mistakes in this chapter
+  const w=wrongGet()[c.id]||[];
+  let chips=`<span class="tag b">${nq} sawaal</span>`;
+  if(p.best!=null)chips+=` <span class="tag g">Best ${p.best}/${nq}</span>`;
+  if(w.length)chips+=` <span class="tag r">${w.length} galtiyan</span>`;
+
+  let extra='';
+  if(cc){
+    const hasLes=!!(cc.scenes&&cc.scenes.length);
+    if(hasLes)extra+=`<div class="tile" onclick="playLesson('${c.id}')"><div class="ic">▶️</div>
+      <div class="g1"><div class="n">Video Lesson</div><div class="s">Gattu ke saath poora chapter</div></div><div class="ch">›</div></div>`;
+    if(cc.qa&&cc.qa.length)extra+=`<div class="tile" onclick="openQA('${c.id}')"><div class="ic">💬</div>
+      <div class="g1"><div class="n">Sawaal-Jawab</div><div class="s">${cc.qa.length} sawaal jawab ke saath</div></div><div class="ch">›</div></div>`;
+    if(cc.match&&cc.match.length)extra+=`<div class="tile" onclick="openMatch('${c.id}')"><div class="ic">🔗</div>
+      <div class="g1"><div class="n">Match &amp; Fill</div><div class="s">Jodi banao</div></div><div class="ch">›</div></div>`;
+    if(cc.swadhyay&&cc.swadhyay.length)extra+=`<div class="tile" onclick="openSwadhyay('${c.id}')"><div class="ic">📖</div>
+      <div class="g1"><div class="n">${state.subj==='english'?'Full Answers':'स्वाध्याय (उत्तरांसह)'}</div><div class="s">Kitaab ke saare sawaal</div></div><div class="ch">›</div></div>`;
+    if(cc.workbook&&cc.workbook.length)extra+=`<div class="tile" onclick="playWorkbook('${c.id}')"><div class="ic">📘</div>
+      <div class="g1"><div class="n">Workbook</div><div class="s">Answers ke saath</div></div><div class="ch">›</div></div>`;
   }
-  let bonus='';
   if(c.bonus&&c.bonus.length){
-    bonus=`<div class="card" style="margin-top:14px"><div class="fred" style="font-weight:700;font-size:16px;color:${C.purpleDark};margin-bottom:10px">🎯 Is chapter ki extra practice:</div>`;
-    c.bonus.forEach(b=>{ bonus+=`<div class="row" style="margin-bottom:9px">
-        <button class="btn" style="background:${C.purple};flex:2;font-size:15px;padding:11px" onclick="playLesson('${b.id}')">▶ ${b.label}</button>
-        <button class="btn" style="background:${C.mint};color:${C.purple};flex:1;font-size:15px;padding:11px" onclick="playQuiz('${b.id}')">📝</button></div>`;});
-    bonus+=`</div>`;
+    c.bonus.forEach(b=>{extra+=`<div class="tile" onclick="playLesson('${b.id}')"><div class="ic">🎯</div>
+      <div class="g1"><div class="n">${b.label}</div><div class="s">Extra practice</div></div>
+      <div class="iconbtn" onclick="event.stopPropagation();playQuiz('${b.id}')">📝</div></div>`;});
   }
+
   app.innerHTML=`
-    <div class="topbar"><button class="link" onclick="go('home')">← Saare chapters</button></div>
-    <div class="card" style="text-align:center">
-      <div style="font-size:60px">${c.emoji}</div>
-      <div style="font-size:12px;font-weight:800;color:${c.color};margin-top:4px">${c.label||'CHAPTER'} ${c.n}</div>
-      <div class="fred" style="font-weight:700;font-size:25px;color:${C.purpleDark}">${c.title}</div>
-      ${c.ready?`<div style="color:${C.soft};font-weight:800;font-size:13px;margin-top:8px">${(content(c.id).scenes&&content(c.id).scenes.length)?((p.lesson?'✅ Lesson dekha':'⬜ Lesson baaki')+' &nbsp;•&nbsp; '):''}${p.best!=null?('⭐ Quiz best: '+p.best+'/'+content(c.id).quiz.length):'⬜ Quiz baaki'}</div>`:''}
+    <div class="topbar">
+      <button class="link" onclick="go('home')">←</button>
+      <div style="flex:1"><div class="fred" style="font-size:17px;font-weight:700">${c.title}</div>
+        <div style="font-size:11.5px;color:var(--soft);font-weight:600">${curSubject().title} · ${c.label||'Chapter'} ${c.n}</div></div>
     </div>
-    <div class="card" style="margin-top:14px">
-      <div class="fred" style="font-weight:700;font-size:17px;color:${C.purpleDark};margin-bottom:12px">📖 Is chapter mein kya seekhoge:</div>
-      ${topics}
-    </div>
-    ${action}
-    ${bonus}`;
+    ${c.ready?`<div class="card">
+      <div style="display:flex;gap:14px;align-items:center">
+        ${ringSVG(pct,Math.round(pct*100)+'%',56)}
+        <div style="flex:1">
+          <div style="font-size:11.5px;color:var(--soft);font-weight:700">Sabse achha score</div>
+          <div class="fred" style="font-size:25px;font-weight:700">${p.best!=null?p.best:'—'} <span style="font-size:15px;color:var(--soft)">/ ${nq}</span></div>
+        </div>
+      </div>
+      <div style="margin-top:12px">${chips}</div>
+    </div>`:`<div class="card" style="text-align:center;padding:24px;color:var(--soft);font-weight:700">🔒 Yeh chapter jald ready ho raha hai</div>`}
+    ${topics.length?`<div class="sec">Is ${c.label?'part':'chapter'} mein kya hai</div>${tHTML}`:''}
+    ${extra?`<div class="sec">Aur bhi</div>${extra}`:''}
+    ${c.ready?`<div class="foot"><div class="in"><div class="row">
+      <button class="btn gh" style="flex:1" onclick="startExam('${c.id}')">⏱ Exam mode</button>
+      <button class="btn" style="flex:1.35" onclick="playQuiz('${c.id}')">Quiz shuru karo</button>
+    </div></div></div>`:''}`;
 }
 function playLesson(id){state.cid=id;state.playMode='lesson';go('lesson');}
 function playWorkbook(id){state.cid=id;state.playMode='workbook';go('lesson');}
@@ -13312,6 +13560,7 @@ function playQuiz(id){state.cid=id;startQuiz();}
 
 /* ---------- LESSON ---------- */
 function lesson(){
+  setChrome('none');
   state.scene=0;state.playing=true;
   app.innerHTML=`
     <div class="topbar"><button class="link" onclick="go('chapter')">← Band</button>
@@ -13378,45 +13627,86 @@ function togglePlay(){state.playing=!state.playing;setPP();if(state.playing)runS
 function setPP(){const b=document.getElementById("pp");if(b)b.textContent=state.playing?"⏸ Pause":"▶ Chalao";}
 
 /* ---------- QUIZ ---------- */
-function startQuiz(){state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;state.customQ=null;state.customMeta=null;state.examMode=false;state.mistakeMode=false;state.exAns=null;state.examEnd=null;go('quiz');}
+function startQuiz(){state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;state.customQ=null;state.customMeta=null;state.examMode=false;state.mistakeMode=false;state.mixMode=false;state.qStatus=[];state.exAns=null;state.examEnd=null;if(state.cid)save('padhai_last',{subj:state.subj,cid:state.cid});go('quiz');}
 function quizSetLang(l){state.quizLang=l;quiz();}
 function shuffleArr(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
-function quiz(){const q=Q()[state.qi];
-  const lang=state.quizLang||'hi';
-  const hasEn=!!(q.qe&&q.oe);
-  const qText=(lang==='en'&&q.qe)?q.qe:q.q;
-  const optsArr=(lang==='en'&&q.oe)?q.oe:q.opts;
-  const n=q.visual?q.visual.length:optsArr.length;
-  if(state.qShuffleIdx!==state.qi){state.qShuffle=shuffleArr([...Array(n).keys()]);state.qShuffleIdx=state.qi;state.qCorrectPos=state.qShuffle.indexOf(q.ans);}
-  const order=state.qShuffle;
-  let optsHTML="";if(q.visual){order.forEach((origI,p)=>{const o=q.visual[origI];optsHTML+=`<button class="opt" id="o${p}" onclick="pick(${p})">${circleSVG(o.p,o.s,o.v,70)}</button>`;});}else{order.forEach((origI,p)=>{optsHTML+=`<button class="opt" id="o${p}" onclick="pick(${p})">${optsArr[origI]}</button>`;});}
-  const langBtn=(l,label)=>`<button onclick="quizSetLang('${l}')" style="border:none;padding:5px 13px;border-radius:16px;font-weight:800;font-size:12px;cursor:pointer;${lang===l?'background:'+C.purple+';color:#fff':'background:#F2E6D9;color:'+C.soft+';border:1.5px solid '+C.soft+'55'}">${label}</button>`;
-  const toggle=hasEn?`<div class="row" style="justify-content:center;gap:6px;margin-bottom:10px">${langBtn('hi','🇮🇳 Hinglish')} ${langBtn('en','🔤 English')}</div>`:'';
-  app.innerHTML=`<div class="topbar"><button class="link" onclick="go('chapter')">← Band</button>
-      <span style="color:${C.soft};font-weight:800">${state.mistakeMode?'❌':(state.examMode?'📝':content(state.cid).emoji)} ${lang==='en'?'Question':'Sawaal'} ${state.qi+1}/${Q().length}</span>
-      ${state.examMode?`<span id="examclock" style="color:${C.purple};font-weight:800">⏱️</span>`:`<span style="color:${C.mint};font-weight:800">⭐ ${state.score}</span>`}</div>
-    ${toggle}
-    <div class="card">${q.tag?`<div style="display:inline-block;background:#FDECC8;color:${C.purple};font-weight:800;font-size:12px;padding:5px 12px;border-radius:20px;margin-bottom:10px">${q.tag}</div>`:''}<div class="fred" style="font-weight:700;font-size:20px;color:${C.ink};margin-bottom:16px">${qText}</div>
-      <div>${optsHTML}</div><div id="next"></div></div>`;
+function quiz(){
+  setChrome('foot');
+  const list=Q();
+  if(state.qi>=list.length)return finishQuiz();
+  const q=list[state.qi];
+  const lang=(state.qLang==='en')?'en':'hi';
+  const nOpt=q.visual?q.visual.length:q.opts.length;
+  if(state.qShuffleIdx!==state.qi){state.qOrder=shuffleArr([...Array(nOpt).keys()]);state.qShuffleIdx=state.qi;}
+  const order=state.qOrder;
+  state.qCorrectPos=order.indexOf(q.ans);
+
+  const body=(lang==='en'&&q.qe)?q.qe:q.q;
+  const opts=(lang==='en'&&q.oe)?q.oe:q.opts;
+  const KEY=['A','B','C','D','E','F'];
+  let optsHTML='';
+  order.forEach((oi,pos)=>{
+    const txt=q.visual?q.visual[oi]:opts[oi];
+    optsHTML+=`<button class="opt" id="o${pos}" onclick="pick(${pos})">
+      <span class="optk">${KEY[pos]}</span><span style="flex:1">${txt}</span></button>`;});
+
+  const st=state.qStatus||[];
+  const bars=list.map((_,k)=>`<i class="${st[k]===1?'d':(st[k]===2?'w':(k===state.qi?'c':''))}"></i>`).join('');
+
+  const modeTag=state.examMode?`<span class="tag g" id="examclock">⏱</span>`
+    :(state.mistakeMode?`<span class="tag r">Galtiyan</span>`
+    :(state.mixMode?`<span class="tag b">Mix</span>`:''));
+
+  const langSeg=(q.qe||q.oe)?`<div class="seg" style="margin:0 0 14px">
+      <button class="${lang==='hi'?'on':''}" onclick="quizSetLang('hi')">🇮🇳 Hinglish</button>
+      <button class="${lang==='en'?'on':''}" onclick="quizSetLang('en')">🔤 English</button></div>`:'';
+
+  app.innerHTML=`
+    <div class="topbar">
+      <button class="link" onclick="quitQuiz()">✕</button>
+      <div style="flex:1"></div>
+      ${modeTag}
+      <span class="tag">${state.qi+1} / ${list.length}</span>
+      ${state.examMode?'':`<span class="tag b">⭐ ${state.score}</span>`}
+    </div>
+    <div class="qprog">${bars}</div>
+    <div style="margin-top:16px">
+      ${q.tag?`<span class="tag b">${q.tag}</span>`:''}
+      <div class="fred" style="font-size:19px;font-weight:600;line-height:1.45;margin:11px 0 14px">${body}</div>
+      ${langSeg}
+      ${optsHTML}
+      <div id="next"></div>
+    </div>`;
   if(state.examMode){if(!EXAMINT)EXAMINT=setInterval(examTick,1000);examTick();}
 }
+function quizSetLang(l){state.qLang=l;quiz();}
+function quitQuiz(){shutup();if(EXAMINT){clearInterval(EXAMINT);EXAMINT=null;}
+  if(state.mistakeMode||state.mixMode)return go('subjects');go('chapter');}
 function pick(i){
   if(state.picked!==null)return;
   state.picked=i;
   const q=Q()[state.qi];
-  const n=q.visual?q.visual.length:q.opts.length;
+  const nOpt=q.visual?q.visual.length:q.opts.length;
   const correctPos=state.qCorrectPos;
   const right=(i===correctPos);
   const meta=(state.customMeta&&state.customMeta[state.qi])?state.customMeta[state.qi]:{cid:state.cid,qi:state.qi};
   if(right)state.score++;
-  if(state.examMode){
-    state.exAns=state.exAns||[];state.exAns[state.qi]={right:right,pick:i};
-    for(let k=0;k<n;k++){const el=document.getElementById("o"+k);if(!el)continue;el.onclick=null;
-      if(k===i){el.style.background="#EDE7FA";el.style.borderColor=C.purple;el.innerHTML+='<span style="margin-left:auto;font-size:20px">✔️</span>';}}
-  }else{
-    for(let k=0;k<n;k++){const el=document.getElementById("o"+k);if(!el)continue;el.onclick=null;
-      if(k===correctPos){el.style.background="#E3F5E5";el.style.color="#1B5E20";el.style.borderColor=C.mint;el.innerHTML+='<span style="margin-left:auto;font-size:22px">✅</span>';}
-      else if(k===i){el.style.background="#FCE4E0";el.style.color="#8B231A";el.style.borderColor=C.coral;el.innerHTML+='<span style="margin-left:auto;font-size:22px">❌</span>';}}
+  state.qStatus=state.qStatus||[];state.qStatus[state.qi]=right?1:2;
+
+  for(let k=0;k<nOpt;k++){const el=document.getElementById("o"+k);if(!el)continue;el.onclick=null;
+    if(state.examMode){
+      if(k===i){el.style.borderColor='var(--brand)';el.style.background='var(--brand-w)';
+        el.querySelector('.optk').style.cssText+=';background:var(--brand);color:#fff';}
+    }else{
+      if(k===correctPos){el.classList.add('ok');el.style.borderColor='var(--brand)';el.style.background='var(--brand-w)';
+        el.querySelector('.optk').style.cssText+=';background:var(--brand);color:#fff';
+        el.insertAdjacentHTML('beforeend','<span style="color:var(--brand);font-size:17px">✓</span>');}
+      else if(k===i){el.style.borderColor='var(--red)';el.style.background='var(--red-w)';
+        el.querySelector('.optk').style.cssText+=';background:var(--red);color:#fff';
+        el.insertAdjacentHTML('beforeend','<span style="color:var(--red);font-size:17px">✕</span>');}
+    }
+  }
+  if(!state.examMode){
     const un=load("padhai_name","");
     if(right){
       if(LANG==='en')speakOne(un?("Well done "+un+"! Correct!"):"Correct! Well done!","en");
@@ -13429,9 +13719,13 @@ function pick(i){
     }
   }
   if(meta&&meta.cid){ if(right)wrongDel(meta.cid,meta.qi); else wrongAdd(meta.cid,meta.qi); }
+  topicBump(q.tag,right);
   streakBump();
+
   const last=state.qi===Q().length-1;
-  document.getElementById("next").innerHTML=`<button class="btn" style="background:${C.purple};margin-top:6px" onclick="${last?"finishQuiz()":"nextQ()"}">${last?"Result dekho 🎉":"Agla sawaal →"}</button>`;
+  const expl=(!state.examMode&&q.why)?`<div class="expl"><b class="fred">Kaise?</b><br>${q.why}</div>`:'';
+  document.getElementById("next").innerHTML=expl+
+    `<div class="foot"><div class="in"><button class="btn" onclick="${last?"finishQuiz()":"nextQ()"}">${last?"Result dekho":"Agla sawaal"}</button></div></div>`;
 }
 function nextQ(){shutup();state.qi++;state.picked=null;quiz();}
 function finishQuiz(){
@@ -13444,28 +13738,101 @@ function finishQuiz(){
   go('result');
 }
 function result(){
-  const tot=Q().length;
-  const pct=tot?state.score/tot:0;
-  const icon=pct===1?"🏆":pct>=.5?"🌟":"🌱";
-  const msg=pct===1?"Perfect! Tum champion ho!":pct>=.5?"Bahut achhe! Thodi aur practice 💪":"Koi baat nahi, phir se try karo 🌱";
+  setChrome('foot');
+  const list=Q(),tot=list.length,pct=tot?state.score/tot:0;
+  const st=state.qStatus||[];
+  // wrong topics
+  const bad={};
+  list.forEach((q,k)=>{if(st[k]===2){const t=q.tag||'Aur';bad[t]=(bad[t]||0)+1;}});
+  const badArr=Object.keys(bad).map(k=>({n:k,c:bad[k]})).sort((a,b)=>b.c-a.c).slice(0,4);
+  const msg=pct===1?'Sab sahi! Kamaal kar diya':pct>=.8?'Bahut badhiya!':pct>=.5?'Achha hai, thodi aur practice':'Koi baat nahi, phir se karte hain';
+  const sk=streakGet();
+  const r=58,cc=2*Math.PI*r;
+
   let extra='';
-  if(state.mistakeMode){
-    const left=wrongCount();
-    extra=`<div style="background:#FDECC8;border-radius:14px;padding:12px;margin:0 0 14px;font-weight:800;color:${C.purpleDark};font-size:15px">${left?('❌ Ab '+left+' galtiyan baaki hain'):'🎉 Sab galtiyan saaf ho gayi!'}</div>`;
-  }else if(state.examMode){
-    extra=`<div style="background:#FDECC8;border-radius:14px;padding:12px;margin:0 0 14px;font-weight:800;color:${C.purpleDark};font-size:15px">⏱️ Exam Mode • ${state.score} / ${tot} marks</div>`;
+  if(state.mistakeMode){const left=wrongCount();
+    extra=`<div class="card" style="background:var(--brand-w);border-color:#CDE5E0;display:flex;gap:11px;align-items:center;margin-top:12px">
+      <div style="font-size:21px">${left?'📌':'🎉'}</div>
+      <div style="flex:1;font-size:12.5px;line-height:1.55;font-weight:600;color:var(--brand-d)">
+        ${left?('Ab '+left+' galtiyan baaki hain.'):'Saari galtiyan saaf ho gayi!'}</div></div>`;
+  }else if(badArr.length){
+    extra=`<div class="card" style="background:var(--gold-w);border-color:#F0DFBC;display:flex;gap:11px;align-items:flex-start;margin-top:12px">
+      <div style="font-size:19px">💡</div>
+      <div style="flex:1;font-size:12.5px;line-height:1.55;font-weight:600;color:var(--gold-d)">
+        Ye ${tot-state.score} sawaal apne aap <b>Galtiyan</b> mein chale gaye. Kal inhe dobara karke pakka kar lo.</div></div>`;
   }
-  const st=streakGet(),today=streakToday(),goal=st.goal||10;
-  const sline=`<div style="color:${C.soft};font-weight:800;font-size:13px;margin-bottom:16px">🔥 ${st.days||0} din ki streak &nbsp;•&nbsp; aaj ${today}/${goal} sawaal${today>=goal?' ✅':''}</div>`;
-  const homeBtn=state.mistakeMode?`<button class="btn" style="background:${C.purple};flex:1" onclick="go('subjects')">🏠 Home</button>`
-                                 :`<button class="btn" style="background:${C.purple};flex:1" onclick="go('home')">🏠 Home</button>`;
-  app.innerHTML=`<div style="height:24px"></div><div class="card" style="text-align:center">
-      <div class="pop" style="font-size:74px">${icon}</div>
-      <div class="fred" style="font-weight:700;font-size:27px;color:${C.purpleDark}">${state.score} / ${tot} sahi!</div>
-      <div style="font-weight:800;color:${C.soft};margin:10px 0 14px;font-size:18px">${msg}</div>
-      ${extra}${sline}
-      <div class="row"><button class="btn" style="background:${C.coral};flex:1" onclick="restartQuizAny()">🔁 Phir se</button>
-        ${homeBtn}</div></div>`;
+
+  app.innerHTML=`
+    <div class="topbar"><button class="link" onclick="quitQuiz()">✕</button><div style="flex:1"></div>
+      ${state.examMode?'<span class="tag g">Exam mode</span>':''}</div>
+    <div style="text-align:center;padding:12px 0 2px">
+      <div style="position:relative;width:132px;height:132px;margin:0 auto">
+        <svg width="132" height="132" style="transform:rotate(-90deg)">
+          <circle cx="66" cy="66" r="${r}" fill="none" stroke="var(--sunk)" stroke-width="10"/>
+          <circle cx="66" cy="66" r="${r}" fill="none" stroke="var(--brand)" stroke-width="10" stroke-linecap="round"
+            stroke-dasharray="${cc}" stroke-dashoffset="${cc*(1-pct)}"/></svg>
+        <div style="position:absolute;inset:0;display:grid;place-content:center;text-align:center">
+          <div class="fred" style="font-size:38px;font-weight:700;line-height:1">${state.score}</div>
+          <div style="font-size:11.5px;color:var(--soft);font-weight:700">/ ${tot} sahi</div></div>
+      </div>
+      <div class="fred" style="font-size:18px;font-weight:700;margin-top:13px">${msg}</div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b style="color:var(--brand)">${state.score}</b><span>sahi</span></div>
+      <div class="stat"><b style="color:var(--red)">${tot-state.score}</b><span>galat</span></div>
+      <div class="stat"><b style="color:var(--gold)">${sk.days||0}</b><span>din streak</span></div>
+    </div>
+    ${badArr.length?`<div class="sec">Kahan galti hui</div>`+badArr.map(b=>
+      `<div class="tile" style="cursor:default"><div class="ic" style="background:var(--red-w);color:var(--red);font-size:15px;font-weight:800">${b.c}</div>
+       <div class="g1"><div class="n" style="font-size:13.5px">${b.n}</div><div class="s">${b.c} sawaal galat</div></div></div>`).join(''):''}
+    ${extra}
+    <div class="foot"><div class="in"><div class="row">
+      <button class="btn gh" style="flex:1" onclick="restartQuizAny()">Phir se karo</button>
+      <button class="btn" style="flex:1" onclick="quitQuiz()">Ho gaya</button>
+    </div></div></div>`;
+}
+
+/* ---------- PROGRESS ---------- */
+function progressScreen(){
+  setChrome('nav');
+  const d=last7(),mx=Math.max(1,...d.map(x=>x.v)),week=d.reduce((a,b)=>a+b.v,0);
+  const st=streakGet(),rank=topicRank();
+  const strong=rank.filter(x=>x.p>=70).slice(0,4);
+  const weak=rank.filter(x=>x.p<70).reverse().slice(0,4);
+  const prog=load("padhai_prog",{});
+  let tq=0,td=0;
+  SUBJECTS.filter(s=>s.ready).forEach(s=>{const x=subjStat(s.id);tq+=x.q;td+=x.qd;});
+
+  const bars=d.map((x,i)=>`<div><i class="${x.v?'':'dim'}" style="height:${Math.max(4,Math.round(x.v*100/mx))}%"></i><u>${x.l}</u></div>`).join('');
+  const brk=(a,col)=>a.map(x=>`<div class="brk"><span style="flex:1">${x.n}</span>
+      <span class="bd"><i style="width:${x.p}%;background:${col}"></i></span>
+      <b class="fred" style="width:34px;text-align:right;font-size:12.5px">${x.p}%</b></div>`).join('');
+
+  app.innerHTML=`
+    <div class="topbar"><div><div class="fred" style="font-size:19px;font-weight:700">Progress</div>
+      <div style="font-size:11.5px;color:var(--soft);font-weight:600">Pichhle 7 din</div></div></div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <div><div class="fred" style="font-size:27px;font-weight:700">${week}</div>
+          <div style="font-size:11.5px;color:var(--soft);font-weight:700">sawaal is hafte</div></div>
+        <span class="tag g">🔥 ${st.days||0} din streak</span>
+      </div>
+      <div class="wk">${bars}</div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>${td}</b><span>kul sahi</span></div>
+      <div class="stat"><b>${tq}</b><span>kul sawaal</span></div>
+      <div class="stat"><b style="color:${wrongCount()?'var(--red)':'var(--brand)'}">${wrongCount()}</b><span>galtiyan</span></div>
+    </div>
+    ${strong.length?`<div class="sec">Mazboot topics</div>${brk(strong,'var(--brand)')}`:''}
+    ${weak.length?`<div class="sec">Yahan mehnat chahiye</div>${brk(weak,'var(--red)')}`:''}
+    ${(!strong.length&&!weak.length)?`<div class="card" style="text-align:center;padding:26px;color:var(--soft);font-weight:600;font-size:13px">Thodi practice karo, phir yahan topic ke hisaab se report dikhegi</div>`:''}
+    ${weak.length?`<div class="card" style="margin-top:14px;display:flex;gap:11px;align-items:center;background:var(--brand-w);border-color:#CDE5E0;cursor:pointer" onclick="openAsk()">
+      <div style="font-size:23px">🐘</div>
+      <div style="flex:1;font-size:12.5px;line-height:1.55;font-weight:600;color:var(--brand-d)">
+        <b>${weak[0].n}</b> mein galtiyan ho rahi hain. Gattu se samjho?</div>
+      <div class="ch" style="color:var(--brand);font-size:17px">›</div></div>`:''}
+    ${navBar('prog')}`;
 }
 
 /* ---------- Q&A (Sawaal-Jawab: padhne/yaad karne ke liye) ---------- */
@@ -13473,6 +13840,7 @@ function openQA(id){state.cid=id;state.qaOpen=-1;if(!state.qaLang)state.qaLang='
 function qaToggle(i){state.qaOpen=(state.qaOpen===i)?-1:i;render();}
 function qaSetLang(l){state.qaLang=l;render();}
 function qaScreen(){
+  setChrome('none');
   const cn=content(state.cid);const list=cn.qa||[];
   const lang=state.qaLang||'hi';
   let items='';
@@ -13545,6 +13913,7 @@ function swPlayAllStep(tok){
 }
 function swStopAll(){shutup();state.token++;state.swPlayAllActive=false;state.swPlayingKey=null;render();}
 function swScreen(){
+  setChrome('none');
   const cn=content(state.cid);const secs=cn.swadhyay||[];
   const anyPlaying=!!state.swPlayingKey;
   let blocks='';
@@ -13601,6 +13970,7 @@ function matchPickRight(ri){
   render();
 }
 function matchScreen(){
+  setChrome('none');
   const cn=content(state.cid);const pairs=cn.match||[];
   const total=pairs.length;const done=Object.keys(state.matchDone).length;
   let left='',right='';
