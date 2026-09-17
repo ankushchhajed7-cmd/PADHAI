@@ -104,6 +104,19 @@
     font-family:Karla,Mukta,sans-serif;font-size:12.5px;color:var(--soft);cursor:pointer}
   .seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(22,35,58,.12)}
 
+  .qbox{background:linear-gradient(160deg,var(--brand) 0%,var(--brand-d) 100%);border-radius:var(--r2);
+    padding:16px 15px;margin:11px 0 14px;box-shadow:0 6px 18px -8px rgba(7,82,70,.55)}
+  .qtag{display:inline-block;font-size:10.5px;font-weight:700;padding:4px 10px;border-radius:7px;
+    background:rgba(255,255,255,.18);color:#fff;margin-bottom:9px}
+  .qt{color:#fff;font-family:Gabarito,Mukta,sans-serif;font-weight:700;letter-spacing:-.018em;
+    font-size:19.5px;line-height:1.45}
+  /* keep embedded diagrams, boxes and tables readable on the dark band */
+  .qt svg{background:#fff;border-radius:10px;padding:5px}
+  .qt table{background:#fff;border-radius:8px;color:var(--ink)}
+  .qt td,.qt th{color:var(--ink)}
+  .qt div[style*="background"]{color:var(--ink)}
+  .qt span[style*="border"]{background:#fff;color:var(--ink)}
+  .qt b{color:inherit}
   .qprog{display:flex;gap:2.5px;margin-top:11px}
   .qprog i{flex:1;height:3px;border-radius:2px;background:var(--sunk)}
   .qprog i.d{background:var(--brand)} .qprog i.w{background:var(--red)} .qprog i.c{background:var(--ink2)}
@@ -13911,7 +13924,8 @@ function quiz(){
   const list=Q();
   if(state.qi>=list.length)return finishQuiz();
   const q=list[state.qi];
-  const lang=(state.qLang==='en')?'en':'hi';
+  const onlyEn=qOnlyEn();
+  const lang=onlyEn?'en':((state.qLang==='en')?'en':'hi');
   const nOpt=q.visual?q.visual.length:q.opts.length;
   if(state.qShuffleIdx!==state.qi){state.qOrder=shuffleArr([...Array(nOpt).keys()]);state.qShuffleIdx=state.qi;}
   const order=state.qOrder;
@@ -13933,7 +13947,7 @@ function quiz(){
     :(state.mistakeMode?`<span class="tag r">Galtiyan</span>`
     :(state.mixMode?`<span class="tag b">Mix</span>`:''));
 
-  const langSeg=(q.qe||q.oe)?`<div class="seg" style="margin:0 0 14px">
+  const langSeg=(!onlyEn&&(q.qe||q.oe))?`<div class="seg" style="margin:0 0 14px">
       <button class="${lang==='hi'?'on':''}" onclick="quizSetLang('hi')">🇮🇳 Hinglish</button>
       <button class="${lang==='en'?'on':''}" onclick="quizSetLang('en')">🔤 English</button></div>`:'';
 
@@ -13947,8 +13961,10 @@ function quiz(){
     </div>
     <div class="qprog">${bars}</div>
     <div style="margin-top:16px">
-      ${q.tag?`<span class="tag b">${q.tag}</span>`:''}
-      <div class="fred" style="font-size:19.5px;font-weight:700;line-height:1.45;margin:11px 0 14px;color:var(--brand-d)">${body}</div>
+      <div class="qbox">
+        ${q.tag?`<span class="qtag">${q.tag}</span>`:''}
+        <div class="qt">${body}</div>
+      </div>
       ${langSeg}
       ${optsHTML}
       <div id="next"></div>
@@ -13956,6 +13972,9 @@ function quiz(){
   if(state.examMode){if(!EXAMINT)EXAMINT=setInterval(examTick,1000);examTick();}
 }
 function quizSetLang(l){state.qLang=l;quiz();}
+/* Science Olympiad book is English-only */
+function qOnlyEn(){const m=(state.customMeta&&state.customMeta[state.qi])?state.customMeta[state.qi]:{cid:state.cid};
+  return String(m.cid||'').indexOf('sci_')===0;}
 function quitQuiz(){shutup();if(EXAMINT){clearInterval(EXAMINT);EXAMINT=null;}
   if(state.mistakeMode||state.mixMode)return go('subjects');go('chapter');}
 function pick(i){
