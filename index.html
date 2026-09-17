@@ -12833,7 +12833,8 @@ function navBar(active){
   return `<div class="nav">${it.map(([k,i,l,fn])=>
     `<a class="${active===k?'on':''}" onclick="${fn}"><i>${i}</i>${l}</a>`).join('')}</div>`;
 }
-function navStudy(){const l=load("padhai_last",null);if(l&&l.subj){state.subj=l.subj;go('home');}else go('subjects');}
+function navStudy(){const l=load("padhai_last",null);
+  if(l&&l.subj&&SUBJECTS.find(x=>x.id===l.subj)){state.subj=l.subj;go('home');}else go('subjects');}
 function setChrome(mode){document.body.classList.toggle('hasnav',mode==='nav');
   document.body.classList.toggle('hasfoot',mode==='foot');}
 
@@ -12859,6 +12860,11 @@ function subjStat(id){
     const nq=(cc.quiz||[]).length;q+=nq;const p=prog[c.id]||{};
     if(p.best!=null){qd+=p.best;const hl=!!(cc.scenes&&cc.scenes.length);if(hl?p.lesson:true)done++;}});
   return {done:done,total:total,q:q,qd:qd,pct:q?qd/q:0};
+}
+function groupStat(ids){
+  let q=0,qd=0,parts=0;
+  ids.forEach(id=>{const s=subjStat(id);q+=s.q;qd+=s.qd;parts+=s.total;});
+  return {q:q,qd:qd,total:parts,pct:q?qd/q:0};
 }
 function chapPct(c){if(!c.ready)return 0;const cc=content(c.id);if(!cc)return 0;
   const nq=(cc.quiz||[]).length;if(!nq)return 0;const p=(load("padhai_prog",{})[c.id])||{};
@@ -13145,7 +13151,7 @@ function streakCard(){
 }
 
 function go(s){shutup();clearTimeout(state.timer);if(EXAMINT&&s!=='quiz'){clearInterval(EXAMINT);EXAMINT=null;}state.token++;state.swPlayingKey=null;state.swPlayAllActive=false;state.screen=s;render();}
-function render(){if(state.screen==="nameSetup")return nameSetup();if(state.screen==="ask")return askScreen();if(state.screen==="progress")return progressScreen();if(state.screen==="subjects")return subjects();if(state.screen==="home")return home();if(state.screen==="chapter")return chapter();if(state.screen==="lesson")return lesson();if(state.screen==="quiz")return quiz();if(state.screen==="result")return result();if(state.screen==="qa")return qaScreen();if(state.screen==="match")return matchScreen();if(state.screen==="swadhyay")return swScreen();}
+function render(){if(state.screen==="nameSetup")return nameSetup();if(state.screen==="ask")return askScreen();if(state.screen==="progress")return progressScreen();if(state.screen==="olymp")return olympScreen();if(state.screen==="subjects")return subjects();if(state.screen==="home")return home();if(state.screen==="chapter")return chapter();if(state.screen==="lesson")return lesson();if(state.screen==="quiz")return quiz();if(state.screen==="result")return result();if(state.screen==="qa")return qaScreen();if(state.screen==="match")return matchScreen();if(state.screen==="swadhyay")return swScreen();}
 
 // ---- The 6 subjects ----
 const SUBJECTS=[
@@ -13156,8 +13162,9 @@ const SUBJECTS=[
  {id:'marathi',title:'Marathi',sub:'RISE सहज शिकूया मराठी',emoji:'📕',color:C.yellow,ready:true},
  {id:'hindi',title:'Hindi',sub:'वीणा • NCERT',emoji:'✏️',color:C.mint,ready:true},
  {id:'nces',title:'NCES Handbook',sub:'Class IV NCES • Question Bank',emoji:'🏆',color:C.yellow,ready:true,unit:'parts'},
- {id:'ehf',title:'EHF Olympiad',sub:'Class IV • Olympiad Explorer',emoji:'🏅',color:C.mint,ready:true,unit:'parts'},
- {id:'sciolymp',title:'Science Olympiad',sub:'EHF NISO • Class IV',emoji:'🧪',color:C.purple,ready:true,unit:'parts'},
+ {id:'olympiad',title:'Olympiad',sub:'Maths • Science • Exam practice',emoji:'🏅',color:C.yellow,ready:true,group:['ehf','sciolymp']},
+ {id:'ehf',title:'Maths Olympiad',sub:'EHF Olympiad Explorer • Class IV',emoji:'🥇',color:C.mint,ready:true,unit:'parts',inGroup:'olympiad'},
+ {id:'sciolymp',title:'Science Olympiad',sub:'EHF NISO • Class IV',emoji:'🧪',color:C.purple,ready:true,unit:'parts',inGroup:'olympiad'},
  {id:'gk',title:'General Knowledge',sub:'GK & Aptitude',emoji:'🌍',color:C.sky,ready:false},
 ];
 function curSubject(){return SUBJECTS.find(s=>s.id===state.subj)||SUBJECTS[0];}
@@ -13335,11 +13342,13 @@ function subjects(){
 
   let cards='';
   SUBJECTS.forEach(s=>{
-    const st2=s.ready?subjStat(s.id):{total:0,pct:0,q:0};
+    if(s.inGroup)return;
+    const st2=s.group?groupStat(s.group):(s.ready?subjStat(s.id):{total:0,pct:0,q:0});
+    const unit=s.group?(s.group.length+' books'):(st2.total+' '+unitName(s,st2.total));
     cards+=`<div class="tile" onclick="openSubject('${s.id}')" style="${s.ready?'':'opacity:.6'}">
       <div class="ic">${s.emoji}</div>
       <div class="g1"><div class="n">${s.title}</div>
-        <div class="s">${s.ready?(st2.total+' '+(s.unit||'chapters')+(st2.q?' · '+st2.q+' sawaal':'')):'Jald aa raha hai'}</div>
+        <div class="s">${s.ready?(unit+(st2.q?' · '+st2.q+' sawaal':'')):'Jald aa raha hai'}</div>
         ${s.ready&&st2.q?`<div class="trk"><i style="width:${Math.round(st2.pct*100)}%"></i></div>`:''}</div>
       ${s.ready&&st2.q?ringSVG(st2.pct,Math.round(st2.pct*100)+'%'):'<div class="ch">🔒</div>'}</div>`;});
 
@@ -13366,6 +13375,8 @@ function subjects(){
     ${cards}
     ${navBar('home')}`;
 }
+function unitName(s,n){const u=s.unit||'chapters';
+  if(n===1)return u==='parts'?'part':'chapter';return u;}
 function niceDate(){const d=new Date();
   const D=['Ravivaar','Somvaar','Mangalvaar','Budhvaar','Guruvaar','Shukravaar','Shanivaar'];
   const M=['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -13386,7 +13397,9 @@ function startMix(){
   state.exAns=null;state.examEnd=null;go('quiz');
 }
 
-function openSubject(id){const s=SUBJECTS.find(x=>x.id===id);if(!s||!s.ready){return;}state.subj=id;go('home');}
+function openSubject(id){const s=SUBJECTS.find(x=>x.id===id);if(!s||!s.ready){return;}
+  if(s.group){state.grp=id;return go('olymp');}
+  state.subj=id;go('home');}
 
 // ---- The real 14 book chapters (Maths Mela Class 4) ----
 const BOOK=[
@@ -13523,6 +13536,43 @@ const ABOUT={
  h_shatranj:["तेनालीरामन — विजयनगर के परामर्शदाता","दरबारियों की ईर्ष्या — शतरंज चुनौती","मुंडन से बचने की चतुराई","शतरंज की चालें, भाषा व स्वाध्याय"],
  h_aditya:["सूर्य क्या है — तारा या राजा?","आदित्य-एल 1 — भारत का सूर्य मिशन","लगरांज बिंदु का रहस्य","सौर ऊर्जा, सूर्य के नाम व स्वाध्याय"],
 };
+function olympScreen(){
+  setChrome('nav');
+  const g=SUBJECTS.find(x=>x.id===(state.grp||'olympiad'));
+  const ids=g.group||[];
+  const gs=groupStat(ids);
+  let cards='';
+  ids.forEach(id=>{
+    const s=SUBJECTS.find(x=>x.id===id);if(!s)return;
+    const st=subjStat(id);
+    cards+=`<div class="tile" onclick="openBook('${id}')">
+      <div class="ic">${s.emoji}</div>
+      <div class="g1"><div class="n">${s.title}</div>
+        <div class="s">${st.total} ${unitName(s,st.total)} · ${st.q} sawaal</div>
+        <div class="trk"><i style="width:${Math.round(st.pct*100)}%"></i></div></div>
+      ${ringSVG(st.pct,Math.round(st.pct*100)+'%')}</div>`;});
+  app.innerHTML=`
+    <div class="topbar">
+      <button class="link" onclick="go('subjects')">←</button>
+      <div style="flex:1"><div class="fred" style="font-size:18px;font-weight:700">${g.title}</div>
+        <div style="font-size:11.5px;color:var(--soft);font-weight:600">${g.sub}</div></div>
+    </div>
+    <div class="card" style="display:flex;align-items:center;gap:14px">
+      ${ringSVG(gs.pct,Math.round(gs.pct*100)+'%',56)}
+      <div style="flex:1">
+        <div class="fred" style="font-size:15px;font-weight:700">${gs.qd} / ${gs.q} sawaal sahi</div>
+        <div style="font-size:11.5px;color:var(--soft);font-weight:600;margin-top:2px">${ids.length} books · ${gs.total} parts</div>
+      </div>
+    </div>
+    <div class="sec">Books</div>
+    ${cards}
+    <div class="card" style="margin-top:6px;display:flex;gap:11px;align-items:center;background:var(--gold-w);border-color:#F0DFBC">
+      <div style="font-size:21px">⏱</div>
+      <div style="flex:1;font-size:12.5px;line-height:1.55;font-weight:600;color:var(--gold-d)">
+        Har part ke andar <b>Exam mode</b> hai — timer ke saath asli olympiad jaisa practice.</div></div>
+    ${navBar('study')}`;
+}
+function openBook(id){state.subj=id;go('home');}
 function home(){
   setChrome('nav');
   const subj=curSubject();const bk=subjectBook(subj.id);const st=subjStat(subj.id);
@@ -13550,7 +13600,7 @@ function home(){
 
   app.innerHTML=`
     <div class="topbar">
-      <button class="link" onclick="go('subjects')">←</button>
+      <button class="link" onclick="${subj.inGroup?`go('olymp')`:`go('subjects')`}">←</button>
       <div style="flex:1"><div class="fred" style="font-size:18px;font-weight:700">${subj.title}</div>
         <div style="font-size:11.5px;color:var(--soft);font-weight:600">${subj.sub}</div></div>
     </div>
