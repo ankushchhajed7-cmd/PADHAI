@@ -1,6 +1,6 @@
 /* PadhAI service worker - network first, self-updating
-   Har update par CACHE ka number badal do: padhai-v18, padhai-v18 ... */
-const CACHE = 'padhai-v18';
+   Har update par CACHE ka number badal do: padhai-v19, padhai-v19 ... */
+const CACHE = 'padhai-v19';
 
 // Naya SW turant install ho, purane ka intezaar na kare
 self.addEventListener('install', e => {
