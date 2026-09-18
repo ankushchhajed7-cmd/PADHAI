@@ -14259,7 +14259,7 @@ function quiz(){
   const onlyEn=qOnlyEn();
   const lang=onlyEn?'en':((state.qLang==='en')?'en':'hi');
   const nOpt=q.visual?q.visual.length:q.opts.length;
-  if(state.qShuffleIdx!==state.qi){state.qOrder=shuffleArr([...Array(nOpt).keys()]);state.qShuffleIdx=state.qi;}
+  if(state.qShuffleIdx!==state.qi){state.qOrder=optOrder(q,nOpt);state.qShuffleIdx=state.qi;}
   const order=state.qOrder;
   state.qCorrectPos=order.indexOf(q.ans);
 
@@ -14302,6 +14302,20 @@ function quiz(){
       <div id="next"></div>
     </div>`;
   if(state.examMode){if(!EXAMINT)EXAMINT=setInterval(examTick,1000);examTick();}
+}
+/* Option order. Two rules:
+   1. If an option refers to another option by letter ("both (a) and (b)", "only (a)",
+      "A and B"), shuffling would make it meaningless -> keep the book's order.
+   2. Otherwise shuffle, but always keep "all/none of these" at the bottom. */
+const OPT_REF=/\bboth\b|\bonly\s*\(?[abcd]\)?\b|\([abcd]\)\s*(and|&amp;|&)|\b[abcd]\s+and\s+[abcd]\b/i;
+const OPT_TAIL=/\b(all|none)\s+of\s+(these|the above)\b/i;
+function optOrder(q,n){
+  const src=q.visual?q.visual:(q.opts||[]);
+  const txt=[];for(let i=0;i<n;i++)txt.push(String(src[i]==null?'':src[i]));
+  if(txt.some(t=>OPT_REF.test(t))){const ord=[];for(let i=0;i<n;i++)ord.push(i);return ord;}
+  const head=[],tail=[];
+  txt.forEach((t,i)=>{ if(OPT_TAIL.test(t))tail.push(i); else head.push(i); });
+  return shuffleArr(head).concat(tail);
 }
 function quizSetLang(l){state.qLang=l;quiz();}
 /* Science Olympiad book is English-only */
