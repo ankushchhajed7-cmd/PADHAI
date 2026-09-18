@@ -13377,6 +13377,89 @@ function chapPct(c){if(!c.ready)return 0;const cc=content(c.id);if(!cc)return 0;
   const nq=(cc.quiz||[]).length;if(!nq)return 0;const p=(load("padhai_prog",{})[c.id])||{};
   return p.best!=null?Math.min(1,p.best/nq):0;}
 
+
+/* ============ Samajhna hai (questions the child wants explained) ============ */
+function learnGet(){return load("padhai_learn",{});}
+function learnAdd(cid,qi){const w=learnGet();w[cid]=w[cid]||[];if(w[cid].indexOf(qi)<0)w[cid].push(qi);save("padhai_learn",w);}
+function learnDel(cid,qi){const w=learnGet();if(w[cid]){w[cid]=w[cid].filter(function(x){return x!==qi;});if(!w[cid].length)delete w[cid];}save("padhai_learn",w);}
+function learnCount(){const w=learnGet();let t=0;for(const k in w)t+=w[k].length;return t;}
+function learnList(subjId){
+  const w=learnGet(),out=[];
+  let ids=null;
+  if(subjId){try{ids=subjectBook(subjId).map(function(c){return c.id;});}catch(e){ids=null;}}
+  for(const cid in w){
+    if(ids&&ids.indexOf(cid)<0)continue;
+    const cn=CH.find(function(c){return c.id===cid;});
+    if(!cn||!cn.quiz)continue;
+    w[cid].forEach(function(qi){if(cn.quiz[qi])out.push({cid:cid,qi:qi,q:cn.quiz[qi]});});
+  }
+  return out;
+}
+function startLearn(subjId){
+  const list=learnList(subjId);
+  if(!list.length){alert('Abhi "Samajhna hai" list khaali hai.');return;}
+  const picked=shuffleArr(list).slice(0,20);
+  state.customQ=picked.map(function(x){return x.q;});
+  state.customMeta=picked.map(function(x){return {cid:x.cid,qi:x.qi};});
+  state.cid=picked[0].cid;
+  state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;state.qStatus=[];
+  state.examMode=false;state.mistakeMode=false;state.mixMode=false;state.learnMode=true;
+  state.learnSubj=subjId||null;state.exAns=null;state.examEnd=null;
+  go('quiz');
+}
+function curMeta(){
+  return (state.customMeta&&state.customMeta[state.qi])?state.customMeta[state.qi]:{cid:state.cid,qi:state.qi};
+}
+function stripTags(t){return String(t).replace(/<[^>]*>/g,' ').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();}
+
+async function explainQ(){
+  const q=Q()[state.qi];
+  const meta=curMeta();
+  if(meta&&meta.cid)learnAdd(meta.cid,meta.qi);
+  const el=document.getElementById('explain');
+  if(!el)return;
+  if(!askKey()){
+    el.innerHTML='<div class="expl">Ye sawaal <b>Samajhna hai</b> list mein daal diya \u2705<br>'+
+      'Gattu ki awaaz mein samjhane ke liye pehle \ud83d\udc18 Gattu screen par API key daalni hogi.</div>';
+    return;
+  }
+  el.innerHTML='<div class="expl">Gattu soch raha hai\u2026 \ud83d\udcad</div>';
+  const lang=qOnlyEn()?'en':((state.qLang==='hi')?'hi':'en');
+  const body=(lang==='en'&&q.qe)?q.qe:q.q;
+  const opts=((lang==='en'&&q.oe)?q.oe:q.opts)||[];
+  const letters='abcdef';
+  const prompt='Neeche Class 4 ka ek sawaal hai. Bachche ko ye samajh nahi aaya.\n\n'+
+    'Sawaal: '+stripTags(body)+'\n'+
+    'Options: '+opts.map(function(o,i){return letters[i]+') '+stripTags(o);}).join('   ')+'\n'+
+    'Sahi jawab: '+stripTags(opts[q.ans]||'')+'\n\n'+
+    'Ab bachche ko bilkul aasan bhasha mein samjhao: (1) sawaal poochh kya raha hai, '+
+    '(2) step by step hal, (3) sahi jawab kyun sahi hai. 5 se 7 line. Koi markdown chinh mat use karo.';
+  try{
+    const txt=await askCall([{role:'user',text:prompt}]);
+    state.explainTxt=txt;
+    el.innerHTML='<div class="expl" style="white-space:pre-wrap">'+askEsc(txt)+'</div>'+
+      '<div class="row" style="margin-top:8px">'+
+      '<button class="btn gh" style="flex:1" onclick="speakExplain()">\ud83d\udd0a Phir se sunno</button>'+
+      '<button class="btn gh" style="flex:1" onclick="learnDone()">\u2713 Samajh aa gaya</button></div>';
+    speakExplain();
+  }catch(e){
+    el.innerHTML='<div class="expl">Abhi Gattu jawab nahi de paaya \ud83d\ude14<br>'+
+      'Sawaal <b>Samajhna hai</b> list mein daal diya hai \u2014 baad mein dobara try karna.</div>';
+  }
+}
+function speakExplain(){
+  if(!state.explainTxt)return;
+  shutup();
+  speakOne(state.explainTxt.replace(/[*#`]/g,''),(LANG==='en'?'en':(LANG==='mr'?'mr':'hi')));
+}
+function learnDone(){
+  const meta=curMeta();
+  if(meta&&meta.cid)learnDel(meta.cid,meta.qi);
+  shutup();
+  const el=document.getElementById('explain');
+  if(el)el.innerHTML='<div class="expl">Shabaash! \ud83c\udf89 Ye sawaal list se hata diya.</div>';
+}
+
 /* ================= Streak • Mistake bank • Exam mode ================= */
 let EXAMINT=null;
 function dkey(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
@@ -13419,7 +13502,7 @@ function startMistakes(subjId){
   state.customMeta=picked.map(function(x){return {cid:x.cid,qi:x.qi};});
   state.cid=picked[0].cid;
   state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;
-  state.examMode=false;state.mistakeMode=true;state.mixMode=false;state.qStatus=[];state.mistakeSubj=subjId||null;
+  state.examMode=false;state.mistakeMode=true;state.mixMode=false;state.learnMode=false;state.qStatus=[];state.mistakeSubj=subjId||null;
   state.exAns=null;state.examEnd=null;
   go('quiz');
 }
@@ -13433,7 +13516,7 @@ function startExam(cid){
   state.customQ=idx.map(function(i){return list[i];});
   state.customMeta=idx.map(function(i){return {cid:cid,qi:i};});
   state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;
-  state.examMode=true;state.mistakeMode=false;state.mixMode=false;state.qStatus=[];state.exAns=[];
+  state.examMode=true;state.mistakeMode=false;state.mixMode=false;state.learnMode=false;state.qStatus=[];state.exAns=[];
   state.examEnd=Date.now()+cnt*90*1000;
   go('quiz');
 }
@@ -13449,6 +13532,7 @@ function examTick(){
 }
 
 function restartQuizAny(){
+  if(state.learnMode)return startLearn(state.learnSubj);
   if(state.mistakeMode)return startMistakes(state.mistakeSubj);
   if(state.examMode)return startExam(state.cid);
   startQuiz();
@@ -13885,7 +13969,7 @@ function editName(){state.screen='nameSetup';render();setTimeout(()=>{const el=d
 function subjects(){
   setChrome('nav');
   const name=load("padhai_name","dost");
-  const st=streakGet(),today=streakToday(),goal=st.goal||10,wc=wrongCount();
+  const st=streakGet(),today=streakToday(),goal=st.goal||10,wc=wrongCount(),lc=learnCount();
   const last=load("padhai_last",null);
   let hero='';
   if(last&&last.cid){
@@ -13941,7 +14025,7 @@ function subjects(){
     <div class="quick">
       ${qa('↺','var(--red-w)','var(--red)','Galtiyan sudhaaro',wc?(wc+' sawaal'):'Sab saaf hai',wc?"startMistakes()":"alert('Abhi koi galti nahi hai! Shabaash 🎉')")}
       ${qa('🎲','var(--brand-w)','var(--brand)','Mix practice','Sab chapters se 20',"startMix()")}
-      ${qa('📈','var(--gold-w)','var(--gold-d)','Meri progress','Hafte ka hisaab',"go('progress')")}
+      ${qa('📘','var(--gold-w)','var(--gold-d)','Samajhna hai',lc?(lc+' sawaal'):'Koi nahi',lc?"startLearn()":"alert('Abhi Samajhna-hai list khaali hai.')")}
       ${qa('🐘','var(--sunk)','var(--ink2)','Gattu se poocho','Koi bhi doubt',"openAsk()")}
     </div>
     <div class="sec">Subjects</div>
@@ -13966,7 +14050,7 @@ function startMix(){
   const pick=shuffleArr(pool).slice(0,20);
   state.customQ=pick.map(x=>x.q);state.customMeta=pick.map(x=>({cid:x.cid,qi:x.qi}));
   state.cid=pick[0].cid;state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;
-  state.examMode=false;state.mistakeMode=false;state.mixMode=true;state.qStatus=[];
+  state.examMode=false;state.mistakeMode=false;state.mixMode=true;state.learnMode=false;state.qStatus=[];
   state.exAns=null;state.examEnd=null;go('quiz');
 }
 
@@ -14335,7 +14419,7 @@ function togglePlay(){state.playing=!state.playing;setPP();if(state.playing)runS
 function setPP(){const b=document.getElementById("pp");if(b)b.textContent=state.playing?"⏸ Pause":"▶ Chalao";}
 
 /* ---------- QUIZ ---------- */
-function startQuiz(){state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;state.customQ=null;state.customMeta=null;state.examMode=false;state.mistakeMode=false;state.mixMode=false;state.qStatus=[];state.exAns=null;state.examEnd=null;if(state.cid)save('padhai_last',{subj:state.subj,cid:state.cid});go('quiz');}
+function startQuiz(){state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;state.customQ=null;state.customMeta=null;state.examMode=false;state.mistakeMode=false;state.mixMode=false;state.learnMode=false;state.qStatus=[];state.exAns=null;state.examEnd=null;if(state.cid)save('padhai_last',{subj:state.subj,cid:state.cid});go('quiz');}
 function quizSetLang(l){state.quizLang=l;quiz();}
 function shuffleArr(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
 function quiz(){
@@ -14344,7 +14428,7 @@ function quiz(){
   if(state.qi>=list.length)return finishQuiz();
   const q=list[state.qi];
   const onlyEn=qOnlyEn();
-  const lang=onlyEn?'en':((state.qLang==='en')?'en':'hi');
+  const lang=onlyEn?'en':((state.qLang==='hi')?'hi':'en');
   const nOpt=q.visual?q.visual.length:q.opts.length;
   if(state.qShuffleIdx!==state.qi){state.qOrder=optOrder(q,nOpt);state.qShuffleIdx=state.qi;}
   const order=state.qOrder;
@@ -14364,7 +14448,8 @@ function quiz(){
 
   const modeTag=state.examMode?`<span class="tag g" id="examclock">⏱</span>`
     :(state.mistakeMode?`<span class="tag r">Galtiyan</span>`
-    :(state.mixMode?`<span class="tag b">Mix</span>`:''));
+    :(state.mixMode?`<span class="tag b">Mix</span>`
+    :(state.learnMode?`<span class="tag g">Samajhna hai</span>`:'')));
 
   const langSeg=(!onlyEn&&(q.qe||q.oe))?`<div class="seg" style="margin:0 0 14px">
       <button class="${lang==='hi'?'on':''}" onclick="quizSetLang('hi')">🇮🇳 Hinglish</button>
@@ -14386,6 +14471,8 @@ function quiz(){
       </div>
       ${langSeg}
       ${optsHTML}
+      ${state.examMode?'':`<button class="btn gh" style="margin-top:2px;font-size:14px" onclick="explainQ()">🤔 Samajh nahi aaya — Gattu samjhaye</button>`}
+      <div id="explain"></div>
       <div id="next"></div>
     </div>`;
   if(state.examMode){if(!EXAMINT)EXAMINT=setInterval(examTick,1000);examTick();}
@@ -14409,7 +14496,7 @@ function quizSetLang(l){state.qLang=l;quiz();}
 function qOnlyEn(){const m=(state.customMeta&&state.customMeta[state.qi])?state.customMeta[state.qi]:{cid:state.cid};
   return String(m.cid||'').indexOf('sci_')===0;}
 function quitQuiz(){shutup();if(EXAMINT){clearInterval(EXAMINT);EXAMINT=null;}
-  if(state.mistakeMode||state.mixMode)return go('subjects');go('chapter');}
+  if(state.mistakeMode||state.mixMode||state.learnMode)return go('subjects');go('chapter');}
 function pick(i){
   if(state.picked!==null)return;
   state.picked=i;
@@ -14446,7 +14533,8 @@ function pick(i){
       else speakOne(un?(un+" बेटा, यह जवाब गलत है। सही जवाब हरे रंग में है।"):"सही जवाब हरे रंग में है।","hi");
     }
   }
-  if(meta&&meta.cid){ if(right)wrongDel(meta.cid,meta.qi); else wrongAdd(meta.cid,meta.qi); }
+  if(meta&&meta.cid){ if(right)wrongDel(meta.cid,meta.qi); else wrongAdd(meta.cid,meta.qi);
+    if(state.learnMode&&right)learnDel(meta.cid,meta.qi); }
   topicBump(q.tag,right);
   streakBump();
 
@@ -14478,7 +14566,12 @@ function result(){
   const r=58,cc=2*Math.PI*r;
 
   let extra='';
-  if(state.mistakeMode){const left=wrongCount();
+  if(state.learnMode){const left=learnCount();
+    extra=`<div class="card" style="background:var(--gold-w);border-color:#F0DFBC;display:flex;gap:11px;align-items:center;margin-top:12px">
+      <div style="font-size:21px">${left?'📘':'🎉'}</div>
+      <div style="flex:1;font-size:12.5px;line-height:1.55;font-weight:600;color:var(--gold-d)">
+        ${left?('Ab '+left+' sawaal samajhne baaki hain.'):'Saare sawaal samajh aa gaye!'}</div></div>`;
+  }else if(state.mistakeMode){const left=wrongCount();
     extra=`<div class="card" style="background:var(--brand-w);border-color:#CDE5E0;display:flex;gap:11px;align-items:center;margin-top:12px">
       <div style="font-size:21px">${left?'📌':'🎉'}</div>
       <div style="flex:1;font-size:12.5px;line-height:1.55;font-weight:600;color:var(--brand-d)">
