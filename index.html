@@ -172,6 +172,7 @@
 <body>
 <div class="wrap" id="app"></div>
 <script>
+const APP_VER='v27';
 const C={purple:"#0B6E5F",purpleDark:"#075246",yellow:"#E29A1F",coral:"#C2413A",mint:"#0B6E5F",sky:"#E29A1F",soft:"#7C8AA3",ink:"#16233A",line:"#E7E4DD",sunk:"#F3F1EC",surface:"#FFFFFF"};
 const app=document.getElementById("app");
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
@@ -14030,10 +14031,21 @@ function subjects(){
     </div>
     <div class="sec">Subjects</div>
     ${cards}
+    <div style="text-align:center;margin:18px 0 4px">
+      <button class="link" style="font-size:11.5px" onclick="appRefresh()">PadhAI ${APP_VER} · naya version laao</button>
+    </div>
     ${navBar('home')}`;
 }
 function unitName(s,n){const u=s.unit||'chapters';
   if(n===1)return u==='parts'?'part':'chapter';return u;}
+async function appRefresh(){
+  if(!confirm('App ka naya version laayein? (Progress safe rahega)'))return;
+  try{
+    if(window.caches){const ks=await caches.keys();for(const k of ks)await caches.delete(k);}
+    if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();for(const r of rs)await r.unregister();}
+  }catch(e){}
+  location.reload(true);
+}
 function niceDate(){const d=new Date();
   const D=['Ravivaar','Somvaar','Mangalvaar','Budhvaar','Guruvaar','Shukravaar','Shanivaar'];
   const M=['January','February','March','April','May','June','July','August','September','October','November','December'];
