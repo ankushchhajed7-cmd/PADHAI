@@ -13472,27 +13472,85 @@ function askScrollEnd(){
   if(box)box.scrollTop=box.scrollHeight+9999;
 }
 
-async function askCall(history){
-  const key=askKey();
+/* Ask Google which models this key can actually use, instead of guessing. */
+async function askDiscover(key){
+  try{
+    const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200&key='+encodeURIComponent(key));
+    const j=await r.json();
+    if(!j||!j.models)return null;
+    const names=j.models.filter(function(m){
+        return (m.supportedGenerationMethods||[]).indexOf('generateContent')>=0;})
+      .map(function(m){return String(m.name||'').replace(/^models\//,'');})
+      .filter(function(nm){return nm&&!/embedding|aqa|imagen|veo|tts|image|audio|live|thinking/i.test(nm);});
+    if(!names.length)return null;
+    const score=function(nm){
+      let v=0;
+      if(/flash/i.test(nm))v+=100;
+      if(/2\.5/.test(nm))v+=50; else if(/2\.0/.test(nm))v+=40; else if(/1\.5/.test(nm))v+=15;
+      if(/lite/i.test(nm))v+=8;
+      if(/latest/i.test(nm))v+=4;
+      if(/pro/i.test(nm))v-=25;
+      if(/preview|exp/i.test(nm))v-=35;
+      return v;};
+    names.sort(function(a,b){return score(b)-score(a);});
+    return names.slice(0,6);
+  }catch(e){return null;}
+}
+
+function askBody(model,history,noThink){
   const contents=history.slice(-10).map(function(m){
     return {role:(m.role==='user'?'user':'model'),parts:[{text:m.text}]};
   });
-  const body={contents:contents,systemInstruction:{parts:[{text:ASK_SYS}]},
-              generationConfig:{temperature:0.6,maxOutputTokens:700}};
-  const saved=load("padhai_model","");
-  const list=saved?[saved].concat(ASK_MODELS.filter(function(m){return m!==saved;})):ASK_MODELS;
+  const gen={temperature:0.6,maxOutputTokens:2048};
+  /* 2.5 models spend their output budget on hidden "thinking" and the real answer
+     gets cut off mid-sentence. Turn that off so the whole reply reaches the child. */
+  if(!noThink&&/2\.5/.test(model))gen.thinkingConfig={thinkingBudget:0};
+  return {contents:contents,systemInstruction:{parts:[{text:ASK_SYS}]},generationConfig:gen};
+}
+
+async function askOnce(model,history,key,noThink){
+  const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent?key='+encodeURIComponent(key),
+    {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(askBody(model,history,noThink))});
+  const j=await r.json();
+  if(!r.ok){
+    const msg=(j&&j.error&&j.error.message)?j.error.message:('HTTP '+r.status);
+    return {err:msg,badArg:(r.status===400)};
+  }
+  const c=j.candidates&&j.candidates[0];
+  const txt=(c&&c.content&&c.content.parts)?c.content.parts.map(function(p){return p.text||'';}).join(''):'';
+  if(!txt)return {err:(c&&c.finishReason)?('Jawab adhoora aaya ('+c.finishReason+')'):'Khaali jawab aaya'};
+  return {txt:txt.trim()};
+}
+
+async function askTry(model,history,key){
+  let out=await askOnce(model,history,key,false);
+  /* older models reject thinkingConfig - try again without it */
+  if(out.err&&out.badArg)out=await askOnce(model,history,key,true);
+  return out;
+}
+async function askCall(history){
+  const key=askKey();
   let lastErr='';
+  /* fast path: reuse the model that worked last time - no extra round trip */
+  const saved=load("padhai_model","");
+  if(saved){
+    try{
+      const out=await askTry(saved,history,key);
+      if(out.txt)return out.txt;
+      lastErr=out.err||'';
+    }catch(e){lastErr=e.message||'Network problem';}
+    save("padhai_model","");
+  }
+  /* saved model gone or never set - ask Google what this key can use */
+  let list=[];
+  const found=await askDiscover(key);
+  if(found)found.forEach(function(m){if(list.indexOf(m)<0)list.push(m);});
+  ASK_MODELS.forEach(function(m){if(list.indexOf(m)<0&&m!==saved)list.push(m);});
   for(let i=0;i<list.length;i++){
     try{
-      const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+list[i]+':generateContent?key='+encodeURIComponent(key),
-        {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-      const j=await r.json();
-      if(!r.ok){lastErr=(j&&j.error&&j.error.message)?j.error.message:('HTTP '+r.status);continue;}
-      const c=j.candidates&&j.candidates[0];
-      const txt=c&&c.content&&c.content.parts?c.content.parts.map(function(p){return p.text||'';}).join(''):'';
-      if(!txt){lastErr='Khaali jawab aaya';continue;}
-      save("padhai_model",list[i]);
-      return txt.trim();
+      const out=await askTry(list[i],history,key);
+      if(out.txt){save("padhai_model",list[i]);return out.txt;}
+      lastErr=out.err||'Jawab nahi mila';
     }catch(e){lastErr=e.message||'Network problem';}
   }
   throw new Error(lastErr||'Jawab nahi mila');
@@ -13514,7 +13572,7 @@ async function askSend(){
     const m2=askMsgs();m2.push({role:'gattu',text:ans});askSave(m2);
   }catch(e){
     const m2=askMsgs();
-    m2.push({role:'gattu',text:'Oh! Abhi jawab nahi mil paaya 😔\n('+(e.message||'net check karo')+')\nInternet check karke phir se try karo.'});
+    m2.push({role:'gattu',text:'Oh! Abhi jawab nahi mil paaya 😔\nInternet check karke phir se try karo. Agar baar-baar aisa ho to neeche "API key badlo" se nayi key daal kar dekho.\n\n('+(e.message||'network problem')+')'});
     askSave(m2);
   }
   state.askBusy=false;render();askScrollEnd();
@@ -13594,7 +13652,7 @@ function askScreen(){
     chips+
     '<div style="display:flex;gap:8px;align-items:flex-end">'+
       '<textarea id="askInput" rows="2" placeholder="Apna sawaal likho…" style="flex:1;box-sizing:border-box;padding:12px;border-radius:16px;border:3px solid '+C.soft+'55;font-family:Nunito;font-weight:800;font-size:15px;resize:none"></textarea>'+
-      '<button onclick="askSend()" '+(state.askBusy?'disabled':'')+' style="border:none;border-radius:16px;background:'+(state.askBusy?C.soft:C.coral)+';color:#FFD400;font-family:Fredoka;font-weight:800;font-size:20px;padding:14px 18px;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.22)">➤</button>'+
+      '<button onclick="askSend()" '+(state.askBusy?'disabled':'')+' style="border:none;border-radius:16px;background:'+(state.askBusy?C.soft:C.purple)+';color:#fff;font-family:Gabarito;font-weight:700;font-size:20px;padding:14px 18px;cursor:pointer;box-shadow:0 4px 12px -5px rgba(7,82,70,.6)">➤</button>'+
     '</div>'+
     '<div style="text-align:center;margin-top:10px"><button class="link" style="font-size:12px" onclick="askForgetKey()">🔑 API key badlo</button></div>';
   setTimeout(askScrollEnd,0);
