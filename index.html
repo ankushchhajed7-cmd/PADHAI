@@ -173,7 +173,7 @@
 <body>
 <div class="wrap" id="app"></div>
 <script>
-const APP_VER='v29';
+const APP_VER='v30';
 const C={purple:"#0B6E5F",purpleDark:"#075246",yellow:"#E29A1F",coral:"#C2413A",mint:"#0B6E5F",sky:"#E29A1F",soft:"#7C8AA3",ink:"#16233A",line:"#E7E4DD",sunk:"#F3F1EC",surface:"#FFFFFF"};
 const app=document.getElementById("app");
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
@@ -13299,27 +13299,85 @@ const CH=[
 ];
 
 /* ---------- speech ---------- */
-let VOICES=[];
-function loadVoices(){if('speechSynthesis' in window)VOICES=speechSynthesis.getVoices()||[];}
-if('speechSynthesis' in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+let VOICES=[],VOICE_TRIES=0;
+const HAS_TTS=(typeof window!=='undefined')&&('speechSynthesis' in window);
+/* getVoices() is empty for the first moment on Android - keep asking */
+function loadVoices(){
+  if(!HAS_TTS)return;
+  try{VOICES=speechSynthesis.getVoices()||[];}catch(e){VOICES=[];}
+  if(!VOICES.length&&VOICE_TRIES<15){VOICE_TRIES++;setTimeout(loadVoices,300);}
+}
+if(HAS_TTS){loadVoices();try{speechSynthesis.onvoiceschanged=loadVoices;}catch(e){}}
 function findV(re){return VOICES.find(v=>re.test(v.lang));}
 function getVoice(lang){
-  if(lang==='mr')return findV(/mr-IN/i)||findV(/^mr/i)||findV(/hi-IN/i)||findV(/^hi/i)||null;
-  if(lang==='hi')return findV(/hi-IN/i)||findV(/^hi/i)||null;
-  return findV(/en-IN/i)||findV(/en-GB/i)||findV(/^en/i)||null;
+  let v=null;
+  if(lang==='mr')v=findV(/mr-IN/i)||findV(/^mr/i)||findV(/hi-IN/i)||findV(/^hi/i);
+  else if(lang==='hi')v=findV(/hi-IN/i)||findV(/^hi/i);
+  else v=findV(/en-IN/i)||findV(/en-GB/i)||findV(/^en/i);
+  /* no matching voice? speak with whatever the phone has, instead of staying silent */
+  return v||findV(/^en/i)||VOICES[0]||null;
 }
 let SPEED=load("padhai_speed","normal");
 function curRate(){return SPEED==='slow'?0.6:0.8;}
-function speakOne(text,lang,onend){
-  if(!('speechSynthesis' in window)){if(onend)onend();return;}
-  const u=new SpeechSynthesisUtterance(text);const v=getVoice(lang);
-  if(v)u.voice=v;
-  u.lang=(lang==='mr')?((v&&/mr/i.test(v.lang))?'mr-IN':'hi-IN'):(lang==='hi')?'hi-IN':'en-IN';
-  u.rate=curRate();u.pitch=1.05;
-  u.onend=()=>{if(onend)onend();};u.onerror=()=>{if(onend)onend();};
-  speechSynthesis.speak(u);
+
+/* Android stops speaking after ~15s unless it is nudged */
+let TTSKEEP=null;
+function ttsKeepStart(){
+  ttsKeepStop();
+  TTSKEEP=setInterval(function(){
+    try{ if(speechSynthesis.speaking){speechSynthesis.pause();speechSynthesis.resume();} else ttsKeepStop(); }
+    catch(e){ttsKeepStop();}
+  },9000);
 }
-function shutup(){if('speechSynthesis' in window)speechSynthesis.cancel();}
+function ttsKeepStop(){if(TTSKEEP){clearInterval(TTSKEEP);TTSKEEP=null;}}
+
+/* phones only allow speech after the child has tapped once */
+let TTS_UNLOCKED=false;
+function ttsUnlock(){
+  if(TTS_UNLOCKED||!HAS_TTS)return;
+  TTS_UNLOCKED=true;
+  try{const u=new SpeechSynthesisUtterance(' ');u.volume=0;speechSynthesis.speak(u);}catch(e){}
+  loadVoices();
+}
+if(typeof document!=='undefined'&&document.addEventListener){
+  document.addEventListener('touchstart',ttsUnlock,{once:true,passive:true});
+  document.addEventListener('click',ttsUnlock,{once:true});
+}
+
+function speakOne(text,lang,onend){
+  if(!HAS_TTS||!text){if(onend)onend();return;}
+  ttsUnlock();
+  try{speechSynthesis.cancel();}catch(e){}
+  /* cancel() and speak() in the same tick swallows the line on Android */
+  setTimeout(function(){
+    try{
+      const u=new SpeechSynthesisUtterance(String(text));
+      const v=getVoice(lang);
+      if(v)u.voice=v;
+      u.lang=v?v.lang:((lang==='mr'||lang==='hi')?'hi-IN':'en-IN');
+      u.rate=curRate();u.pitch=1.05;u.volume=1;
+      u.onend=function(){ttsKeepStop();if(onend)onend();};
+      u.onerror=function(){ttsKeepStop();if(onend)onend();};
+      speechSynthesis.speak(u);
+      ttsKeepStart();
+    }catch(e){if(onend)onend();}
+  },70);
+}
+function shutup(){ttsKeepStop();if(HAS_TTS){try{speechSynthesis.cancel();}catch(e){}}}
+
+/* lets the parent check the phone's voice setup in one tap */
+function soundTest(){
+  ttsUnlock();loadVoices();
+  if(!HAS_TTS){alert('Is browser mein awaaz ka support nahi hai. Chrome mein kholkar dekho.');return;}
+  speakOne(LANG==='en'?'Hello! Can you hear me?':'नमस्ते! क्या मेरी आवाज़ सुनाई दे रही है?',LANG,null);
+  setTimeout(function(){
+    if(!VOICES.length){
+      alert('Is phone par koi awaaz (voice) nahi mili.\n\nSettings > Accessibility > Text-to-speech kholo aur "Google Speech Services" install ya enable karo.');
+    }else{
+      alert(VOICES.length+' voice mili.\n\nAgar phir bhi awaaz nahi aayi to:\n1. Phone ka media volume badhao\n2. Silent / vibrate mode band karo\n3. Settings > Text-to-speech mein Hindi voice download karo');
+    }
+  },1400);
+}
 let LANG=load("padhai_lang","hi");
 
 /* ---------- state ---------- */
@@ -14090,7 +14148,9 @@ function subjects(){
     <div class="sec">Subjects</div>
     ${cards}
     <div style="text-align:center;margin:18px 0 4px">
-      <button class="link" style="font-size:11.5px" onclick="appRefresh()">PadhAI ${APP_VER} · naya version laao</button>
+      <button class="link" style="font-size:11.5px" onclick="soundTest()">🔊 Awaaz test</button>
+      <span style="color:var(--line)">&nbsp;|&nbsp;</span>
+      <button class="link" style="font-size:11.5px" onclick="appRefresh()">PadhAI ${APP_VER}</button>
     </div>
     ${navBar('home')}`;
 }
