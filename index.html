@@ -173,7 +173,7 @@
 <body>
 <div class="wrap" id="app"></div>
 <script>
-const APP_VER='v32';
+const APP_VER='v34';
 const C={purple:"#0B6E5F",purpleDark:"#075246",yellow:"#E29A1F",coral:"#C2413A",mint:"#0B6E5F",sky:"#E29A1F",soft:"#7C8AA3",ink:"#16233A",line:"#E7E4DD",sunk:"#F3F1EC",surface:"#FFFFFF"};
 const app=document.getElementById("app");
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
@@ -13299,7 +13299,7 @@ const CH=[
 ];
 
 /* ---------- speech ---------- */
-let VOICES=[],VOICE_TRIES=0;
+let VOICES=[],VOICE_TRIES=0,SPOKE=false;
 const HAS_TTS=(typeof window!=='undefined')&&('speechSynthesis' in window);
 /* getVoices() is empty for the first moment on Android - keep asking */
 function loadVoices(){
@@ -13320,14 +13320,18 @@ function getVoice(lang){
 let SPEED=load("padhai_speed","normal");
 function curRate(){return SPEED==='slow'?0.6:0.8;}
 
-/* Android stops speaking after ~15s unless it is nudged */
+/* Chrome on Android sometimes pauses long speech by itself.
+   Only nudge it when it is ACTUALLY paused - calling pause()/resume() on healthy
+   speech chops the voice into pieces. */
 let TTSKEEP=null;
 function ttsKeepStart(){
   ttsKeepStop();
   TTSKEEP=setInterval(function(){
-    try{ if(speechSynthesis.speaking){speechSynthesis.pause();speechSynthesis.resume();} else ttsKeepStop(); }
-    catch(e){ttsKeepStop();}
-  },9000);
+    try{
+      if(!speechSynthesis.speaking){ttsKeepStop();return;}
+      if(speechSynthesis.paused)speechSynthesis.resume();
+    }catch(e){ttsKeepStop();}
+  },3000);
 }
 function ttsKeepStop(){if(TTSKEEP){clearInterval(TTSKEEP);TTSKEEP=null;}}
 
@@ -13355,6 +13359,7 @@ if(typeof window!=='undefined'){
   };
 }
 function speakBridge(text,lang,onend){
+  SPOKE=true;
   BRIDGE_CB=onend||null;
   if(BRIDGE_TMR){clearTimeout(BRIDGE_TMR);BRIDGE_TMR=null;}
   const code=(lang==='mr')?'mr-IN':(lang==='hi')?'hi-IN':'en-IN';
@@ -13378,6 +13383,7 @@ function speakOne(text,lang,onend){
       if(v)u.voice=v;
       u.lang=v?v.lang:((lang==='mr'||lang==='hi')?'hi-IN':'en-IN');
       u.rate=curRate();u.pitch=1.05;u.volume=1;
+      u.onstart=function(){SPOKE=true;};
       u.onend=function(){ttsKeepStop();if(onend)onend();};
       u.onerror=function(){ttsKeepStop();if(onend)onend();};
       speechSynthesis.speak(u);
@@ -14576,6 +14582,7 @@ function showScene(){const s=S()[state.scene];document.getElementById("stage").i
 function talk(on){const m=document.getElementById("masc");if(m)m.className="mascot"+(on?" talk":"");}
 function runScene(){
   const s=S()[state.scene];const tok=++state.token;state.sceneStart=Date.now();clearTimeout(state.timer);talk(true);
+  SPOKE=false;
   if(!('speechSynthesis' in window)){state.timer=setTimeout(()=>finishScene(tok),s.dur*(LANG==='both'?1.4:1));return;}
   const factor=(LANG==='both'?1.95:1);
   state.timer=setTimeout(()=>finishScene(tok),s.dur*factor+(SPEED==='slow'?9000:6000));
@@ -14590,8 +14597,15 @@ function finishScene(tok){
   clearTimeout(state.timer);talk(false);
   const s=S()[state.scene];
   const elapsed=Date.now()-state.sceneStart;
-  const minShow=s.dur*(LANG==='both'?1.0:0.85);
-  const wait=Math.max(900,minShow-elapsed); // pause so kid can absorb
+  /* If Sara actually spoke, the child has already heard the scene - a short breath
+     is enough. Waiting out the scripted duration leaves long dead silences. */
+  let wait;
+  if(SPOKE){
+    wait=(SPEED==='slow'?2000:1200);
+  }else{
+    const minShow=s.dur*(LANG==='both'?1.0:0.85);
+    wait=Math.max(900,minShow-elapsed);
+  }
   state.timer=setTimeout(()=>{if(tok===state.token&&state.playing)nextScene();},wait);
 }
 function nextScene(manual){shutup();clearTimeout(state.timer);state.token++;talk(false);if(state.scene>=S().length-1){if(state.playMode!=='workbook'){const pr=load("padhai_prog",{});pr[state.cid]=pr[state.cid]||{};pr[state.cid].lesson=true;save("padhai_prog",pr);}if(manual)return;state.playing=false;setPP();return;}state.scene++;if(manual&&!state.playing){showScene();}else{state.playing=true;setPP();showScene();}}
