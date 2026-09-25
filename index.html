@@ -173,7 +173,7 @@
 <body>
 <div class="wrap" id="app"></div>
 <script>
-const APP_VER='v30';
+const APP_VER='v32';
 const C={purple:"#0B6E5F",purpleDark:"#075246",yellow:"#E29A1F",coral:"#C2413A",mint:"#0B6E5F",sky:"#E29A1F",soft:"#7C8AA3",ink:"#16233A",line:"#E7E4DD",sunk:"#F3F1EC",surface:"#FFFFFF"};
 const app=document.getElementById("app");
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
@@ -13344,8 +13344,30 @@ if(typeof document!=='undefined'&&document.addEventListener){
   document.addEventListener('click',ttsUnlock,{once:true});
 }
 
+/* An APK's WebView cannot speak on its own. If the wrapper exposes a native
+   bridge (window.AndroidTTS) we use that instead. */
+function hasBridge(){return typeof window!=='undefined'&&window.AndroidTTS&&typeof window.AndroidTTS.speak==='function';}
+let BRIDGE_CB=null,BRIDGE_TMR=null;
+if(typeof window!=='undefined'){
+  window.__ttsDone=function(){
+    if(BRIDGE_TMR){clearTimeout(BRIDGE_TMR);BRIDGE_TMR=null;}
+    const cb=BRIDGE_CB;BRIDGE_CB=null;if(cb)cb();
+  };
+}
+function speakBridge(text,lang,onend){
+  BRIDGE_CB=onend||null;
+  if(BRIDGE_TMR){clearTimeout(BRIDGE_TMR);BRIDGE_TMR=null;}
+  const code=(lang==='mr')?'mr-IN':(lang==='hi')?'hi-IN':'en-IN';
+  try{window.AndroidTTS.speak(String(text),code,curRate());}
+  catch(e){const cb=BRIDGE_CB;BRIDGE_CB=null;if(cb)cb();return;}
+  /* safety net in case the wrapper never calls back */
+  const ms=Math.max(1800,Math.round(String(text).length*95));
+  BRIDGE_TMR=setTimeout(function(){BRIDGE_TMR=null;const cb=BRIDGE_CB;BRIDGE_CB=null;if(cb)cb();},ms);
+}
 function speakOne(text,lang,onend){
-  if(!HAS_TTS||!text){if(onend)onend();return;}
+  if(!text){if(onend)onend();return;}
+  if(hasBridge())return speakBridge(text,lang,onend);
+  if(!HAS_TTS){if(onend)onend();return;}
   ttsUnlock();
   try{speechSynthesis.cancel();}catch(e){}
   /* cancel() and speak() in the same tick swallows the line on Android */
@@ -13363,20 +13385,49 @@ function speakOne(text,lang,onend){
     }catch(e){if(onend)onend();}
   },70);
 }
-function shutup(){ttsKeepStop();if(HAS_TTS){try{speechSynthesis.cancel();}catch(e){}}}
+function shutup(){
+  ttsKeepStop();
+  if(BRIDGE_TMR){clearTimeout(BRIDGE_TMR);BRIDGE_TMR=null;}
+  BRIDGE_CB=null;
+  if(hasBridge()){try{window.AndroidTTS.stop();}catch(e){}}
+  if(HAS_TTS){try{speechSynthesis.cancel();}catch(e){}}
+}
 
 /* lets the parent check the phone's voice setup in one tap */
+/* where is the app actually running? */
+function appEnv(){
+  const ua=(navigator.userAgent||'');
+  const standalone=(window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true;
+  const webview=/\bwv\b/i.test(ua)||(/Android/i.test(ua)&&!/Chrome\/\d/i.test(ua))||/; ?wv\)/i.test(ua);
+  return {ua:ua,standalone:standalone,webview:webview,bridge:hasBridge()};
+}
 function soundTest(){
   ttsUnlock();loadVoices();
-  if(!HAS_TTS){alert('Is browser mein awaaz ka support nahi hai. Chrome mein kholkar dekho.');return;}
+  const e=appEnv();
+  const where=e.webview?'APK / WebView':(e.standalone?'Home-screen app (PWA)':'Chrome browser');
+  if(e.bridge){
+    speakOne(LANG==='en'?'Hello! Can you hear me?':'नमस्ते! क्या मेरी आवाज़ सुनाई दे रही है?',LANG,null);
+    setTimeout(function(){alert('Kahan chal raha hai: '+where+'\nAndroid ki apni awaaz (TTS bridge) chalu hai.\n\nAgar awaaz na aaye to phone ka media volume badhao.');},1500);
+    return;
+  }
+  if(!HAS_TTS||e.webview){
+    alert('Yahan awaaz nahi aa sakti.\n\nKahan chal raha hai: '+where+
+          '\n\nAPK ke andar Android ka WebView chalta hai, jo bol nahi sakta.\n\n'+
+          'Turant hal: Chrome mein wahi link kholo → menu → "Add to Home screen". Wahan awaaz aayegi.');
+    return;
+  }
   speakOne(LANG==='en'?'Hello! Can you hear me?':'नमस्ते! क्या मेरी आवाज़ सुनाई दे रही है?',LANG,null);
   setTimeout(function(){
-    if(!VOICES.length){
-      alert('Is phone par koi awaaz (voice) nahi mili.\n\nSettings > Accessibility > Text-to-speech kholo aur "Google Speech Services" install ya enable karo.');
+    let m='Kahan chal raha hai: '+where+'\nVoice mili: '+VOICES.length+'\n\n';
+    if(e.webview){
+      m+='Ye APK / WebView hai. Ismein aksar awaaz nahi aati.\nChrome mein wahi link kholkar dekho — agar wahan aaye, to dikkat APK ki hai, app ki nahi.';
+    }else if(!VOICES.length){
+      m+='Is phone par koi voice nahi mili.\nSettings > Accessibility > Text-to-speech kholo aur "Google Speech Services" install ya enable karo.';
     }else{
-      alert(VOICES.length+' voice mili.\n\nAgar phir bhi awaaz nahi aayi to:\n1. Phone ka media volume badhao\n2. Silent / vibrate mode band karo\n3. Settings > Text-to-speech mein Hindi voice download karo');
+      m+='Agar phir bhi awaaz nahi aayi to:\n1. Media volume badhao (ringtone volume alag hota hai)\n2. Silent / vibrate band karo\n3. Text-to-speech mein Hindi voice download karo';
     }
-  },1400);
+    alert(m);
+  },1500);
 }
 let LANG=load("padhai_lang","hi");
 
