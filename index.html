@@ -173,7 +173,7 @@
 <body>
 <div class="wrap" id="app"></div>
 <script>
-const APP_VER='v35';
+const APP_VER='v36';
 const C={purple:"#0B6E5F",purpleDark:"#075246",yellow:"#E29A1F",coral:"#C2413A",mint:"#0B6E5F",sky:"#E29A1F",soft:"#7C8AA3",ink:"#16233A",line:"#E7E4DD",sunk:"#F3F1EC",surface:"#FFFFFF"};
 const app=document.getElementById("app");
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
@@ -13296,7 +13296,7 @@ const CH=[
    {tag:"Communication",q:"Our eyes get tired due to watching television or working on a computer for a long time.",qe:"Our eyes get tired due to watching television or working on a computer for a long time.",opts:["True", "False", "Can't say", "None of these"],oe:["True", "False", "Can't say", "None of these"],ans:0},
    {tag:"Communication",q:"Doctors advise us not to keep the mobile in the pocket on the left side of the shirt. Why?",qe:"Doctors advise us not to keep the mobile in the pocket on the left side of the shirt. Why?",opts:["As the mobile might fall.", "Rays emitted by them can have harmful effects on our heart.", "Rays emitted by them can make our heart stronger.", "None of these"],oe:["As the mobile might fall.", "Rays emitted by them can have harmful effects on our heart.", "Rays emitted by them can make our heart stronger.", "None of these"],ans:1},
   ]},
- {id:'e_happy',title:'Happy and Healthy Living',emoji:'🌈',color:C.mint,scenes:[
+ {id:'e_happy',title:'Happy and Healthy Living',emoji:'🌈',color:C.mint,swName:'📝 Workbook — likhit jawab',swSub:'87 sawaal, poore jawab ke saath',scenes:[
    {art:emoji("🌈"),cap:"Chapter 6 — Happy and Healthy Living! Aaj hum seekhenge ki khush aur swasth kaise rahein.",hi:"नमस्ते बच्चों! मैं हूँ सारा। आज हम EVS का छठा पाठ पढ़ेंगे — Happy and Healthy Living. इसमें हम जानेंगे कि हमें खुशी कब मिलती है, हमारा खाना खेत से थाली तक कैसे पहुँचता है, और खुश और स्वस्थ रहने के लिए क्या-क्या ज़रूरी है।",en:"Namaste children! I am Sara. Today we will learn the sixth EVS chapter, Happy and Healthy Living. We will find out when we feel happy, how our food travels from the field to our plate, and what we need to stay happy and healthy.",mr:"नमस्कार मुलांनो! मी सारा. आज आपण EVS चा सहावा धडा शिकू — Happy and Healthy Living. आपल्याला आनंद कधी मिळतो, आपले अन्न शेतातून ताटापर्यंत कसे येते आणि निरोगी राहण्यासाठी काय आवश्यक आहे हे आपण पाहू.",dur:11000},
    {art:emoji("😊"),cap:"Hum sab alag-alag samay par khush hote hain — khelte waqt, padhte waqt, ya apna pasandida khaana khaate waqt.",hi:"हम सब अलग-अलग समय पर, अलग-अलग कारणों से खुश होते हैं। कोई खेलते समय खुश होता है, कोई पढ़ते समय, कोई दोस्तों से मिलकर। और सबसे ज़्यादा खुशी तब मिलती है जब हमें अपना मनपसंद खाना मिलता है।",en:"All of us feel happy at different times and for different reasons. Some feel happy while playing, some while studying, some when they meet friends. And we feel very happy when we eat our favourite food.",mr:"आपण सगळे वेगवेगळ्या वेळी, वेगवेगळ्या कारणांनी आनंदी होतो. कोणी खेळताना, कोणी अभ्यास करताना, कोणी मित्रांना भेटून. आणि आवडते जेवण मिळाले की खूप आनंद होतो.",dur:11000},
    {art:emoji("🌾"),cap:"Journey of the Grains — anaaj ka safar. Chalo dekhte hain ki chawal ya gehun hamari thali tak kaise pahunchta hai.",hi:"अब हम देखेंगे — Journey of the Grains, यानी अनाज का सफ़र। हमारी थाली में जो चावल या गेहूँ आता है, वह खेत से यहाँ तक बारह कदमों में पहुँचता है। यह सफ़र बहुत लंबा और मेहनत भरा होता है।",en:"Now we will see the Journey of the Grains. The rice or wheat that reaches our plate travels here from the field in twelve steps. It is a long journey full of hard work.",mr:"आता आपण पाहू — Journey of the Grains, म्हणजे धान्याचा प्रवास. आपल्या ताटातील तांदूळ किंवा गहू शेतातून इथपर्यंत बारा टप्प्यांत पोहोचतो. हा प्रवास खूप मोठा आणि कष्टाचा असतो.",dur:11000},
@@ -13372,6 +13372,130 @@ const CH=[
    {q:"Safe touch aur unsafe touch mein kya farak hai?",qe:"What is the difference between a safe touch and an unsafe touch?",a:"Safe touch wo hai jisse hume achha aur surakshit lage — jaise maa ka gale lagana, ya maa-baap ke saamne doctor ka jaanch karna. Unsafe touch wo hai jisse hume ajeeb, dara hua ya asahaj lage — chahe wo koi jaan-pehchaan ka ho ya ajnabi.",ae:"A safe touch makes us feel good and secure, like a hug from mother, or a doctor examining us with our parents present. An unsafe touch makes us feel uneasy, scared or uncomfortable, whether from someone we know or a stranger."},
    {q:"Agar koi galat tarike se chhue to kya karna chahiye?",qe:"What should you do if someone touches you inappropriately?",a:"Teen kadam: 1) Zor se 'No' bolo. 2) Us vyakti ya jagah se turant door hat jao. 3) Kisi bharosemand bade ko batao — maa, papa ya teacher. Isme bachche ki koi galti nahi hoti. Chup mat raho. Zarurat ho to Childline 1098 par phone kar sakte ho.",ae:"Three steps: 1) Shout 'No' loudly. 2) Go away from that person or place at once. 3) Tell a trusted adult — mother, father or teacher. It is never the child's fault. Do not stay silent. If needed you can call Childline on 1098."},
    {q:"Khush aur swasth rehne ke liye kya-kya zaroori hai?",qe:"What do we need to stay happy and healthy?",a:"Sahi khaana samay par khaana, dhyan se khaana, khaana barbaad na karna, rozana khelna aur vyayam karna, poori neend lena, aur surakshit mehsoos karna. Sharir aur mann dono ka dhyan rakhna zaroori hai.",ae:"Eating right food at the right time, eating mindfully, not wasting food, playing and exercising daily, getting enough sleep, and feeling safe. We must take care of both our body and our mind."},
+  ],swadhyay:[
+   {t:"Happy Moments Journal (apne jawab)",items:[
+     {q:"1. I feel happy when I am with ______",a:"Ye tumhara apna jawab hai. Namuna: \"...my family and my friends.\" (Iska koi ek sahi jawab nahi hota — apne mann se likho.)"},
+     {q:"2. A fun activity that makes me smile is ______",a:"Namuna: \"...playing in the park and drawing pictures.\""},
+     {q:"3. I feel super happy at this time of the day: ______",a:"Namuna: \"...in the evening, when I go out to play.\""},
+     {q:"4. Happiness is when I go out with ______",a:"Namuna: \"...my parents and my sister.\""},
+     {q:"5. I feel happy when the weather is ______",a:"Namuna: \"...cool and rainy.\""},
+   ]},
+   {t:"The Journey of the Grains (12 tasveerein)",items:[
+     {q:"Tasveer 1",a:"The farmer sows the seeds in the field. (Kisan khet mein beej bota hai.)"},
+     {q:"Tasveer 2",a:"The field is watered from a canal or a pump. (Khet ko nahar ya pump se paani diya jaata hai.)"},
+     {q:"Tasveer 3",a:"It rains and the crop gets water. (Baarish hoti hai aur fasal ko paani milta hai.)"},
+     {q:"Tasveer 4",a:"Cattle and manure make the soil fertile. (Gaay-bail aur khaad se mitti upjaau banti hai.)"},
+     {q:"Tasveer 5",a:"Earthworms make the soil soft and airy. (Kenchue mitti ko narm aur hawadaar banate hain.)"},
+     {q:"Tasveer 6",a:"The farmer guards the crop in the field. (Kisan khet mein fasal ki rakhwali karta hai.)"},
+     {q:"Tasveer 7",a:"The crop is harvested. (Fasal ki katai hoti hai.)"},
+     {q:"Tasveer 8",a:"The grains are separated from the stalks — threshing. (Danthal se daane alag kiye jaate hain.)"},
+     {q:"Tasveer 9",a:"The grains are cleaned and filled into sacks. (Daane saaf karke bori mein bhare jaate hain.)"},
+     {q:"Tasveer 10",a:"The grain is sold at the shop. (Dukaan par anaaj becha jaata hai.)"},
+     {q:"Tasveer 11",a:"The food is cooked at home. (Ghar par khaana pakaya jaata hai.)"},
+     {q:"Tasveer 12",a:"The child eats the food. (Bachcha khaana khata hai.)"},
+   ]},
+   {t:"Let us Write! (Textbook page 88)",items:[
+     {q:"1. What is the role of farmers in this process?",a:"Farmers plough the field, sow the seeds, give water and manure, protect the crop from birds and pests, and harvest it when it is ready. It is only because of their hard work that grain reaches our plate."},
+     {q:"2. List out the missing elements in the table on textbook page 88.",a:"Help the grain (tick ✓): Soil, Air, Water, Farmer, Earthworm, Insect.\nDo not help (cross ✗): Stone, Wood, Tiger, Hills, Fire, Bat."},
+     {q:"(a) Soil — role",a:"It holds the roots firmly and provides essential nutrients and minerals to the plant."},
+     {q:"(b) Water — role",a:"It helps the seed to sprout and the plant to grow."},
+     {q:"(c) Farmer — role",a:"He works hard to grow the crops."},
+     {q:"(d) Cattle — role",a:"They help to plough the fields and give manure."},
+     {q:"(e) Shopkeeper — role",a:"He stores and sells the food to us."},
+     {q:"(f) Family members — role",a:"They buy the food and cook it for us."},
+     {q:"(g) Any other — role",a:"The Sun provides light and energy to the plant."},
+   ]},
+   {t:"Thank You Everyone! (box ke shabd bharo)",items:[
+     {q:"Box ke shabd",a:"plants · crops · groceries · food · seeds"},
+     {q:"1. Dear soil, thank you for being a ground where ______ grow.",a:"plants"},
+     {q:"2. Dear farmer, thank you for growing various ______.",a:"crops"},
+     {q:"3. Dear Sun, thank you for helping the ______ grow in your light.",a:"seeds"},
+     {q:"4. Dear shopkeeper, thank you for making it easy to buy ______.",a:"groceries"},
+     {q:"5. Dear mom/dad/grandmother, thank you for preparing yummy ______.",a:"food"},
+   ]},
+   {t:"Showing Gratitude to Mother Nature (jodi milao)",items:[
+     {q:"1. Makar Sankranti",a:"(b) Sharing sweets made of sesame and jaggery to thank the Sun"},
+     {q:"2. Lohri",a:"(d) Bonfire, songs and dance to thank for the winter harvest"},
+     {q:"3. Onam",a:"(a) Worship of rivers and paddy fields with boat races"},
+     {q:"4. Raja Utsav",a:"(c) Honouring mother Earth before farming season begins"},
+   ]},
+   {t:"Mindful Eating (sahi kram)",items:[
+     {q:"Steps ko sahi kram mein number do",a:"The taste is felt using the tongue and the nose. → 3\nThe food is placed in the mouth. → 1\nThe taste is remembered while chewing. → 4\nThe food is chewed by teeth. → 2\nThe food is remembered before swallowing. → 5"},
+     {q:"Sahi kram ek line mein",a:"1 → food placed in mouth, 2 → chewed by teeth, 3 → taste felt by tongue and nose, 4 → taste remembered while chewing, 5 → food remembered before swallowing."},
+   ]},
+   {t:"Let us Discuss! (Textbook page 92)",items:[
+     {q:"1. What role does your tongue play in this process?",a:"The tongue recognises the taste of the food — sweet, salty, sour or bitter. It also moves the food around so that the teeth can chew it properly."},
+     {q:"2. What do your teeth do to the food?",a:"The teeth cut, tear, chew and grind the food into small pieces so that it becomes soft and easy to swallow."},
+     {q:"3. What happens to the food inside your mouth during this process?",a:"The teeth grind the food into small pieces, saliva mixes with it, the tongue tastes it, and the food becomes soft and moist enough to be swallowed."},
+     {q:"4. What is mindful eating?",a:"Mindful eating means eating slowly and with full attention — feeling the taste, smell and texture of every bite instead of eating in a hurry."},
+     {q:"5. What are the benefits of mindful eating?",a:"Food tastes better, digestion improves, we do not overeat, we make healthier food choices, and we enjoy and value our food more."},
+   ]},
+   {t:"Valuing Food (khaali jagah bharo)",items:[
+     {q:"1. We should never ______ food. (share/waste)",a:"waste"},
+     {q:"2. Wasting food means we are not showing ______. (hunger/respect)",a:"respect"},
+     {q:"3. Every grain of food is ______. (precious/fun)",a:"precious"},
+     {q:"4. Food should not be thrown in the ______. (dustbin/bag)",a:"dustbin"},
+     {q:"5. We should eat every ______ of food served on our plate. (grain/drop)",a:"grain"},
+   ]},
+   {t:"Valuing Food (sthiti ki jodi)",items:[
+     {q:"1. More food is offered than needed.",a:"(b) Take only what is needed to avoid waste."},
+     {q:"2. Food is served hot.",a:"(c) Wait till food becomes cold."},
+     {q:"3. Feeling full but still more food is offered.",a:"(d) Say 'No, thank you' politely."},
+     {q:"4. The plate has just the right amount of food.",a:"(a) Finish it and enjoy every bite."},
+   ]},
+   {t:"Types of Teeth",items:[
+     {q:"Incisors",a:"Flat teeth in the front — Cutting food"},
+     {q:"Canines",a:"Sharp and pointed teeth next to the incisors — Tearing food"},
+     {q:"Premolars",a:"Wide teeth behind the canines — Crushing and grinding food"},
+     {q:"Molars",a:"Big teeth at the back of the mouth — Chewing and grinding food before swallowing"},
+   ]},
+   {t:"Enjoying Sports (tasveer dekhkar jawab)",items:[
+     {q:"1. Which activity in the picture do you like the most? Why?",a:"Namuna: \"I like the swing the most, because it makes me feel like I am flying.\" (Apni pasand likho.)"},
+     {q:"2. Name two games from the picture that make our body strong.",a:"Namuna: Football and cycling. (Dono mein poore sharir ki exercise hoti hai.)"},
+     {q:"3. Name two games that need a partner.",a:"Namuna: Badminton and see-saw. (Ye akele nahi khele ja sakte.)"},
+     {q:"4. Name one activity that can be done alone.",a:"Namuna: Skipping (rassi koodna) — ise akele bhi kar sakte hain."},
+     {q:"5. Why is playing outside good for us?",a:"Playing outside gives us fresh air and sunlight, makes our body strong, keeps us active and happy, helps us make friends, and gives us good sleep at night."},
+   ]},
+   {t:"Let us Think! (khelon ke naam)",items:[
+     {q:"Can you name the games shown in the pictures?",a:"Kitaab ki tasveer dekhkar likho. Bharat ke aam outdoor khel jo aksar in tasveeron mein hote hain: Langdi (hopscotch), Kho-kho, Kabaddi, Cricket, Lagori/Pitthu, Gilli-danda, Rassa-kashi (tug of war), aur Lattu (spinning top). Har tasveer ke saamne wahi naam likho jo us khel se milta hai."},
+   ]},
+   {t:"Stretch, Smile and Stay Healthy (yoga)",items:[
+     {q:"Virkshasana",a:"Tree pose"},
+     {q:"Trikonasana",a:"Triangle pose"},
+     {q:"Marjarasana",a:"Cat pose"},
+     {q:"Navasana",a:"Boat pose"},
+     {q:"Virbhadrasana",a:"Warrior pose"},
+     {q:"Adho Mukha Shwasana",a:"Downward Dog pose"},
+   ]},
+   {t:"Sleep Well Too (True / False)",items:[
+     {q:"1. Good sleep helps us feel fresh the next day.",a:"True"},
+     {q:"2. After a lot of play, we can skip sleep and still feel good.",a:"False — khelne ke baad sharir ko aur zyada aaram chahiye."},
+     {q:"3. Our body requires good sleep everyday.",a:"True"},
+     {q:"4. Watching TV or mobile phone at night is better than sleeping.",a:"False — isse neend kharab hoti hai."},
+     {q:"5. Playing and exercising make our body tired.",a:"True"},
+     {q:"6. Sleeping during the day is better than sleeping at night.",a:"False — raat ki neend hi sabse achhi hoti hai."},
+     {q:"7. Our body needs rest if we eat well.",a:"False — sharir ko aaram hamesha chahiye, chahe humne kuch bhi khaya ho."},
+   ]},
+   {t:"Let us Discuss! (Textbook page 95 aur 97)",items:[
+     {q:"1. (p95) Which physical activities do you do in your daily life?",a:"Namuna: Running, cycling, skipping, playing kho-kho and cricket, and doing yoga every morning."},
+     {q:"2. (p95) How do you feel on a day when you play a lot?",a:"I feel fresh, happy and energetic. I get a good appetite and I sleep well at night."},
+     {q:"3. (p97) Why, do you think, our body needs rest?",a:"Rest removes the tiredness of the body, repairs our muscles and refreshes our mind, so that we can work and play well again."},
+     {q:"4. (p97) Do you think it is important to rest after a busy day of exercise and play? Why?",a:"Yes. Without rest we stay tired and irritable, we cannot focus on our studies or play, and our body does not get time to recover."},
+   ]},
+   {t:"Feeling Safe (S ya U likho)",items:[
+     {q:"Kaise pehchane — Safe touch (S)",a:"Wo touch jisme bachcha aaram se aur khush dikhe: maa ka pyaar se gale lagana, dost se haath milana, daadi ka haath pakadkar sadak paar karna, maa-baap ke saamne doctor ka jaanch karna."},
+     {q:"Kaise pehchane — Unsafe touch (U)",a:"Wo touch jisme bachcha dara hua, asahaj ya rota hua dikhe: koi zabardasti pakde, bachcha chhootne ki koshish kare, ya bachche ko ajeeb mehsoos ho — chahe wo koi jaan-pehchaan ka ho ya ajnabi."},
+     {q:"Pehli tasveer",a:"U — kyunki wahan bachcha chhootne ki koshish kar raha hai (kitaab mein ye pehle se likha hai)."},
+     {q:"Sabse zaroori baat",a:"Apne sharir par sirf tumhara haq hai. Agar kisi ka chhoona ajeeb lage, to wo unsafe touch hai — chahe wo kitna bhi apna kyun na ho. Isme bachche ki koi galti nahi hoti."},
+   ]},
+   {t:"Galat sparsh par kya karein (sahi kram)",items:[
+     {q:"Teen kadam sahi kram mein",a:"1. Shout 'No' loudly — zor se 'nahi' chillao.\n2. Go away from that person/place — us vyakti ya jagah se turant door hato.\n3. Tell someone trusted — kisi bharosemand bade ko batao."},
+   ]},
+   {t:"Let us Write! (Textbook page 99)",items:[
+     {q:"1. What would you do if someone's touch made you feel uncomfortable?",a:"I would immediately say 'No' loudly, move away from that person at once, and tell my mother, father or teacher about it. I will not keep it a secret, because it is not my fault."},
+     {q:"2. If you face an unsafe situation, who would you tell?",a:"I would tell my parents, my class teacher, or any other trusted adult in my family. If needed, I can also call Childline on 1098."},
+     {q:"3. List two situations where you would firmly say 'No'.",a:"Situation 1: When a stranger asks me to go somewhere alone, or offers me sweets, a gift or a ride.\nSituation 2: When anyone touches me in a way that makes me feel uncomfortable, or asks me to keep such a touch a secret."},
+   ]},
   ],workbook:[
    {art:emoji("📘"),cap:"Workbook Time! Chapter 6 ke saare workbook sawaal, jawab ke saath.",hi:"नमस्ते! अब हम Chapter 6 — Happy and Healthy Living — का पूरा Workbook करेंगे। NCERT Our Wondrous World Workbook के हर सवाल का जवाब सुनोगे, और यह भी समझोगे कि वह जवाब सही क्यों है। ध्यान से सुनो!",en:"Namaste! Now we will go through the complete Workbook for Chapter 6, Happy and Healthy Living. You will hear the answer to every question from the NCERT Our Wondrous World Workbook, and also understand why each answer is correct. Listen carefully!",mr:"नमस्कार! आता आपण Chapter 6 — Happy and Healthy Living — चे संपूर्ण Workbook करू. NCERT Our Wondrous World Workbook मधील प्रत्येक प्रश्नाचे उत्तर ऐकाल आणि ते बरोबर का आहे हेही समजून घ्याल. लक्ष देऊन ऐका!",dur:12000},
    {art:emoji("😊"),cap:"Happy Moments Journal — ye tumhare apne jawab hain, koi ek sahi jawab nahi.",hi:"पहला भाग है Happy Moments Journal. इसमें पाँच वाक्य पूरे करने हैं — मैं खुश होता हूँ जब मैं किसके साथ होता हूँ, कौन सी मज़ेदार गतिविधि मुझे मुस्कुराती है, दिन के किस समय मैं सबसे खुश होता हूँ, किसके साथ बाहर जाकर खुशी मिलती है, और कैसा मौसम मुझे खुश करता है। ध्यान दो — इनका कोई एक सही जवाब नहीं होता। ये तुम्हारे अपने विचार हैं, इसलिए अपने मन से लिखो।",en:"The first part is the Happy Moments Journal. You have to complete five sentences — who I feel happy with, what fun activity makes me smile, at what time of day I feel super happy, who I enjoy going out with, and what weather makes me happy. Note this — there is no single right answer here. These are your own ideas, so write them from your heart.",mr:"पहिला भाग आहे Happy Moments Journal. यात पाच वाक्ये पूर्ण करायची आहेत — मी कोणासोबत आनंदी असतो, कोणती मजेशीर गोष्ट मला हसवते, दिवसाच्या कोणत्या वेळी मी खूप आनंदी असतो, कोणासोबत बाहेर जायला आवडते आणि कोणते हवामान मला आनंद देते. लक्षात ठेवा — याचे एकच बरोबर उत्तर नसते. ही तुमची स्वतःची मते आहेत, म्हणून मनापासून लिहा.",dur:14000},
@@ -14594,8 +14718,11 @@ function chapter(){
       <div class="g1"><div class="n">Sawaal-Jawab</div><div class="s">${cc.qa.length} sawaal jawab ke saath</div></div><div class="ch">›</div></div>`;
     if(cc.match&&cc.match.length)extra+=`<div class="tile" onclick="openMatch('${c.id}')"><div class="ic">🔗</div>
       <div class="g1"><div class="n">Match &amp; Fill</div><div class="s">Jodi banao</div></div><div class="ch">›</div></div>`;
-    if(cc.swadhyay&&cc.swadhyay.length)extra+=`<div class="tile" onclick="openSwadhyay('${c.id}')"><div class="ic">📖</div>
-      <div class="g1"><div class="n">${state.subj==='english'?'Full Answers':'स्वाध्याय (उत्तरांसह)'}</div><div class="s">Kitaab ke saare sawaal</div></div><div class="ch">›</div></div>`;
+    if(cc.swadhyay&&cc.swadhyay.length){
+      const swName=cc.swName||(state.subj==='english'?'Full Answers':((state.subj==='marathi'||state.subj==='hindi')?'स्वाध्याय (उत्तरांसह)':'Likhit Sawaal-Jawab'));
+      const swSub=cc.swSub||'Kitaab ke saare sawaal';
+      extra+=`<div class="tile" onclick="openSwadhyay('${c.id}')"><div class="ic">📖</div>
+      <div class="g1"><div class="n">${swName}</div><div class="s">${swSub}</div></div><div class="ch">›</div></div>`;}
     if(cc.workbook&&cc.workbook.length)extra+=`<div class="tile" onclick="playWorkbook('${c.id}')"><div class="ic">📘</div>
       <div class="g1"><div class="n">Workbook</div><div class="s">Answers ke saath</div></div><div class="ch">›</div></div>`;
   }
