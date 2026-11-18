@@ -173,7 +173,7 @@
 <body>
 <div class="wrap" id="app"></div>
 <script>
-const APP_VER='v36';
+const APP_VER='v37';
 const C={purple:"#0B6E5F",purpleDark:"#075246",yellow:"#E29A1F",coral:"#C2413A",mint:"#0B6E5F",sky:"#E29A1F",soft:"#7C8AA3",ink:"#16233A",line:"#E7E4DD",sunk:"#F3F1EC",surface:"#FFFFFF"};
 const app=document.getElementById("app");
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
@@ -13760,6 +13760,28 @@ function chapPct(c){if(!c.ready)return 0;const cc=content(c.id);if(!cc)return 0;
   return p.best!=null?Math.min(1,p.best/nq):0;}
 
 
+
+/* ============ Resume: quiz jahan chhoda wahin se ============ */
+function resAll(){return load("padhai_resume",{});}
+function resGet(cid){
+  const r=resAll()[cid];
+  if(!r||typeof r.qi!=='number'||r.qi<1)return null;
+  const cc=content(cid);
+  const n=(cc&&cc.quiz)?cc.quiz.length:0;
+  /* chapter badal gaya ya quiz poora ho chuka -> resume nahi */
+  if(!n||r.qi>=n)return null;
+  return r;
+}
+function resSave(){
+  /* sirf normal chapter quiz ka resume - exam, galtiyan, mix, samajhna-hai ka nahi */
+  if(state.examMode||state.customQ||!state.cid)return;
+  const r=resAll(),tot=Q().length,nx=state.qi+1;
+  if(nx>=tot)delete r[state.cid];
+  else r[state.cid]={qi:nx,score:state.score,qStatus:(state.qStatus||[]).slice(0,nx),ts:Date.now()};
+  save("padhai_resume",r);
+}
+function resClear(cid){const r=resAll();if(r[cid]){delete r[cid];save("padhai_resume",r);}}
+
 /* ============ Samajhna hai (questions the child wants explained) ============ */
 function learnGet(){return load("padhai_learn",{});}
 function learnAdd(cid,qi){const w=learnGet();w[cid]=w[cid]||[];if(w[cid].indexOf(qi)<0)w[cid].push(qi);save("padhai_learn",w);}
@@ -14374,7 +14396,7 @@ function subjects(){
       hero=`<div class="hero" onclick="resumeLast()">
         <div style="font-size:11px;font-weight:700;opacity:.82">Jahan chhoda tha</div>
         <div class="fred" style="font-size:19px;font-weight:700;margin-top:3px">${sj.title} · ${cc.title}</div>
-        <div style="font-size:12px;opacity:.86;margin-top:3px">${c?((c.label||'Chapter')+' '+c.n):''} · ${(cc.quiz||[]).length} sawaal</div>
+        <div style="font-size:12px;opacity:.86;margin-top:3px">${c?((c.label||'Chapter')+' '+c.n):''} · ${(cc.quiz||[]).length} sawaal${(function(){const r=resGet(last.cid);return r?` · Q${r.qi+1} par ruke the`:'';})()}</div>
         <div style="height:5px;background:rgba(255,255,255,.22);border-radius:99px;margin-top:12px;overflow:hidden">
           <i style="display:block;height:100%;background:#fff;border-radius:99px;width:${Math.round(pct*100)}%"></i></div>
         <button class="btn" style="background:#fff;color:var(--brand-d);margin-top:13px">Aage padho</button></div>`;
@@ -14404,8 +14426,9 @@ function subjects(){
 
   app.innerHTML=`
     <div class="topbar">
-      <div><div class="fred" style="font-size:19px;font-weight:700">Namaste, ${name}</div>
+      <div style="flex:1;min-width:0"><div class="fred" style="font-size:19px;font-weight:700">Namaste, ${name}</div>
         <div style="font-size:11.5px;color:var(--soft);font-weight:600">${niceDate()}</div></div>
+      <button onclick="appRefresh()" title="Naya version laao" style="border:1px solid var(--line);background:var(--surface);color:var(--brand-d);font-family:Gabarito,Mukta,sans-serif;font-weight:700;font-size:12px;padding:8px 11px;border-radius:999px;cursor:pointer;flex:0 0 auto">↻ ${APP_VER}</button>
       <div class="iconbtn" onclick="editName()">✏️</div>
     </div>
     ${hero}
@@ -14425,8 +14448,6 @@ function subjects(){
     ${cards}
     <div style="text-align:center;margin:18px 0 4px">
       <button class="link" style="font-size:11.5px" onclick="soundTest()">🔊 Awaaz test</button>
-      <span style="color:var(--line)">&nbsp;|&nbsp;</span>
-      <button class="link" style="font-size:11.5px" onclick="appRefresh()">PadhAI ${APP_VER}</button>
     </div>
     ${navBar('home')}`;
 }
@@ -14708,6 +14729,8 @@ function chapter(){
   let chips=`<span class="tag b">${nq} sawaal</span>`;
   if(p.best!=null)chips+=` <span class="tag g">Best ${p.best}/${nq}</span>`;
   if(w.length)chips+=` <span class="tag r">${w.length} galtiyan</span>`;
+  const rs=c.ready?resGet(c.id):null;
+  if(rs)chips+=` <span class="tag g">Q${rs.qi+1} par ruke the</span>`;
 
   let extra='';
   if(cc){
@@ -14752,12 +14775,13 @@ function chapter(){
     ${extra?`<div class="sec">Aur bhi</div>${extra}`:''}
     ${c.ready?`<div class="foot"><div class="in"><div class="row">
       <button class="btn gh" style="flex:1" onclick="startExam('${c.id}')">⏱ Exam mode</button>
-      <button class="btn" style="flex:1.35" onclick="playQuiz('${c.id}')">Quiz shuru karo</button>
-    </div></div></div>`:''}`;
+      <button class="btn" style="flex:1.35" onclick="playQuiz('${c.id}')">${rs?`▶ Q${rs.qi+1} se aage`:'Quiz shuru karo'}</button>
+    </div>${rs?`<div style="text-align:center;margin-top:7px"><button class="link" style="font-size:12.5px" onclick="playQuizFresh('${c.id}')">↺ Shuru se (Q1) karo</button></div>`:''}</div></div>`:''}`;
 }
 function playLesson(id){state.cid=id;state.playMode='lesson';go('lesson');}
 function playWorkbook(id){state.cid=id;state.playMode='workbook';go('lesson');}
-function playQuiz(id){state.cid=id;startQuiz();}
+function playQuiz(id){state.cid=id;startQuiz(true);}
+function playQuizFresh(id){state.cid=id;resClear(id);startQuiz(false);}
 
 
 /* ---------- LESSON ---------- */
@@ -14837,7 +14861,7 @@ function togglePlay(){state.playing=!state.playing;setPP();if(state.playing)runS
 function setPP(){const b=document.getElementById("pp");if(b)b.textContent=state.playing?"⏸ Pause":"▶ Chalao";}
 
 /* ---------- QUIZ ---------- */
-function startQuiz(){state.qi=0;state.picked=null;state.score=0;state.qShuffleIdx=-1;state.customQ=null;state.customMeta=null;state.examMode=false;state.mistakeMode=false;state.mixMode=false;state.learnMode=false;state.qStatus=[];state.exAns=null;state.examEnd=null;if(state.cid)save('padhai_last',{subj:state.subj,cid:state.cid});go('quiz');}
+function startQuiz(cont){const r=cont?resGet(state.cid):null;state.qi=r?r.qi:0;state.picked=null;state.score=r?(r.score||0):0;state.qStatus=r?((r.qStatus||[]).slice()):[];state.qShuffleIdx=-1;state.customQ=null;state.customMeta=null;state.examMode=false;state.mistakeMode=false;state.mixMode=false;state.learnMode=false;state.exAns=null;state.examEnd=null;state.resumed=!!r;if(state.cid)save('padhai_last',{subj:state.subj,cid:state.cid});go('quiz');}
 function quizSetLang(l){state.quizLang=l;quiz();}
 function shuffleArr(a){const b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;}
 function quiz(){
@@ -14867,7 +14891,8 @@ function quiz(){
   const modeTag=state.examMode?`<span class="tag g" id="examclock">⏱</span>`
     :(state.mistakeMode?`<span class="tag r">Galtiyan</span>`
     :(state.mixMode?`<span class="tag b">Mix</span>`
-    :(state.learnMode?`<span class="tag g">Samajhna hai</span>`:'')));
+    :(state.learnMode?`<span class="tag g">Samajhna hai</span>`
+    :(state.resumed?`<span class="tag g">▶ Jari hai</span>`:''))));
 
   const langSeg=(!onlyEn&&(q.qe||q.oe))?`<div class="seg" style="margin:0 0 14px">
       <button class="${lang==='hi'?'on':''}" onclick="quizSetLang('hi')">🇮🇳 Hinglish</button>
@@ -14955,6 +14980,7 @@ function pick(i){
     if(state.learnMode&&right)learnDel(meta.cid,meta.qi); }
   topicBump(q.tag,right);
   streakBump();
+  resSave();
 
   const last=state.qi===Q().length-1;
   const expl=(!state.examMode&&q.why)?`<div class="expl"><b class="fred">Kaise?</b><br>${q.why}</div>`:'';
@@ -14969,6 +14995,7 @@ function finishQuiz(){
   pr[state.cid]=pr[state.cid]||{};
   if(state.examMode){pr[state.cid].exam=Math.max(pr[state.cid].exam||0,state.score);save("padhai_prog",pr);}
   else if(!state.customQ){pr[state.cid].best=Math.max(pr[state.cid].best==null?0:pr[state.cid].best,state.score);save("padhai_prog",pr);}
+  if(!state.examMode&&!state.customQ)resClear(state.cid);
   go('result');
 }
 function result(){
